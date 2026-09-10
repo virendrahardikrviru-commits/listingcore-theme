@@ -1,0 +1,1191 @@
+# Copyright (C) 2026 virendrasingh06
+# This file is distributed under the GNU General Public License v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: ListingCore Theme 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/theme/listingcore_theme\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-09-10T13:52:22+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: listingcore-theme\n"
+
+#. Theme Name of the theme
+#: style.css
+#: inc/block-patterns.php:24
+msgid "ListingCore Theme"
+msgstr ""
+
+#. Theme URI of the theme
+#: style.css
+msgid "https://wordpress.org/themes/listingcore-theme/"
+msgstr ""
+
+#. Description of the theme
+#: style.css
+msgid "A modern, clean companion theme for the ListingCore plugin. Provides beautiful layouts for classified ads, marketplace listings, directories, and any listing-based website. Includes hero search, category grid, listing cards, filters sidebar, user dashboard, contact forms, and full WooCommerce compatibility."
+msgstr ""
+
+#. Author of the theme
+#: style.css
+msgid "virendrasingh06"
+msgstr ""
+
+#. Author URI of the theme
+#: style.css
+msgid "https://profiles.wordpress.org/virendrasingh06/"
+msgstr ""
+
+#: 404.php:24
+msgid "Page Not Found"
+msgstr ""
+
+#: 404.php:30
+msgid "Sorry, the page you were looking for could not be found. It may have been removed, renamed, or is temporarily unavailable."
+msgstr ""
+
+#: 404.php:36
+msgid "Search this site"
+msgstr ""
+
+#: 404.php:42
+msgid "Back to Homepage"
+msgstr ""
+
+#: 404.php:47
+#: search.php:138
+#: template-parts/content-none.php:48
+msgid "Browse Listings"
+msgstr ""
+
+#: 404.php:58
+msgid "You might be interested in"
+msgstr ""
+
+#: 404.php:77
+msgid "Recent Posts"
+msgstr ""
+
+#: archive-listing.php:26
+msgid "All Listings"
+msgstr ""
+
+#: archive-listing.php:45
+#: header.php:107
+#: inc/widgets.php:178
+#: inc/widgets.php:212
+#: taxonomy-listing_category.php:65
+#: taxonomy-listing_category.php:163
+#: template-listings.php:46
+msgid "Post a Listing"
+msgstr ""
+
+#: archive-listing.php:93
+#: taxonomy-listing_category.php:139
+msgid "View Listing"
+msgstr ""
+
+#: archive-listing.php:109
+msgid "No listings found"
+msgstr ""
+
+#: archive-listing.php:112
+msgid "There are no listings to display at this time."
+msgstr ""
+
+#. translators: %s: post title
+#: comments.php:33
+#, php-format
+msgid "One comment on &ldquo;%s&rdquo;"
+msgstr ""
+
+#. translators: 1: comment count, 2: post title
+#: comments.php:39
+#, php-format
+msgid "%1$s comment on &ldquo;%2$s&rdquo;"
+msgid_plural "%1$s comments on &ldquo;%2$s&rdquo;"
+msgstr[0] ""
+msgstr[1] ""
+
+#: comments.php:60
+msgid "Older comments"
+msgstr ""
+
+#: comments.php:61
+msgid "Newer comments"
+msgstr ""
+
+#: comments.php:70
+msgid "Comments are closed."
+msgstr ""
+
+#: comments.php:79
+msgid "Leave a Comment"
+msgstr ""
+
+#: comments.php:82
+msgid "Your email address will not be published. Required fields are marked *"
+msgstr ""
+
+#: comments.php:85
+msgid "Comment *"
+msgstr ""
+
+#: comments.php:87
+msgid "Post Comment"
+msgstr ""
+
+#: footer.php:33
+msgid "Back to top"
+msgstr ""
+
+#: front-page.php:12
+msgid "Find What You Need, Sell What You Have"
+msgstr ""
+
+#: front-page.php:13
+msgid "Browse thousands of local classified ads. Post your own for free."
+msgstr ""
+
+#: front-page.php:32
+msgid "What are you searching for today?..."
+msgstr ""
+
+#: front-page.php:35
+#: searchform.php:15
+msgid "Search"
+msgstr ""
+
+#: front-page.php:48
+msgid "Browse by Marketplace Segments"
+msgstr ""
+
+#: front-page.php:65
+#, php-format
+msgid "%s Listing"
+msgid_plural "%s Listings"
+msgstr[0] ""
+msgstr[1] ""
+
+#: front-page.php:70
+msgid "No marketplace categories populated yet."
+msgstr ""
+
+#: front-page.php:81
+msgid "Recently Added Listings"
+msgstr ""
+
+#: front-page.php:87
+msgid "View All Listings →"
+msgstr ""
+
+#: front-page.php:122
+msgid "No classified listings have been published yet."
+msgstr ""
+
+#: front-page.php:124
+msgid "Be the First to Post!"
+msgstr ""
+
+#: header.php:65
+#: inc/theme-setup.php:148
+msgid "Primary Menu"
+msgstr ""
+
+#: header.php:88
+msgid "Toggle search"
+msgstr ""
+
+#: header.php:99
+msgid "View wishlist"
+msgstr ""
+
+#: header.php:117
+msgid "Toggle menu"
+msgstr ""
+
+#: inc/block-patterns.php:25
+msgid "Patterns for building classified ads, marketplace, and directory pages."
+msgstr ""
+
+#: inc/block-patterns.php:45
+msgid "Hero with Search"
+msgstr ""
+
+#: inc/block-patterns.php:46
+msgid "A full-width hero section with a headline and the ListingCore search form."
+msgstr ""
+
+#: inc/block-patterns.php:50
+msgid "Find What You Need"
+msgstr ""
+
+#: inc/block-patterns.php:54
+msgid "Browse thousands of listings across categories."
+msgstr ""
+
+#: inc/block-patterns.php:70
+msgid "Categories Grid"
+msgstr ""
+
+#: inc/block-patterns.php:71
+msgid "A section displaying ListingCore listing categories in a grid."
+msgstr ""
+
+#: inc/block-patterns.php:75
+msgid "Browse by Category"
+msgstr ""
+
+#: inc/block-patterns.php:91
+msgid "Featured Listings"
+msgstr ""
+
+#: inc/block-patterns.php:92
+msgid "A section showing the latest listings from the ListingCore plugin."
+msgstr ""
+
+#: inc/block-patterns.php:96
+msgid "Latest Listings"
+msgstr ""
+
+#: inc/block-patterns.php:112
+msgid "Call to Action"
+msgstr ""
+
+#: inc/block-patterns.php:113
+msgid "A call-to-action section with a Post Listing button."
+msgstr ""
+
+#: inc/block-patterns.php:117
+msgid "Ready to Sell Something?"
+msgstr ""
+
+#: inc/block-patterns.php:121
+msgid "Post your listing in minutes. It is free and easy."
+msgstr ""
+
+#: inc/block-patterns.php:137
+msgid "Content with Sidebar"
+msgstr ""
+
+#: inc/block-patterns.php:138
+msgid "A two-column layout with main content and a sidebar."
+msgstr ""
+
+#: inc/block-patterns.php:143
+msgid "Main Content"
+msgstr ""
+
+#: inc/block-patterns.php:147
+msgid "Add your content here."
+msgstr ""
+
+#: inc/block-patterns.php:153
+#: sidebar.php:32
+msgid "Sidebar"
+msgstr ""
+
+#: inc/block-patterns.php:157
+msgid "Add sidebar widgets or content here."
+msgstr ""
+
+#: inc/block-patterns.php:170
+msgid "Banner CTA"
+msgstr ""
+
+#: inc/block-patterns.php:171
+msgid "A compact banner with headline and button."
+msgstr ""
+
+#: inc/block-patterns.php:177
+msgid "Start listing today"
+msgstr ""
+
+#: inc/block-patterns.php:184
+msgid "Get Started"
+msgstr ""
+
+#: inc/class-listingcore-theme-walker-nav-menu.php:104
+msgid "Toggle submenu"
+msgstr ""
+
+#: inc/customizer.php:26
+msgid "ListingCore Theme Options"
+msgstr ""
+
+#: inc/customizer.php:27
+msgid "Customize your ListingCore Theme appearance and features."
+msgstr ""
+
+#: inc/customizer.php:38
+msgid "Brand Colors"
+msgstr ""
+
+#: inc/customizer.php:57
+msgid "Primary Color"
+msgstr ""
+
+#: inc/customizer.php:77
+msgid "Accent Color"
+msgstr ""
+
+#: inc/customizer.php:89
+msgid "Layout"
+msgstr ""
+
+#: inc/customizer.php:105
+msgid "Sidebar Position"
+msgstr ""
+
+#: inc/customizer.php:109
+msgid "Right"
+msgstr ""
+
+#: inc/customizer.php:110
+msgid "Left"
+msgstr ""
+
+#: inc/customizer.php:111
+msgid "No Sidebar"
+msgstr ""
+
+#: inc/customizer.php:122
+msgid "Listing Display"
+msgstr ""
+
+#: inc/customizer.php:124
+msgid "These options only apply when the ListingCore plugin is active."
+msgstr ""
+
+#: inc/customizer.php:139
+msgid "Listings Per Page"
+msgstr ""
+
+#: inc/customizer.php:161
+msgid "Grid Columns"
+msgstr ""
+
+#: inc/customizer.php:165
+msgid "2 Columns"
+msgstr ""
+
+#: inc/customizer.php:166
+msgid "3 Columns"
+msgstr ""
+
+#: inc/customizer.php:167
+msgid "4 Columns"
+msgstr ""
+
+#: inc/customizer.php:178
+msgid "Footer"
+msgstr ""
+
+#: inc/customizer.php:194
+msgid "Custom Copyright Text"
+msgstr ""
+
+#: inc/customizer.php:195
+msgid "Leave empty to use the default \"© Year Site Name\" text."
+msgstr ""
+
+#: inc/enqueue.php:69
+msgid "Loading…"
+msgstr ""
+
+#: inc/enqueue.php:70
+msgid "Something went wrong. Please try again."
+msgstr ""
+
+#: inc/enqueue.php:71
+msgid "Are you sure?"
+msgstr ""
+
+#: inc/enqueue.php:72
+msgid "Searching…"
+msgstr ""
+
+#: inc/enqueue.php:73
+msgid "No results found."
+msgstr ""
+
+#: inc/plugin-recommendation.php:98
+msgid "Activate ListingCore"
+msgstr ""
+
+#: inc/plugin-recommendation.php:99
+#: template-dashboard.php:36
+#: template-listings.php:82
+#: template-submit.php:94
+#: template-wishlist.php:36
+msgid "Install ListingCore"
+msgstr ""
+
+#: inc/plugin-recommendation.php:104
+msgid "Thank you for installing ListingCore Theme!"
+msgstr ""
+
+#: inc/plugin-recommendation.php:109
+msgid "ListingCore plugin is installed but not active. Activate it to unlock the full theme experience — listings, search, categories, wishlist, dashboard, and more."
+msgstr ""
+
+#: inc/plugin-recommendation.php:111
+msgid "To unlock the full potential of this theme, install the free ListingCore plugin. It powers listings, search, categories, wishlist, and the user dashboard."
+msgstr ""
+
+#: inc/plugin-recommendation.php:120
+msgid "View Plugin Details"
+msgstr ""
+
+#: inc/plugin-recommendation.php:123
+msgid "Dismiss this notice"
+msgstr ""
+
+#: inc/plugin-recommendation.php:163
+msgid "Permission denied."
+msgstr ""
+
+#: inc/plugin-recommendation.php:168
+msgid "Notice dismissed."
+msgstr ""
+
+#: inc/template-functions.php:144
+msgid "No image available"
+msgstr ""
+
+#: inc/template-functions.php:160
+msgid "Home"
+msgstr ""
+
+#. translators: %s: search query
+#: inc/template-functions.php:172
+#, php-format
+msgid "Search: %s"
+msgstr ""
+
+#: inc/template-functions.php:178
+msgid "Breadcrumb"
+msgstr ""
+
+#: inc/template-functions.php:193
+#: single.php:91
+msgid "Previous"
+msgstr ""
+
+#: inc/template-functions.php:194
+#: single.php:92
+msgid "Next"
+msgstr ""
+
+#: inc/template-functions.php:195
+msgid "Posts navigation"
+msgstr ""
+
+#: inc/template-functions.php:225
+msgid "This theme works best with the ListingCore plugin. Some features may not be available until the plugin is installed."
+msgstr ""
+
+#. translators: %s: comment date
+#: inc/template-functions.php:289
+#, php-format
+msgid "%s ago"
+msgstr ""
+
+#: inc/template-functions.php:297
+msgid "Your comment is awaiting moderation."
+msgstr ""
+
+#: inc/template-hooks.php:64
+msgid "Skip to content"
+msgstr ""
+
+#: inc/template-hooks.php:98
+#: inc/theme-setup.php:194
+msgid "Footer Column 1"
+msgstr ""
+
+#: inc/template-hooks.php:99
+#: inc/theme-setup.php:199
+msgid "Footer Column 2"
+msgstr ""
+
+#: inc/template-hooks.php:100
+#: inc/theme-setup.php:204
+msgid "Footer Column 3"
+msgstr ""
+
+#: inc/template-hooks.php:101
+#: inc/theme-setup.php:209
+msgid "Footer Column 4"
+msgstr ""
+
+#. translators: 1: current year, 2: site name.
+#: inc/template-hooks.php:147
+#, php-format
+msgid "© %1$s %2$s. All rights reserved."
+msgstr ""
+
+#: inc/template-hooks.php:212
+msgid "ListingCore Theme works best with the ListingCore plugin. Please install and activate it for full functionality."
+msgstr ""
+
+#: inc/theme-setup.php:81
+msgid "Primary"
+msgstr ""
+
+#: inc/theme-setup.php:86
+msgid "Accent"
+msgstr ""
+
+#: inc/theme-setup.php:91
+msgid "Success"
+msgstr ""
+
+#: inc/theme-setup.php:96
+msgid "Dark"
+msgstr ""
+
+#: inc/theme-setup.php:101
+msgid "Light"
+msgstr ""
+
+#: inc/theme-setup.php:112
+msgid "Small"
+msgstr ""
+
+#: inc/theme-setup.php:117
+msgid "Normal"
+msgstr ""
+
+#: inc/theme-setup.php:122
+msgid "Large"
+msgstr ""
+
+#: inc/theme-setup.php:127
+msgid "Huge"
+msgstr ""
+
+#: inc/theme-setup.php:149
+msgid "Secondary Menu"
+msgstr ""
+
+#: inc/theme-setup.php:150
+msgid "Footer Menu"
+msgstr ""
+
+#: inc/theme-setup.php:151
+msgid "Mobile Menu"
+msgstr ""
+
+#: inc/theme-setup.php:152
+msgid "Dashboard Menu"
+msgstr ""
+
+#: inc/theme-setup.php:184
+msgid "Primary Sidebar"
+msgstr ""
+
+#: inc/theme-setup.php:186
+msgid "Main sidebar for listings archive and pages."
+msgstr ""
+
+#: inc/theme-setup.php:189
+msgid "Listing Single Sidebar"
+msgstr ""
+
+#: inc/theme-setup.php:191
+msgid "Sidebar displayed on single listing pages."
+msgstr ""
+
+#: inc/theme-setup.php:196
+msgid "First footer widget area."
+msgstr ""
+
+#: inc/theme-setup.php:201
+msgid "Second footer widget area."
+msgstr ""
+
+#: inc/theme-setup.php:206
+msgid "Third footer widget area."
+msgstr ""
+
+#: inc/theme-setup.php:211
+msgid "Fourth footer widget area."
+msgstr ""
+
+#: inc/theme-setup.php:214
+msgid "Homepage Widgets"
+msgstr ""
+
+#: inc/theme-setup.php:216
+msgid "Widgets displayed on the homepage."
+msgstr ""
+
+#: inc/theme-setup.php:219
+msgid "Dashboard Sidebar"
+msgstr ""
+
+#: inc/theme-setup.php:221
+msgid "Sidebar on user dashboard."
+msgstr ""
+
+#: inc/widgets.php:36
+msgid "ListingCore: Recent Listings"
+msgstr ""
+
+#: inc/widgets.php:38
+msgid "Displays the most recent listings."
+msgstr ""
+
+#: inc/widgets.php:51
+#: inc/widgets.php:100
+msgid "Recent Listings"
+msgstr ""
+
+#: inc/widgets.php:63
+msgid "Install the ListingCore plugin to display listings."
+msgstr ""
+
+#: inc/widgets.php:88
+msgid "No listings found."
+msgstr ""
+
+#: inc/widgets.php:105
+#: inc/widgets.php:217
+#: inc/widgets.php:347
+msgid "Title:"
+msgstr ""
+
+#: inc/widgets.php:117
+msgid "Number of listings:"
+msgstr ""
+
+#: inc/widgets.php:161
+msgid "ListingCore: Call to Action"
+msgstr ""
+
+#: inc/widgets.php:163
+msgid "Displays a call-to-action box with a button."
+msgstr ""
+
+#: inc/widgets.php:229
+msgid "Text:"
+msgstr ""
+
+#: inc/widgets.php:240
+msgid "Button label:"
+msgstr ""
+
+#: inc/widgets.php:252
+msgid "Button URL:"
+msgstr ""
+
+#: inc/widgets.php:296
+msgid "ListingCore: Stats"
+msgstr ""
+
+#: inc/widgets.php:298
+msgid "Displays listing counts by status."
+msgstr ""
+
+#: inc/widgets.php:311
+#: inc/widgets.php:343
+msgid "Listing Stats"
+msgstr ""
+
+#: inc/widgets.php:320
+msgid "Install the ListingCore plugin to display stats."
+msgstr ""
+
+#: inc/widgets.php:331
+msgid "Active Listings"
+msgstr ""
+
+#: page.php:47
+#: single.php:80
+msgid "Pages:"
+msgstr ""
+
+#. translators: %s: page title
+#. translators: %s: listing title
+#. translators: %s: post title
+#: page.php:59
+#: single-listing.php:170
+#: single.php:103
+#, php-format
+msgid "Edit %s"
+msgstr ""
+
+#. translators: %s: search query
+#: search.php:27
+#, php-format
+msgid "Search Results for: %s"
+msgstr ""
+
+#. translators: %s: number of results
+#: search.php:43
+#, php-format
+msgid "%s result found"
+msgid_plural "%s results found"
+msgstr[0] ""
+msgstr[1] ""
+
+#: search.php:95
+msgid "Read more"
+msgstr ""
+
+#. translators: %s: post title
+#: search.php:100
+#: template-parts/content.php:68
+#, php-format
+msgid "about %s"
+msgstr ""
+
+#: search.php:122
+msgid "No results found"
+msgstr ""
+
+#: search.php:126
+msgid "Sorry, nothing matched your search. Please try again with different keywords."
+msgstr ""
+
+#: search.php:135
+#: template-parts/content-none.php:44
+msgid "Looking for listings? Try browsing all listings instead."
+msgstr ""
+
+#: searchform.php:26
+msgid "Search for:"
+msgstr ""
+
+#: searchform.php:36
+msgid "Search…"
+msgstr ""
+
+#: searchform.php:43
+msgid "Submit search"
+msgstr ""
+
+#. translators: %s: view count
+#: single-listing.php:68
+#, php-format
+msgid "%s view"
+msgid_plural "%s views"
+msgstr[0] ""
+msgstr[1] ""
+
+#: single-listing.php:111
+msgid "Listing Details"
+msgstr ""
+
+#: single-listing.php:158
+msgid "Previous listing"
+msgstr ""
+
+#: single-listing.php:159
+msgid "Next listing"
+msgstr ""
+
+#. translators: %s: author name
+#: single.php:54
+#: template-parts/content-search.php:50
+#: template-parts/content.php:48
+#, php-format
+msgid "By %s"
+msgstr ""
+
+#. translators: %s: category name
+#: taxonomy-listing_category.php:36
+#, php-format
+msgid "Listings in %s"
+msgstr ""
+
+#: taxonomy-listing_category.php:40
+msgid "Listings"
+msgstr ""
+
+#. translators: %s: listing count
+#: taxonomy-listing_category.php:55
+#, php-format
+msgid "%s listing"
+msgid_plural "%s listings"
+msgstr[0] ""
+msgstr[1] ""
+
+#: taxonomy-listing_category.php:85
+msgid "Sub-categories"
+msgstr ""
+
+#: taxonomy-listing_category.php:155
+msgid "No listings in this category"
+msgstr ""
+
+#: taxonomy-listing_category.php:158
+msgid "There are no listings in this category yet. Be the first to post one!"
+msgstr ""
+
+#. Template Name of the theme
+msgid "User Dashboard"
+msgstr ""
+
+#: template-dashboard.php:27
+#: template-listings.php:73
+#: template-submit.php:85
+#: template-wishlist.php:27
+msgid "ListingCore Plugin Required"
+msgstr ""
+
+#: template-dashboard.php:30
+msgid "The user dashboard is powered by the ListingCore plugin. Please install and activate it to access your dashboard."
+msgstr ""
+
+#: template-dashboard.php:46
+msgid "Log in to Access Your Dashboard"
+msgstr ""
+
+#: template-dashboard.php:49
+msgid "Log in to manage your listings, view your wishlist, and update your profile."
+msgstr ""
+
+#: template-dashboard.php:53
+#: template-submit.php:57
+msgid "Log in"
+msgstr ""
+
+#: template-dashboard.php:57
+#: template-submit.php:61
+msgid "Register"
+msgstr ""
+
+#. translators: %s: user display name
+#: template-dashboard.php:74
+#, php-format
+msgid "Welcome back, %s"
+msgstr ""
+
+#: template-dashboard.php:82
+msgid "Post a New Listing"
+msgstr ""
+
+#. Template Name of the theme
+msgid "Listings Archive"
+msgstr ""
+
+#: template-listings.php:76
+msgid "This page displays listings powered by the ListingCore plugin. Please install and activate it to see listings here."
+msgstr ""
+
+#: template-parts/content-none.php:19
+msgid "Nothing Found"
+msgstr ""
+
+#: template-parts/content-none.php:21
+msgid "Ready to publish your first post?"
+msgstr ""
+
+#: template-parts/content-none.php:23
+msgid "No content found"
+msgstr ""
+
+#: template-parts/content-none.php:35
+msgid "Sorry, no results matched your search. Please try again with different keywords."
+msgstr ""
+
+#: template-parts/content-none.php:60
+#, php-format
+msgid "Ready to publish your first post? <a href=\"%s\">Get started here</a>."
+msgstr ""
+
+#: template-parts/content-none.php:71
+msgid "No posts have been published yet. Please check back soon."
+msgstr ""
+
+#: template-parts/content-none.php:77
+msgid "It looks like nothing was found at this location. Maybe try a search?"
+msgstr ""
+
+#: template-parts/content-search.php:15
+msgid "Result"
+msgstr ""
+
+#. translators: %s: post type name
+#: template-parts/content-search.php:69
+#, php-format
+msgid "View %s"
+msgstr ""
+
+#. translators: %s: post title
+#: template-parts/content-search.php:77
+#, php-format
+msgid ": %s"
+msgstr ""
+
+#: template-parts/content.php:63
+msgid "Read More"
+msgstr ""
+
+#: template-parts/dashboard/main.php:23
+msgid "Dashboard navigation"
+msgstr ""
+
+#: template-parts/dashboard/main.php:48
+msgid "Overview"
+msgstr ""
+
+#: template-parts/dashboard/main.php:54
+msgid "My Listings"
+msgstr ""
+
+#. Template Name of the theme
+#: template-parts/dashboard/main.php:60
+msgid "Wishlist"
+msgstr ""
+
+#: template-parts/dashboard/main.php:66
+msgid "Profile"
+msgstr ""
+
+#: template-parts/dashboard/main.php:72
+msgid "+ Post a Listing"
+msgstr ""
+
+#: template-parts/dashboard/main.php:78
+msgid "Log Out"
+msgstr ""
+
+#. Template Name of the theme
+msgid "Submit Listing"
+msgstr ""
+
+#: template-submit.php:50
+msgid "Log in to Post a Listing"
+msgstr ""
+
+#: template-submit.php:53
+msgid "You need to be logged in to post a listing. Log in or create a free account to get started."
+msgstr ""
+
+#: template-submit.php:88
+msgid "The listing submission form is powered by the ListingCore plugin. Please install and activate it to enable listing submissions."
+msgstr ""
+
+#: template-wishlist.php:30
+msgid "The wishlist feature is powered by the ListingCore plugin. Please install and activate it to use your wishlist."
+msgstr ""
+
+#: template-wishlist.php:66
+msgid "Log in to save your wishlist across devices."
+msgstr ""
+
+#: template-wishlist.php:88
+msgid "Continue Browsing Listings"
+msgstr ""
+
+#: theme.json
+msgctxt "Color name"
+msgid "Primary"
+msgstr ""
+
+#: theme.json
+msgctxt "Color name"
+msgid "Primary Dark"
+msgstr ""
+
+#: theme.json
+msgctxt "Color name"
+msgid "Primary Light"
+msgstr ""
+
+#: theme.json
+msgctxt "Color name"
+msgid "Accent"
+msgstr ""
+
+#: theme.json
+msgctxt "Color name"
+msgid "Success"
+msgstr ""
+
+#: theme.json
+msgctxt "Color name"
+msgid "Danger"
+msgstr ""
+
+#: theme.json
+msgctxt "Color name"
+msgid "Dark"
+msgstr ""
+
+#: theme.json
+msgctxt "Color name"
+msgid "Gray 700"
+msgstr ""
+
+#: theme.json
+msgctxt "Color name"
+msgid "Gray 500"
+msgstr ""
+
+#: theme.json
+msgctxt "Color name"
+msgid "Gray 300"
+msgstr ""
+
+#: theme.json
+msgctxt "Color name"
+msgid "Gray 100"
+msgstr ""
+
+#: theme.json
+msgctxt "Color name"
+msgid "Light"
+msgstr ""
+
+#: theme.json
+msgctxt "Color name"
+msgid "White"
+msgstr ""
+
+#: theme.json
+msgctxt "Gradient name"
+msgid "Primary to Accent"
+msgstr ""
+
+#: theme.json
+msgctxt "Gradient name"
+msgid "Subtle Fade"
+msgstr ""
+
+#: theme.json
+msgctxt "Gradient name"
+msgid "Dark Overlay"
+msgstr ""
+
+#: theme.json
+msgctxt "Font family name"
+msgid "Plus Jakarta Sans"
+msgstr ""
+
+#: theme.json
+msgctxt "Font family name"
+msgid "JetBrains Mono"
+msgstr ""
+
+#: theme.json
+msgctxt "Font family name"
+msgid "System Font"
+msgstr ""
+
+#: theme.json
+msgctxt "Font size name"
+msgid "Small"
+msgstr ""
+
+#: theme.json
+msgctxt "Font size name"
+msgid "Normal"
+msgstr ""
+
+#: theme.json
+msgctxt "Font size name"
+msgid "Medium"
+msgstr ""
+
+#: theme.json
+msgctxt "Font size name"
+msgid "Large"
+msgstr ""
+
+#: theme.json
+msgctxt "Font size name"
+msgid "Extra Large"
+msgstr ""
+
+#: theme.json
+msgctxt "Font size name"
+msgid "Huge"
+msgstr ""
+
+#: theme.json
+msgctxt "Space size name"
+msgid "Tiny"
+msgstr ""
+
+#: theme.json
+msgctxt "Space size name"
+msgid "Small"
+msgstr ""
+
+#: theme.json
+msgctxt "Space size name"
+msgid "Medium"
+msgstr ""
+
+#: theme.json
+msgctxt "Space size name"
+msgid "Large"
+msgstr ""
+
+#: theme.json
+msgctxt "Space size name"
+msgid "Extra Large"
+msgstr ""
+
+#: theme.json
+msgctxt "Space size name"
+msgid "Huge"
+msgstr ""
+
+#: theme.json
+msgctxt "Shadow name"
+msgid "Small"
+msgstr ""
+
+#: theme.json
+msgctxt "Shadow name"
+msgid "Medium"
+msgstr ""
+
+#: theme.json
+msgctxt "Shadow name"
+msgid "Large"
+msgstr ""
+
+#: theme.json
+msgctxt "Shadow name"
+msgid "Extra Large"
+msgstr ""
+
+#: theme.json
+msgctxt "Template part name"
+msgid "Header"
+msgstr ""
+
+#: theme.json
+msgctxt "Template part name"
+msgid "Footer"
+msgstr ""
+
+#: theme.json
+msgctxt "Custom template name"
+msgid "Listings Archive"
+msgstr ""
+
+#: theme.json
+msgctxt "Custom template name"
+msgid "Submit Listing"
+msgstr ""
+
+#: theme.json
+msgctxt "Custom template name"
+msgid "User Dashboard"
+msgstr ""
+
+#: theme.json
+msgctxt "Custom template name"
+msgid "Wishlist"
+msgstr ""
