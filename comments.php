@@ -1,90 +1,93 @@
 <?php
 /**
- * Comments Template
+ * Comments template.
  *
- * @package ClassiPressPro
+ * Displays the comment list and comment form.
+ *
+ * @package ListingCoreTheme
+ * @since   1.0.0
  */
 
-if ( post_password_required() ) return;
+defined( 'ABSPATH' ) || exit;
+
+/*
+ * If the current post is protected by a password and the visitor has not yet
+ * entered the password we will return early without loading the comments.
+ */
+if ( post_password_required() ) {
+	return;
+}
 ?>
 
-<div id="comments" class="comments-area" style="margin-top:2rem;">
+<div id="comments" class="lct-comments">
 
-    <?php if ( have_comments() ) : ?>
+	<?php if ( have_comments() ) : ?>
 
-        <h2 class="comments-title" style="font-size:1.25rem;font-weight:800;margin-bottom:1.5rem;">
-            <?php
-            $comment_count = get_comments_number();
-            if ( '1' === $comment_count ) {
-                printf( esc_html__( '1 Comment on %s', 'classipress-pro' ), '<span>' . esc_html( get_the_title() ) . '</span>' );
-            } else {
-                printf( esc_html( _n( '%1$s Comments on %2$s', '%1$s Comments on %2$s', $comment_count, 'classipress-pro' ) ), number_format_i18n( $comment_count ), '<span>' . esc_html( get_the_title() ) . '</span>' );
-            }
-            ?>
-        </h2>
+		<h2 class="lct-comments__title">
+			<?php
+			$comment_count = get_comments_number();
 
-        <ol class="comment-list" style="list-style:none;display:flex;flex-direction:column;gap:1rem;">
-            <?php
-            wp_list_comments( [
-                'style'       => 'ol',
-                'short_ping'  => true,
-                'avatar_size' => 48,
-                'callback'    => 'classipress_comment_template',
-            ] );
-            ?>
-        </ol>
+			if ( '1' === $comment_count ) {
+				printf(
+					/* translators: %s: post title */
+					esc_html__( 'One comment on &ldquo;%s&rdquo;', 'listingcore-theme' ),
+					'<span>' . wp_kses_post( get_the_title() ) . '</span>'
+				);
+			} else {
+				printf(
+					/* translators: 1: comment count, 2: post title */
+					esc_html( _n( '%1$s comment on &ldquo;%2$s&rdquo;', '%1$s comments on &ldquo;%2$s&rdquo;', $comment_count, 'listingcore-theme' ) ),
+					number_format_i18n( $comment_count ),
+					'<span>' . wp_kses_post( get_the_title() ) . '</span>'
+				);
+			}
+			?>
+		</h2>
 
-        <?php the_comments_navigation(); ?>
+		<ol class="lct-comments__list">
+			<?php
+			wp_list_comments( [
+				'style'       => 'ol',
+				'short_ping'  => true,
+				'avatar_size' => 60,
+				'callback'    => 'listingcore_theme_comment_callback',
+			] );
+			?>
+		</ol>
 
-    <?php endif; ?>
+		<?php
+		the_comments_navigation( [
+			'prev_text' => esc_html__( 'Older comments', 'listingcore-theme' ),
+			'next_text' => esc_html__( 'Newer comments', 'listingcore-theme' ),
+		] );
+		?>
 
-    <?php if ( ! comments_open() && get_comments_number() && post_type_supports( get_post_type(), 'comments' ) ) : ?>
-        <p class="no-comments" style="text-align:center;color:var(--cp-gray-500);padding:1rem 0;"><?php esc_html_e( 'Comments are closed.', 'classipress-pro' ); ?></p>
-    <?php endif; ?>
+	<?php endif; ?>
 
-    <?php
-    comment_form( [
-        'title_reply_before' => '<h3 id="reply-title" class="comment-reply-title" style="font-size:1.25rem;font-weight:800;margin-bottom:1.5rem;">',
-        'title_reply_after'  => '</h3>',
-        'class_form'         => 'cp-comment-form',
-        'class_submit'       => 'cp-btn cp-btn-primary',
-        'submit_button'      => '<button name="%1$s" type="submit" id="%2$s" class="%3$s">%4$s</button>',
-    ] );
-    ?>
+	<?php if ( ! comments_open() && get_comments_number() && post_type_supports( get_post_type(), 'comments' ) ) : ?>
+
+		<p class="lct-comments__closed">
+			<?php esc_html_e( 'Comments are closed.', 'listingcore-theme' ); ?>
+		</p>
+
+	<?php endif; ?>
+
+	<?php
+	comment_form( [
+		'class_container'    => 'lct-comment-form',
+		'class_form'         => 'lct-comment-form__form',
+		'title_reply'        => esc_html__( 'Leave a Comment', 'listingcore-theme' ),
+		'title_reply_before' => '<h2 id="reply-title" class="lct-comment-form__title">',
+		'title_reply_after'  => '</h2>',
+		'comment_notes_before' => '<p class="lct-comment-form__notes">' . esc_html__( 'Your email address will not be published. Required fields are marked *', 'listingcore-theme' ) . '</p>',
+		'comment_field'      => sprintf(
+			'<p class="lct-comment-form__field"><label for="comment">%1$s</label><textarea id="comment" name="comment" cols="45" rows="6" required aria-required="true"></textarea></p>',
+			esc_html__( 'Comment *', 'listingcore-theme' )
+		),
+		'label_submit'       => esc_html__( 'Post Comment', 'listingcore-theme' ),
+		'submit_button'      => '<input name="%1$s" type="submit" id="%2$s" class="%3$s lct-button lct-button--primary" value="%4$s" />',
+		'submit_field'       => '<p class="lct-comment-form__submit">%1$s %2$s</p>',
+	] );
+	?>
 
 </div>
-
-<?php
-if ( ! function_exists( 'classipress_comment_template' ) ) :
-function classipress_comment_template( $comment, $args, $depth ) {
-    $GLOBALS['comment'] = $comment;
-    ?>
-    <li <?php comment_class( 'cp-comment-item' ); ?> id="comment-<?php comment_ID(); ?>" style="background:var(--cp-white);border:1px solid var(--cp-gray-100);border-radius:var(--cp-border-radius-lg);padding:1.25rem;">
-        <div style="display:flex;gap:1rem;">
-            <div style="flex-shrink:0;">
-                <?php echo get_avatar( $comment, 48, '', get_comment_author(), [ 'style' => 'border-radius:50%;' ] ); ?>
-            </div>
-            <div style="flex:1;">
-                <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.5rem;">
-                    <div>
-                        <strong><?php comment_author(); ?></strong>
-                        <time datetime="<?php comment_date( 'c' ); ?>" style="font-size:.8125rem;color:var(--cp-gray-500);margin-left:.5rem;"><?php comment_date(); ?></time>
-                    </div>
-                    <?php
-                    comment_reply_link( array_merge( $args, [
-                        'depth'     => $depth,
-                        'max_depth' => $args['max_depth'],
-                        'before'    => '<div>',
-                        'after'     => '</div>',
-                    ] ) );
-                    ?>
-                </div>
-                <?php if ( '0' == $comment->comment_approved ) : ?>
-                    <p style="font-style:italic;color:var(--cp-gray-500);"><?php esc_html_e( 'Your comment is awaiting moderation.', 'classipress-pro' ); ?></p>
-                <?php endif; ?>
-                <div class="comment-content"><?php comment_text(); ?></div>
-            </div>
-        </div>
-    <?php
-}
-endif;

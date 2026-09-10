@@ -255,3 +255,69 @@ function listingcore_theme_get_layout_class() {
 
 	return implode( ' ', $classes );
 }
+
+/**
+ * Custom comment callback.
+ *
+ * Renders each comment with theme markup.
+ *
+ * @param WP_Comment $comment Comment object.
+ * @param array      $args    Comment args.
+ * @param int        $depth   Depth of comment.
+ */
+function listingcore_theme_comment_callback( $comment, $args, $depth ) {
+	?>
+	<li id="comment-<?php comment_ID(); ?>" <?php comment_class( 'lct-comment' ); ?>>
+
+		<article class="lct-comment__body">
+
+			<header class="lct-comment__header">
+
+				<div class="lct-comment__avatar">
+					<?php echo get_avatar( $comment, $args['avatar_size'] ); ?>
+				</div>
+
+				<div class="lct-comment__meta">
+					<span class="lct-comment__author">
+						<?php echo wp_kses_post( get_comment_author_link( $comment ) ); ?>
+					</span>
+
+					<time class="lct-comment__date" datetime="<?php echo esc_attr( get_comment_date( DATE_W3C, $comment ) ); ?>">
+						<?php
+						printf(
+							/* translators: %s: comment date */
+							esc_html__( '%s ago', 'listingcore-theme' ),
+							esc_html( human_time_diff( get_comment_time( 'U', true, $comment ), current_time( 'timestamp' ) ) )
+						);
+						?>
+					</time>
+
+					<?php if ( '0' === $comment->comment_approved ) : ?>
+						<span class="lct-comment__awaiting">
+							<?php esc_html_e( 'Your comment is awaiting moderation.', 'listingcore-theme' ); ?>
+						</span>
+					<?php endif; ?>
+				</div>
+
+			</header>
+
+			<div class="lct-comment__content">
+				<?php comment_text( $comment ); ?>
+			</div>
+
+			<footer class="lct-comment__footer">
+				<?php
+				comment_reply_link( array_merge( $args, [
+					'depth'     => $depth,
+					'max_depth' => $args['max_depth'],
+					'before'    => '<span class="lct-comment__reply">',
+					'after'     => '</span>',
+				] ), $comment );
+				?>
+			</footer>
+
+		</article>
+
+	<?php
+	// Note: closing </li> is added by WordPress automatically.
+}
