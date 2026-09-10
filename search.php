@@ -1,63 +1,156 @@
 <?php
 /**
- * Search Results Template
+ * Search results template.
  *
- * @package ClassiPressPro
+ * Displays search results for blog posts and pages.
+ * Listing searches are handled by the ListingCore plugin.
+ *
+ * @package ListingCoreTheme
+ * @since   1.0.0
  */
 
+defined( 'ABSPATH' ) || exit;
+
 get_header();
-cp_breadcrumbs();
 ?>
 
-<main id="main" class="site-main" role="main">
-    <div class="cp-container cp-section-sm">
+<main id="primary" class="lct-main lct-main--search" role="main">
+	<div class="lct-container">
 
-        <header class="page-header" style="margin-bottom:2rem;">
-            <h1 class="page-title">
-                <?php printf( esc_html__( 'Search results for: %s', 'classipress-pro' ), '<span style="color:var(--cp-primary);">' . esc_html( get_search_query() ) . '</span>' ); ?>
-            </h1>
-            <?php if ( $wp_query->found_posts ) : ?>
-            <p style="color:var(--cp-gray-500);margin-top:.5rem;">
-                <?php printf( esc_html( _n( '%s result found', '%s results found', $wp_query->found_posts, 'classipress-pro' ) ), number_format_i18n( $wp_query->found_posts ) ); ?>
-            </p>
-            <?php endif; ?>
-        </header>
+		<?php listingcore_theme_breadcrumbs(); ?>
 
-        <?php if ( have_posts() ) : ?>
+		<header class="lct-page-header">
+			<h1 class="lct-page-header__title">
+				<?php
+				printf(
+					/* translators: %s: search query */
+					esc_html__( 'Search Results for: %s', 'listingcore-theme' ),
+					'<span class="lct-page-header__query">' . esc_html( get_search_query() ) . '</span>'
+				);
+				?>
+			</h1>
 
-            <div class="cp-listings-grid" id="cp-search-results">
-                <?php while ( have_posts() ) : the_post(); ?>
-                    <?php if ( get_post_type() === 'listing' ) : ?>
-                        <?php cp_listing_card( get_the_ID() ); ?>
-                    <?php else : ?>
-                        <?php get_template_part( 'template-parts/content', 'search' ); ?>
-                    <?php endif; ?>
-                <?php endwhile; ?>
-            </div>
+			<?php
+			global $wp_query;
+			$total_results = $wp_query->found_posts;
+			?>
 
-            <?php cp_pagination(); ?>
+			<?php if ( $total_results > 0 ) : ?>
+				<p class="lct-page-header__meta">
+					<?php
+					printf(
+						/* translators: %s: number of results */
+						esc_html( _n( '%s result found', '%s results found', $total_results, 'listingcore-theme' ) ),
+						number_format_i18n( $total_results )
+					);
+					?>
+				</p>
+			<?php endif; ?>
+		</header>
 
-        <?php else : ?>
+		<div class="lct-layout <?php echo esc_attr( listingcore_theme_get_layout_class() ); ?>">
 
-            <div style="text-align:center;padding:4rem 0;">
-                <div style="font-size:4rem;margin-bottom:1rem;">🔍</div>
-                <h2><?php esc_html_e( 'No results found', 'classipress-pro' ); ?></h2>
-                <p style="color:var(--cp-gray-500);margin-bottom:2rem;">
-                    <?php esc_html_e( 'Sorry, no listings match your search. Try different keywords or browse all listings.', 'classipress-pro' ); ?>
-                </p>
-                <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
-                    <a href="<?php echo esc_url( get_post_type_archive_link( 'listing' ) ); ?>" class="cp-btn cp-btn-primary">
-                        <?php esc_html_e( 'Browse All Listings', 'classipress-pro' ); ?>
-                    </a>
-                    <a href="<?php echo esc_url( home_url() ); ?>" class="cp-btn cp-btn-ghost">
-                        <?php esc_html_e( 'Go Home', 'classipress-pro' ); ?>
-                    </a>
-                </div>
-            </div>
+			<div class="lct-layout__main">
 
-        <?php endif; ?>
+				<?php if ( have_posts() ) : ?>
 
-    </div>
+					<div class="lct-posts lct-posts--search">
+
+						<?php
+						while ( have_posts() ) :
+							the_post();
+							?>
+
+							<article id="post-<?php the_ID(); ?>" <?php post_class( 'lct-search-result' ); ?>>
+
+								<?php if ( has_post_thumbnail() ) : ?>
+									<a href="<?php the_permalink(); ?>" class="lct-search-result__thumbnail" aria-hidden="true" tabindex="-1">
+										<?php the_post_thumbnail( 'lct-listing-grid' ); ?>
+									</a>
+								<?php endif; ?>
+
+								<div class="lct-search-result__content">
+
+									<h2 class="lct-search-result__title">
+										<a href="<?php the_permalink(); ?>">
+											<?php the_title(); ?>
+										</a>
+									</h2>
+
+									<div class="lct-search-result__meta">
+										<span class="lct-search-result__type">
+											<?php echo esc_html( get_post_type_object( get_post_type() )->labels->singular_name ); ?>
+										</span>
+										<span class="lct-search-result__meta-sep">·</span>
+										<time datetime="<?php echo esc_attr( get_the_date( DATE_W3C ) ); ?>">
+											<?php echo esc_html( get_the_date() ); ?>
+										</time>
+									</div>
+
+									<div class="lct-search-result__excerpt">
+										<?php the_excerpt(); ?>
+									</div>
+
+									<a href="<?php the_permalink(); ?>" class="lct-search-result__link">
+										<?php esc_html_e( 'Read more', 'listingcore-theme' ); ?>
+										<span class="screen-reader-text">
+											<?php
+											printf(
+												/* translators: %s: post title */
+												esc_html__( 'about %s', 'listingcore-theme' ),
+												esc_html( get_the_title() )
+											);
+											?>
+										</span>
+									</a>
+
+								</div>
+
+							</article>
+
+						<?php endwhile; ?>
+
+					</div>
+
+					<?php listingcore_theme_pagination(); ?>
+
+				<?php else : ?>
+
+					<div class="lct-empty-state">
+
+						<h2 class="lct-empty-state__title">
+							<?php esc_html_e( 'No results found', 'listingcore-theme' ); ?>
+						</h2>
+
+						<p class="lct-empty-state__text">
+							<?php esc_html_e( 'Sorry, nothing matched your search. Please try again with different keywords.', 'listingcore-theme' ); ?>
+						</p>
+
+						<div class="lct-empty-state__search">
+							<?php get_search_form(); ?>
+						</div>
+
+						<?php if ( listingcore_theme_has_plugin() ) : ?>
+							<p class="lct-empty-state__hint">
+								<?php esc_html_e( 'Looking for listings? Try browsing all listings instead.', 'listingcore-theme' ); ?>
+							</p>
+							<a href="<?php echo esc_url( home_url( '/listings/' ) ); ?>" class="lct-button lct-button--primary">
+								<?php esc_html_e( 'Browse Listings', 'listingcore-theme' ); ?>
+							</a>
+						<?php endif; ?>
+
+					</div>
+
+				<?php endif; ?>
+
+			</div>
+
+			<?php get_sidebar(); ?>
+
+		</div>
+
+	</div>
 </main>
 
-<?php get_footer(); ?>
+<?php
+get_footer();
