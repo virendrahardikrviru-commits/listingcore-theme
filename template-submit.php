@@ -1,9 +1,10 @@
 <?php
 /**
  * Template Name: Submit Listing
+ * Template Post Type: page
  *
- * Submission page template. The ListingCore plugin provides the form
- * via shortcode, and the theme handles the presentation wrapper.
+ * Displays the listing submission form via the ListingCore plugin.
+ * Users create a page and select "Submit Listing" as the template.
  *
  * @package ListingCoreTheme
  * @since   1.0.0
@@ -14,7 +15,7 @@ defined( 'ABSPATH' ) || exit;
 get_header();
 ?>
 
-<main id="primary" class="lct-main lct-main--submit-listing" role="main">
+<main id="primary" class="lct-main lct-main--template-submit" role="main">
 	<div class="lct-container">
 
 		<?php listingcore_theme_breadcrumbs(); ?>
@@ -32,17 +33,24 @@ get_header();
 
 						<header class="lct-submit-page__header">
 							<h1 class="lct-submit-page__title"><?php the_title(); ?></h1>
+
+							<?php if ( get_the_content() ) : ?>
+								<div class="lct-submit-page__description">
+									<?php the_content(); ?>
+								</div>
+							<?php endif; ?>
 						</header>
 
 						<?php if ( listingcore_theme_has_plugin() ) : ?>
 
-							<?php
-							// Check if user is logged in (configurable).
-							if ( ! is_user_logged_in() ) :
-								?>
+							<?php if ( ! is_user_logged_in() ) : ?>
+
 								<div class="lct-notice lct-notice--info">
+									<h2 class="lct-notice__title">
+										<?php esc_html_e( 'Log in to Post a Listing', 'listingcore-theme' ); ?>
+									</h2>
 									<p>
-										<?php esc_html_e( 'You need to be logged in to post a listing.', 'listingcore-theme' ); ?>
+										<?php esc_html_e( 'You need to be logged in to post a listing. Log in or create a free account to get started.', 'listingcore-theme' ); ?>
 									</p>
 									<p>
 										<a href="<?php echo esc_url( wp_login_url( get_permalink() ) ); ?>" class="lct-button lct-button--primary">
@@ -55,13 +63,15 @@ get_header();
 										<?php endif; ?>
 									</p>
 								</div>
+
 							<?php else : ?>
 
-								<div class="lct-submit-page__content">
-									<?php the_content(); ?>
-
+								<div class="lct-submit-page__form">
 									<?php
-									// The plugin handles the actual form rendering.
+									/**
+									 * The ListingCore plugin handles the actual submission form:
+									 * validation, file uploads, custom fields, and persistence.
+									 */
 									echo do_shortcode( '[listingcore_listing_form]' );
 									?>
 								</div>
@@ -70,11 +80,12 @@ get_header();
 
 						<?php else : ?>
 
-							<?php the_content(); ?>
-
 							<div class="lct-notice lct-notice--warning">
+								<h2 class="lct-notice__title">
+									<?php esc_html_e( 'ListingCore Plugin Required', 'listingcore-theme' ); ?>
+								</h2>
 								<p>
-									<?php esc_html_e( 'The ListingCore plugin is required to submit listings. Please install and activate it.', 'listingcore-theme' ); ?>
+									<?php esc_html_e( 'The listing submission form is powered by the ListingCore plugin. Please install and activate it to enable listing submissions.', 'listingcore-theme' ); ?>
 								</p>
 
 								<?php if ( current_user_can( 'install_plugins' ) ) : ?>
