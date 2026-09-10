@@ -1,26 +1,88 @@
 <?php
 /**
- * Template part for displaying text search results
+ * Template part for displaying search results.
  *
  * @package ListingCoreTheme
+ * @since   1.0.0
  */
 
 defined( 'ABSPATH' ) || exit;
+
+$listingcore_theme_post_type = get_post_type();
+$listingcore_theme_type_obj  = get_post_type_object( $listingcore_theme_post_type );
+$listingcore_theme_type_name = $listingcore_theme_type_obj
+	? $listingcore_theme_type_obj->labels->singular_name
+	: __( 'Result', 'listingcore-theme' );
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class('listingcore-search-excerpt-card'); ?> style="background: #ffffff; padding: 20px; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 16px;">
-	<header class="entry-header">
-		<span class="search-result-post-type" style="display: inline-block; padding: 2px 6px; font-size: 11px; font-weight: 600; text-transform: uppercase; background: #f1f5f9; color: #475569; border-radius: 4px; margin-bottom: 8px;">
-			<?php 
-			$post_type_obj = get_post_type_object( get_post_type() );
-			echo esc_html( $post_type_obj->labels->singular_name );
-			?>
-		</span>
-		
-		<?php the_title( sprintf( '<h3 class="entry-title" style="font-size: 18px; font-weight: 600; margin: 0 0 10px 0;"><a href="%s" style="color: #0f172a; text-decoration: none;">', esc_url( get_permalink() ) ), '</a></h3>' ); ?>
-	</header>
+<article id="post-<?php the_ID(); ?>" <?php post_class( 'lct-search-result' ); ?>>
 
-	<div class="entry-summary" style="font-size: 14px; line-height: 1.5; color: #475569;">
-		<?php the_excerpt(); ?>
+	<?php if ( has_post_thumbnail() ) : ?>
+		<a href="<?php the_permalink(); ?>" class="lct-search-result__thumbnail-link" aria-hidden="true" tabindex="-1">
+			<div class="lct-search-result__thumbnail">
+				<?php the_post_thumbnail( 'lct-listing-grid' ); ?>
+			</div>
+		</a>
+	<?php endif; ?>
+
+	<div class="lct-search-result__body">
+
+		<header class="lct-search-result__header">
+
+			<span class="lct-search-result__type-badge">
+				<?php echo esc_html( $listingcore_theme_type_name ); ?>
+			</span>
+
+			<h2 class="lct-search-result__title">
+				<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+			</h2>
+
+			<?php if ( 'post' === $listingcore_theme_post_type ) : ?>
+				<div class="lct-search-result__meta">
+					<time datetime="<?php echo esc_attr( get_the_date( DATE_W3C ) ); ?>">
+						<?php echo esc_html( get_the_date() ); ?>
+					</time>
+					<span class="lct-search-result__meta-sep">·</span>
+					<span class="lct-search-result__author">
+						<?php
+						printf(
+							/* translators: %s: author name */
+							esc_html__( 'By %s', 'listingcore-theme' ),
+							esc_html( get_the_author() )
+						);
+						?>
+					</span>
+				</div>
+			<?php endif; ?>
+
+		</header>
+
+		<div class="lct-search-result__excerpt">
+			<?php the_excerpt(); ?>
+		</div>
+
+		<footer class="lct-search-result__footer">
+			<a href="<?php the_permalink(); ?>" class="lct-search-result__link">
+				<?php
+				printf(
+					/* translators: %s: post type name */
+					esc_html__( 'View %s', 'listingcore-theme' ),
+					esc_html( strtolower( $listingcore_theme_type_name ) )
+				);
+				?>
+				<span class="screen-reader-text">
+					<?php
+					printf(
+						/* translators: %s: post title */
+						esc_html__( ': %s', 'listingcore-theme' ),
+						esc_html( get_the_title() )
+					);
+					?>
+				</span>
+				<span class="lct-search-result__arrow" aria-hidden="true">→</span>
+			</a>
+		</footer>
+
 	</div>
+
 </article>
