@@ -119,11 +119,17 @@ function listingcore_theme_plugin_recommendation_notice() {
 			<a href="<?php echo esc_url( 'https://wordpress.org/plugins/listingcore/' ); ?>" class="button button-secondary" target="_blank" rel="noopener noreferrer">
 				<?php esc_html_e( 'View Plugin Details', 'listingcore-theme' ); ?>
 			</a>
-			<button type="button" class="button-link listingcore-theme-notice__dismiss" style="margin-left: 12px;">
+			<button type="button" class="button-link listingcore-theme-notice__dismiss">
 				<?php esc_html_e( 'Dismiss this notice', 'listingcore-theme' ); ?>
 			</button>
 		</p>
 	</div>
+
+    <style>
+		.listingcore-theme-notice__dismiss {
+			margin-left: 12px;
+		}
+	</style>
 
 	<script type="text/javascript">
 		( function() {
