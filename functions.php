@@ -1,57 +1,66 @@
 <?php
 /**
- * ClassiPress Pro Theme Functions
+ * ListingCore Theme functions and definitions.
  *
- * @package ClassiPressPro
- *
- * ClassiPress Pro WordPress Theme
- * Copyright (C) 2024 Your Name
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
+ * @package ListingCoreTheme
+ * @since   1.0.0
  */
 
 defined( 'ABSPATH' ) || exit;
 
-// ─────────────────────────────────────────────────────────
-// CONSTANTS
-// ─────────────────────────────────────────────────────────
-define( 'CP_VERSION', '1.0.4' );
-define( 'CP_DIR',     get_template_directory() );
-define( 'CP_URI',     get_template_directory_uri() );
-define( 'CP_INC',     CP_DIR . '/inc' );
-
-// ─────────────────────────────────────────────────────────
-// THEME FILES  (presentation only — no plugin-territory)
-// ─────────────────────────────────────────────────────────
-require_once CP_INC . '/theme-setup.php';
-require_once CP_INC . '/enqueue.php';
-require_once CP_INC . '/template-functions.php';
-require_once CP_INC . '/template-hooks.php';
-require_once CP_INC . '/widgets.php';
-require_once CP_INC . '/customizer.php';
-require_once CP_INC . '/block-patterns.php';
-require_once CP_INC . '/class-cp-walker-nav-menu.php';
-
-// WooCommerce presentation layer (wrappers, sidebar, styles only)
-if ( class_exists( 'WooCommerce' ) ) {
-    require_once CP_INC . '/woocommerce.php';
+// -----------------------------------------------------------------------------
+// Theme constants
+// -----------------------------------------------------------------------------
+if ( ! defined( 'LISTINGCORE_THEME_VERSION' ) ) {
+	define( 'LISTINGCORE_THEME_VERSION', '1.0.0' );
 }
 
-// ─────────────────────────────────────────────────────────
-// ADMIN NOTICE: companion plugin required
-// ─────────────────────────────────────────────────────────
-add_action( 'admin_notices', function () {
-    if ( ! function_exists( 'cpp_register_post_types' ) ) {
-        echo '<div class="notice notice-warning"><p>';
-        printf(
-            wp_kses(
-                __( '<strong>ClassiPress Pro</strong> requires the <strong>ClassiPress Pro Core</strong> plugin for full functionality. Please install and activate it.', 'classipress-pro' ),
-                [ 'strong' => [] ]
-            )
-        );
-        echo '</p></div>';
-    }
-} );
+if ( ! defined( 'LISTINGCORE_THEME_DIR' ) ) {
+	define( 'LISTINGCORE_THEME_DIR', get_template_directory() );
+}
+
+if ( ! defined( 'LISTINGCORE_THEME_URI' ) ) {
+	define( 'LISTINGCORE_THEME_URI', get_template_directory_uri() );
+}
+
+if ( ! defined( 'LISTINGCORE_THEME_INC' ) ) {
+	define( 'LISTINGCORE_THEME_INC', LISTINGCORE_THEME_DIR . '/inc' );
+}
+
+// -----------------------------------------------------------------------------
+// Load theme modules (presentation only — no plugin territory).
+// -----------------------------------------------------------------------------
+$listingcore_theme_modules = [
+	'/theme-setup.php',              // Theme supports, menus, sidebars, image sizes.
+	'/enqueue.php',                  // Front-end and editor styles/scripts.
+	'/template-functions.php',       // Reusable template helpers.
+	'/template-hooks.php',           // Header/footer/content hooks.
+	'/widgets.php',                  // Custom widgets.
+	'/customizer.php',               // Customizer options.
+	'/block-patterns.php',           // Block patterns.
+	'/class-listingcore-theme-walker-nav-menu.php', // Nav menu walker.
+	'/plugin-recommendation.php',    // Admin notice recommending ListingCore plugin.
+];
+
+foreach ( $listingcore_theme_modules as $listingcore_theme_module ) {
+	$listingcore_theme_module_path = LISTINGCORE_THEME_INC . $listingcore_theme_module;
+
+	if ( file_exists( $listingcore_theme_module_path ) ) {
+		require_once $listingcore_theme_module_path;
+	}
+}
+
+unset( $listingcore_theme_modules, $listingcore_theme_module, $listingcore_theme_module_path );
+
+// -----------------------------------------------------------------------------
+// WooCommerce presentation layer (wrappers, sidebar, styles only).
+// -----------------------------------------------------------------------------
+if ( class_exists( 'WooCommerce' ) ) {
+	$listingcore_theme_wc = LISTINGCORE_THEME_INC . '/woocommerce.php';
+
+	if ( file_exists( $listingcore_theme_wc ) ) {
+		require_once $listingcore_theme_wc;
+	}
+
+	unset( $listingcore_theme_wc );
+}
