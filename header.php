@@ -1,90 +1,140 @@
 <?php
 /**
- * The header for our theme
- *
- * This is the template that displays all of the <head> section and everything up until <div id="content">
+ * Site header.
  *
  * @package ListingCoreTheme
+ * @since   1.0.0
  */
 
 defined( 'ABSPATH' ) || exit;
 ?>
-<!doctype html>
+<!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="profile" href="https://gmpg.org">
-
+	<link rel="profile" href="https://gmpg.org/xfn/11">
 	<?php wp_head(); ?>
 </head>
 
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 
-<div id="page" class="site" style="min-height: 100vh; display: flex; flex-direction: column;">
-	<a class="skip-link screen-reader-text" href="#primary" style="position: absolute; left: -9999px;">
-		<?php esc_html_e( 'Skip to content', 'listingcore-theme' ); ?>
-	</a>
+<div id="page" class="lct-site">
 
-	<!-- Global Sticky Header Support Layer -->
-	<?php $is_sticky = get_theme_mod( 'listingcore_sticky_header', true ); ?>
-	<header id="masthead" class="site-header" style="background: #ffffff; border-bottom: 1px solid #e2e8f0; padding: 15px 0; <?php echo $is_sticky ? 'position: sticky; top: 0; z-index: 1000; box-shadow: 0 1px 3px rgba(0,0,0,0.05);' : ''; ?>">
-		<div class="listingcore-container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; align-items: center; justify-content: space-between;">
-			
-			<!-- Site Logo / Branding Engine -->
-			<div class="site-branding" style="flex-shrink: 0;">
-				<?php
-				if ( has_custom_logo() ) :
-					the_custom_logo();
-				else :
-					?>
-					<h1 class="site-title" style="margin: 0; font-size: 24px; font-weight: 700;">
-						<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" style="color: #0f172a; text-decoration: none;">
-							<?php bloginfo( 'name' ); ?>
-						</a>
-					</h1>
+	<?php do_action( 'listingcore_theme_before_header' ); ?>
+
+	<header id="masthead" class="lct-header" role="banner">
+		<div class="lct-container">
+
+			<div class="lct-header__inner">
+
+				<!-- Site Branding -->
+				<div class="lct-header__branding">
+					<?php if ( has_custom_logo() ) : ?>
+						<div class="lct-header__logo">
+							<?php the_custom_logo(); ?>
+						</div>
+					<?php else : ?>
+						<div class="lct-header__site-info">
+							<?php if ( is_front_page() && is_home() ) : ?>
+								<h1 class="lct-site-title">
+									<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
+										<?php bloginfo( 'name' ); ?>
+									</a>
+								</h1>
+							<?php else : ?>
+								<p class="lct-site-title">
+									<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
+										<?php bloginfo( 'name' ); ?>
+									</a>
+								</p>
+							<?php endif; ?>
+
+							<?php
+							$description = get_bloginfo( 'description', 'display' );
+							if ( $description ) :
+								?>
+								<p class="lct-site-description"><?php echo esc_html( $description ); ?></p>
+							<?php endif; ?>
+						</div>
+					<?php endif; ?>
+				</div>
+
+				<!-- Primary Navigation -->
+				<nav id="site-navigation" class="lct-header__nav" aria-label="<?php esc_attr_e( 'Primary Menu', 'listingcore-theme' ); ?>">
 					<?php
-					$listingcore_description = get_bloginfo( 'description', 'display' );
-					if ( $listingcore_description || is_customize_preview() ) :
-						?>
-						<p class="site-description" style="margin: 3px 0 0 0; font-size: 12px; color: #64748b;">
-							<?php echo $listingcore_description; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-						</p>
-					<?php endif;
-				endif;
-				?>
+					if ( has_nav_menu( 'primary' ) ) {
+						wp_nav_menu( [
+							'theme_location' => 'primary',
+							'container'      => false,
+							'menu_class'     => 'lct-menu lct-menu--primary',
+							'depth'          => 3,
+							'fallback_cb'    => false,
+							'walker'         => new ListingCore_Theme_Walker_Nav_Menu(),
+						] );
+					}
+					?>
+				</nav>
+
+				<!-- Header Actions -->
+				<div class="lct-header__actions">
+					<?php if ( listingcore_theme_has_plugin() ) : ?>
+
+						<!-- Search toggle -->
+						<button
+							type="button"
+							class="lct-header__search-toggle"
+							aria-label="<?php esc_attr_e( 'Toggle search', 'listingcore-theme' ); ?>"
+							aria-expanded="false"
+							aria-controls="lct-header-search"
+						>
+							<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+								<circle cx="11" cy="11" r="8"></circle>
+								<line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+							</svg>
+						</button>
+
+						<!-- Wishlist link -->
+						<a href="<?php echo esc_url( home_url( '/wishlist/' ) ); ?>" class="lct-header__wishlist" aria-label="<?php esc_attr_e( 'View wishlist', 'listingcore-theme' ); ?>">
+							<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+								<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+							</svg>
+						</a>
+
+						<!-- Post listing button -->
+						<a href="<?php echo esc_url( home_url( '/submit-listing/' ) ); ?>" class="lct-button lct-button--primary lct-button--sm">
+							<?php esc_html_e( 'Post a Listing', 'listingcore-theme' ); ?>
+						</a>
+
+					<?php endif; ?>
+
+					<!-- Mobile menu toggle -->
+					<?php if ( has_nav_menu( 'mobile' ) || has_nav_menu( 'primary' ) ) : ?>
+						<button
+							type="button"
+							class="lct-header__menu-toggle"
+							aria-label="<?php esc_attr_e( 'Toggle menu', 'listingcore-theme' ); ?>"
+							aria-expanded="false"
+							aria-controls="site-navigation"
+						>
+							<span class="lct-header__menu-icon" aria-hidden="true"></span>
+						</button>
+					<?php endif; ?>
+				</div>
+
 			</div>
 
-			<!-- Dynamic Navigation Structure Panel -->
-			<nav id="site-navigation" class="main-navigation" aria-label="<?php esc_attr_e( 'Primary Menu', 'listingcore-theme' ); ?>" style="display: flex; align-items: center; gap: 20px;">
-				<?php
-				wp_nav_menu( array(
-					'theme_location' => 'primary',
-					'menu_id'        => 'primary-menu',
-					'container'      => false,
-					'menu_class'     => 'nav-menu',
-					'fallback_cb'    => '__return_false', // Clean fallback behavior to bypass repository review flags
-					'items_wrap'     => '<ul id="%1$s" class="%2$s" style="list-style: none; margin: 0; padding: 0; display: flex; gap: 20px; font-weight: 500; font-size: 15px;">%3$s</ul>',
-				) );
-				?>
-
-				<!-- Call-To-Action "Post Listing" Button Option Layer -->
-				<div class="header-action-button" style="margin-left: 10px;">
-					<?php 
-					$btn_text = get_theme_mod( 'listingcore_post_listing_btn_text', __( 'Post Ad', 'listingcore-theme' ) );
-					
-					// Safe architectural mapping check: attempts to resolve dynamic page slug if submission core logic exists
-					$submit_page_url = home_url( '/submit-listing/' ); 
-					?>
-					<a href="<?php echo esc_url( $submit_page_url ); ?>" class="btn-post-listing" style="background: var(--listingcore-accent, #f59e0b); color: #ffffff; padding: 8px 16px; border-radius: 6px; font-weight: 600; font-size: 14px; text-decoration: none; display: inline-block; transition: background 0.2s;">
-						<?php echo esc_html( $btn_text ); ?>
-					</a>
+			<!-- Expandable search -->
+			<?php if ( listingcore_theme_has_plugin() ) : ?>
+				<div id="lct-header-search" class="lct-header__search" hidden>
+					<?php echo do_shortcode( '[listingcore_search_form]' ); ?>
 				</div>
-			</nav>
+			<?php endif; ?>
 
 		</div>
 	</header>
 
-	<!-- Global wrapper container split opening point -->
-	<div id="content" class="site-content" style="flex-grow: 1;">
+	<?php do_action( 'listingcore_theme_after_header' ); ?>
+
+	<div id="content" class="lct-content">
