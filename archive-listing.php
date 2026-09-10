@@ -1,95 +1,128 @@
 <?php
 /**
- * The template for displaying listing archives
+ * Listings archive template.
+ *
+ * Displays the archive of all listings. Uses the ListingCore plugin's
+ * shortcode to render listings with proper styling.
  *
  * @package ListingCoreTheme
+ * @since   1.0.0
  */
 
-get_header(); ?>
+defined( 'ABSPATH' ) || exit;
 
-<div class="listingcore-breadcrumbs-wrapper">
-    <?php if ( function_exists( 'listingcore_theme_breadcrumbs' ) ) {
-        listingcore_theme_breadcrumbs();
-    } ?>
-</div>
+get_header();
+?>
 
-<main id="primary" class="site-main listingcore-container" style="max-width: 1200px; margin: 40px auto; padding: 0 20px; display: grid; grid-template-columns: 1fr 3fr; gap: 30px;">
-    
-    <!-- ── FILTER SIDEBAR AREA ──────────────────────────────── -->
-    <aside class="listing-archive-sidebar">
-        <?php 
-        // Loads your dedicated filtering widget section for dynamic segment sorting
-        if ( is_active_sidebar( 'sidebar-listings' ) ) {
-            dynamic_sidebar( 'sidebar-listings' );
-        } else {
-            ?>
-            <div class="sidebar-fallback-widget" style="background: #ffffff; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0;">
-                <h4 style="margin-top: 0; font-size: 16px; color: #0f172a; margin-bottom: 10px;">
-                    <?php esc_html_e( 'Filter Listings', 'listingcore-theme' ); ?>
-                </h4>
-                <p style="font-size: 13px; color: #64748b; margin: 0;">
-                    <?php esc_html_e( 'Go to Appearance > Widgets to place your taxonomy filter bars here.', 'listingcore-theme' ); ?>
-                </p>
-            </div>
-            <?php
-        }
-        ?>
-    </aside>
+<main id="primary" class="lct-main lct-main--archive-listing" role="main">
+	<div class="lct-container">
 
-    <!-- ── GRID ENGINE SEARCH RESULTS ──────────────────────── -->
-    <section class="listing-archive-results">
-        
-        <header class="archive-header" style="margin-bottom: 30px;">
-            <h1 class="archive-title" style="font-size: 28px; font-weight: 700; color: #0f172a; margin: 0 0 10px 0;">
-                <?php the_archive_title(); ?>
-            </h1>
-            <?php the_archive_description( '<div class="archive-description" style="color: #64748b; font-size: 15px;">', '</div>' ); ?>
-        </header>
+		<?php listingcore_theme_breadcrumbs(); ?>
 
-        <?php if ( have_posts() ) : ?>
-            
-            <!-- Standard dynamic grid initialization -->
-            <div class="listingcore-grid-view" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px;">
-                <?php
-                while ( have_posts() ) : the_post();
-                    
-                    // Natively calls our cleaned template function loop card
-                    if ( function_exists( 'listingcore_theme_listing_card' ) ) {
-                        listingcore_theme_listing_card( get_the_ID() );
-                    } else {
-                        // Safe architectural fallback layout block
-                        ?>
-                        <article class="fallback-card" style="background:#fff; padding:20px; border-radius:8px; border:1px solid #e2e8f0;">
-                            <h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
-                            <?php the_excerpt(); ?>
-                        </article>
-                        <?php
-                    }
+		<header class="lct-page-header">
+			<h1 class="lct-page-header__title">
+				<?php
+				if ( is_post_type_archive( 'listing' ) ) {
+					esc_html_e( 'All Listings', 'listingcore-theme' );
+				} else {
+					the_archive_title();
+				}
+				?>
+			</h1>
 
-                endwhile;
-                ?>
-            </div>
+			<?php
+			$description = get_the_archive_description();
+			if ( $description ) :
+				?>
+				<div class="lct-page-header__description">
+					<?php echo wp_kses_post( $description ); ?>
+				</div>
+			<?php endif; ?>
 
-            <!-- Renders structured theme pagination strings -->
-            <div class="listingcore-pagination-wrapper" style="margin-top: 40px; text-align: center;">
-                <?php 
-                if ( function_exists( 'listingcore_theme_pagination' ) ) {
-                    listingcore_theme_pagination();
-                } else {
-                    the_posts_navigation();
-                }
-                ?>
-            </div>
+			<?php if ( listingcore_theme_has_plugin() ) : ?>
+				<div class="lct-page-header__actions">
+					<a href="<?php echo esc_url( home_url( '/submit-listing/' ) ); ?>" class="lct-button lct-button--primary">
+						<?php esc_html_e( 'Post a Listing', 'listingcore-theme' ); ?>
+					</a>
+				</div>
+			<?php endif; ?>
+		</header>
 
-        <?php else : ?>
-            
-            <!-- Injects the standard empty template part fallback layout -->
-            <?php get_template_part( 'template-parts/content', 'none' ); ?>
+		<div class="lct-layout <?php echo esc_attr( listingcore_theme_get_layout_class() ); ?>">
 
-        <?php endif; ?>
+			<div class="lct-layout__main">
 
-    </section>
+				<?php if ( listingcore_theme_has_plugin() ) : ?>
 
+					<?php
+					/**
+					 * The ListingCore plugin provides [listingcore_listings] which
+					 * handles the listing loop, pagination, and card rendering.
+					 *
+					 * We pass through the current query args so filters and search
+					 * continue to work.
+					 */
+					echo do_shortcode( '[listingcore_listings]' );
+					?>
+
+				<?php elseif ( have_posts() ) : ?>
+
+					<div class="lct-posts lct-posts--listing">
+
+						<?php
+						while ( have_posts() ) :
+							the_post();
+							?>
+
+							<article id="post-<?php the_ID(); ?>" <?php post_class( 'lct-listing-card' ); ?>>
+
+								<a href="<?php the_permalink(); ?>" class="lct-listing-card__thumbnail-link" aria-hidden="true" tabindex="-1">
+									<?php listingcore_theme_post_thumbnail( get_the_ID(), 'lct-listing-grid' ); ?>
+								</a>
+
+								<div class="lct-listing-card__body">
+									<h2 class="lct-listing-card__title">
+										<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+									</h2>
+
+									<div class="lct-listing-card__excerpt">
+										<?php the_excerpt(); ?>
+									</div>
+
+									<a href="<?php the_permalink(); ?>" class="lct-listing-card__link">
+										<?php esc_html_e( 'View Listing', 'listingcore-theme' ); ?>
+									</a>
+								</div>
+
+							</article>
+
+						<?php endwhile; ?>
+
+					</div>
+
+					<?php listingcore_theme_pagination(); ?>
+
+				<?php else : ?>
+
+					<div class="lct-empty-state">
+						<h2 class="lct-empty-state__title">
+							<?php esc_html_e( 'No listings found', 'listingcore-theme' ); ?>
+						</h2>
+						<p class="lct-empty-state__text">
+							<?php esc_html_e( 'There are no listings to display at this time.', 'listingcore-theme' ); ?>
+						</p>
+					</div>
+
+				<?php endif; ?>
+
+			</div>
+
+			<?php get_sidebar(); ?>
+
+		</div>
+
+	</div>
 </main>
 
-<?php get_footer(); ?>
+<?php
+get_footer();
