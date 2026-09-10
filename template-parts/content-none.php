@@ -1,42 +1,88 @@
 <?php
 /**
- * Template part for displaying a message that posts cannot be found
+ * Template part for displaying a message when no content is found.
  *
  * @package ListingCoreTheme
+ * @since   1.0.0
  */
 
 defined( 'ABSPATH' ) || exit;
 ?>
 
-<section class="no-results not-found" style="background: #ffffff; padding: 40px; border-radius: 12px; border: 1px solid #e2e8f0; text-align: center; color: #475569; width: 100%;">
-	<header class="page-header" style="margin-bottom: 20px;">
-		<h2 class="page-title" style="font-size: 24px; font-weight: 700; color: #0f172a; margin: 0;"><?php esc_html_e( 'Nothing Found Match Your Request', 'listingcore-theme' ); ?></h2>
+<section class="lct-no-results">
+
+	<header class="lct-no-results__header">
+
+		<h2 class="lct-no-results__title">
+			<?php
+			if ( is_search() ) {
+				esc_html_e( 'Nothing Found', 'listingcore-theme' );
+			} elseif ( is_home() && current_user_can( 'publish_posts' ) ) {
+				esc_html_e( 'Ready to publish your first post?', 'listingcore-theme' );
+			} else {
+				esc_html_e( 'No content found', 'listingcore-theme' );
+			}
+			?>
+		</h2>
+
 	</header>
 
-	<div class="page-content" style="max-width: 500px; margin: 0 auto; line-height: 1.6;">
-		<?php if ( is_home() && current_user_can( 'publish_posts' ) ) : ?>
+	<div class="lct-no-results__content">
+
+		<?php if ( is_search() ) : ?>
+
+			<p>
+				<?php esc_html_e( 'Sorry, no results matched your search. Please try again with different keywords.', 'listingcore-theme' ); ?>
+			</p>
+
+			<div class="lct-no-results__search">
+				<?php get_search_form(); ?>
+			</div>
+
+			<?php if ( listingcore_theme_has_plugin() ) : ?>
+				<p class="lct-no-results__hint">
+					<?php esc_html_e( 'Looking for listings? Try browsing all listings instead.', 'listingcore-theme' ); ?>
+				</p>
+				<p>
+					<a href="<?php echo esc_url( home_url( '/listings/' ) ); ?>" class="lct-button lct-button--primary">
+						<?php esc_html_e( 'Browse Listings', 'listingcore-theme' ); ?>
+					</a>
+				</p>
+			<?php endif; ?>
+
+		<?php elseif ( is_home() && current_user_can( 'publish_posts' ) ) : ?>
+
 			<p>
 				<?php
 				printf(
+					/* translators: %s: new post URL */
 					wp_kses(
-						/* translators: %s: Link to WP admin area to write first listing. */
-						__( 'Ready to publish your first marketplace ad? <a href="%s">Get started here</a>.', 'listingcore-theme' ),
-						array( 'a' => array( 'href' => array() ) )
+						__( 'Ready to publish your first post? <a href="%s">Get started here</a>.', 'listingcore-theme' ),
+						[ 'a' => [ 'href' => [] ] ]
 					),
-					esc_url( admin_url( 'post-new.php?post_type=listingcore' ) )
+					esc_url( admin_url( 'post-new.php' ) )
 				);
 				?>
 			</p>
-		<?php elseif ( is_search() ) : ?>
-			<p style="margin-bottom: 25px; color: #64748b;"><?php esc_html_e( 'Sorry, but nothing matched your search terms. Please try again with some different keywords or clear your vertical filter checkboxes.', 'listingcore-theme' ); ?></p>
-			<div style="display: flex; justify-content: center;">
-				<?php get_search_form(); ?>
-			</div>
+
+		<?php elseif ( is_home() ) : ?>
+
+			<p>
+				<?php esc_html_e( 'No posts have been published yet. Please check back soon.', 'listingcore-theme' ); ?>
+			</p>
+
 		<?php else : ?>
-			<p style="margin-bottom: 25px; color: #64748b;"><?php esc_html_e( 'It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help resolve the engine search query.', 'listingcore-theme' ); ?></p>
-			<div style="display: flex; justify-content: center;">
+
+			<p>
+				<?php esc_html_e( 'It looks like nothing was found at this location. Maybe try a search?', 'listingcore-theme' ); ?>
+			</p>
+
+			<div class="lct-no-results__search">
 				<?php get_search_form(); ?>
 			</div>
+
 		<?php endif; ?>
+
 	</div>
+
 </section>
