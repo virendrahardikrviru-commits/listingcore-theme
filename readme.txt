@@ -1,113 +1,181 @@
-=== ClassiPress Pro ===
+=== ListingCore Theme ===
+Contributors: virendrasingh06
+Requires at least: 6.0
+Tested up to: 6.9
+Requires PHP: 8.0
+Version: 1.0.0
+License: GNU General Public License v2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Tags: custom-colors, custom-menu, custom-logo, featured-images, footer-widgets, full-width-template, rtl-language-support, theme-options, translation-ready, blog, two-columns, sticky-post, threaded-comments, block-styles, wide-blocks
+Text Domain: listingcore-theme
 
-Theme Name:   ClassiPress Pro
-Version:      1.0.0
-Requires:     WordPress 6.0+
-Tested up to: WordPress 6.7
-PHP Required: 8.0+
-License:      GPLv2 or later
-License URI:  https://www.gnu.org/licenses/gpl-2.0.html
-Text Domain:  classipress-pro
+A modern, clean companion theme for the ListingCore plugin. Provides beautiful layouts for classified ads, marketplace listings, directories, and any listing-based website.
 
-== DESCRIPTION ==
+== Description ==
 
-ClassiPress Pro is a full-featured classified ads WordPress theme, similar to Classima and CL Classified. It is built to the highest WordPress coding standards and supports all major WordPress plugins.
+ListingCore Theme is a modern, responsive companion theme designed to work alongside the [ListingCore](https://wordpress.org/plugins/listingcore/) plugin.
 
-== FEATURES ==
+It provides polished, ready-to-use layouts for classified ads, marketplaces, directories, and any listing-based website. Whether you're building a real estate portal, a vehicle marketplace, or a general classifieds site, ListingCore Theme gives you a professional foundation.
 
-CLASSIFIED ADS
-- Custom Post Type: "listing" with rich meta fields
-- Custom Taxonomies: category, tag, location, condition
-- Advanced search and filter sidebar (price, category, location, condition, ad type)
-- Grid / list toggle view
-- Featured, urgent, and verified listing badges
-- Listing expiry system
-- View counter
-- Gallery with thumbnails
-- Related listings
-- Contact seller form (AJAX)
-- WhatsApp integration
-- Wishlist / save listings (AJAX)
-- Live search autocomplete (AJAX)
+= Key Features =
 
-MONETIZATION
-- Paid listing support via WooCommerce
-- Package / pricing plan post type
-- Free listing limits per user
+* **Companion Templates** — Ready-made page templates for Listings Archive, Submit Listing, User Dashboard, and Wishlist.
+* **Plugin Integration** — Native integration with the ListingCore plugin's search, listings, wishlist, and dashboard.
+* **Modern Design** — Clean typography, generous spacing, and a professional marketplace aesthetic.
+* **Fully Responsive** — Pixel-perfect layouts on every screen size.
+* **Accessible** — WCAG 2.1 AA compliant, keyboard navigation, ARIA labels.
+* **Translation Ready** — All strings are translation-ready with the `listingcore-theme` text domain.
+* **Block Editor Support** — Full Gutenberg compatibility with custom block patterns.
+* **Customizer Options** — Brand colors, layout, listing display, and footer settings.
+* **Widget Areas** — 8 sidebar/footer widget areas.
+* **WooCommerce Compatible** — Styled WooCommerce pages if you use paid listings.
 
-USER MANAGEMENT
-- Custom roles: listing_poster, listing_moderator
-- User dashboard shortcode
-- Seller profile pages
-- Wishlist management
+= Recommended Plugin =
 
-DESIGN
-- Responsive, mobile-first layout
-- Sticky header
-- Hero section with search form and statistics
-- Category grid with icons
-- Customizer-powered color, font, layout controls
-- Dark footer with social links and widget columns
+ListingCore Theme works best with the [ListingCore plugin](https://wordpress.org/plugins/listingcore/). The plugin provides:
 
-DEVELOPER FRIENDLY
-- Fully hooked with classipress_* action/filter hooks
-- WordPress Coding Standards compliant
-- Composer-ready
-- REST API support for all listing fields
-- Schema.org markup (Product, BlogPosting)
-- Proper escaping on all output
-- Nonce verification on all forms and AJAX
-- Custom capabilities and meta cap mapping
+* Listings custom post type
+* Listing categories and tags
+* Custom fields system (FieldRegistry)
+* Listing search and filtering
+* Wishlist
+* User dashboard
+* Contact forms
+* AJAX loading
+* REST API
+* WooCommerce paid listings
+* Vehicle & Real Estate extensions
 
-PLUGIN COMPATIBILITY
-- WooCommerce: custom wrappers, gallery support, paid listings
-- Elementor: registered header/footer/single/archive locations
-- Yoast SEO / RankMath: OpenGraph ready, breadcrumb support
-- WPML / Polylang: translation-ready with .pot file
-- Contact Form 7: style integration
-- ACF (Advanced Custom Fields): JSON sync folder included
-- Gravity Forms: styled form elements
-- WP Super Cache / W3TC: static page cache friendly
-- LearnDash / TutorLMS: general support via archive/single fallbacks
-- BuddyPress / BuddyBoss: body class and template hooks
-- WP Job Manager: coexistence (separate CPTs)
+**The theme works without the plugin** (standard blog/pages), but the marketplace features require ListingCore.
 
-STANDARDS
-- WCAG 2.1 Level AA accessibility
-- skip link, ARIA landmarks, aria-label on all controls
-- Schema.org structured data
-- Core Web Vitals optimized (lazy images, deferred JS)
-- RTL stylesheet ready
+= Page Templates =
 
-== INSTALLATION ==
+ListingCore Theme includes four companion page templates. After installing the theme and the plugin, create pages and assign:
 
-1. Upload the "classipress-pro" folder to wp-content/themes/
-2. Activate the theme from Appearance > Themes
-3. Go to Appearance > Customize to configure colors, logo, and settings
-4. Add your listing categories under Listings > Categories
-5. Create pages for: Submit Listing, User Dashboard
-6. Assign pages in Appearance > Customize > Classified Ads Settings
-7. Use the shortcodes [cp_listings], [cp_categories], [cp_search_form] in pages
+1. **Listings Archive** — Displays all listings with filters.
+2. **Submit Listing** — Frontend listing submission form.
+3. **User Dashboard** — User's listings, wishlist, and profile.
+4. **Wishlist** — Saved listings.
 
-== SHORTCODES ==
+Each template auto-loads the appropriate ListingCore shortcode.
 
-[cp_listings]             — Display listings grid
-[cp_categories]           — Display category grid
-[cp_search_form]          — Display search form
-[cp_post_listing_button]  — Display "Post Ad" button
-[cp_user_dashboard]       — Display user dashboard
+= Customization =
 
-== THEME OPTIONS (Customizer) ==
+**Customizer** (Appearance → Customize):
 
-Panel: Classified Ads Settings
-- General: Primary color, accent color, listings per page
-- Homepage: Hero title/subtitle/image, stats toggle
-- Header: Search visibility, post button text, sticky header
-- Listings: Default view, sidebar, maps API key
-- Footer: Copyright, social links
-- Monetization: Paid listings, free limit per user
+* Brand Colors — Primary and accent colors
+* Layout — Sidebar position
+* Listing Display — Per page count, grid columns
+* Footer — Custom copyright text
+* Site Identity — Logo, title, tagline
 
-== CHANGELOG ==
+**Widget Areas:**
+
+* Primary Sidebar
+* Listing Single Sidebar
+* Dashboard Sidebar
+* Footer Columns 1–4
+* Homepage Widgets
+
+**Block Patterns** — Insert pre-built patterns from the block editor:
+
+* Hero with Search
+* Categories Grid
+* Featured Listings
+* Call to Action
+* Content with Sidebar
+* Banner CTA
+
+== Installation ==
+
+1. In your WordPress admin, go to **Appearance → Themes → Add New**.
+2. Search for "ListingCore Theme" or upload the ZIP file.
+3. Click **Install**, then **Activate**.
+4. Install the [ListingCore plugin](https://wordpress.org/plugins/listingcore/) to unlock marketplace features.
+5. Create the companion pages (Listings, Submit, Dashboard, Wishlist) and assign templates.
+6. Customize your site via **Appearance → Customize**.
+
+== Frequently Asked Questions ==
+
+= Does this theme require the ListingCore plugin? =
+
+No. The theme works as a standard blog/website theme. The ListingCore plugin is **recommended** (not required) to unlock marketplace features like listings, search, wishlist, and dashboard.
+
+= Can I use this theme for a real estate site? =
+
+Yes! Pair ListingCore Theme with the [ListingCore plugin](https://wordpress.org/plugins/listingcore/) and the **ListingCore Real Estate** extension for property-specific fields and layouts.
+
+= Can I use this theme for a vehicle marketplace? =
+
+Yes! Pair ListingCore Theme with the [ListingCore plugin](https://wordpress.org/plugins/listingcore/) and the **ListingCore Vehicle** extension for vehicle-specific fields.
+
+= Is the theme translation-ready? =
+
+Yes. All strings use the `listingcore-theme` text domain. A `.pot` file is included in the `languages/` folder.
+
+= Is the theme accessible? =
+
+Yes. ListingCore Theme follows WCAG 2.1 AA guidelines with keyboard navigation, ARIA labels, focus management, and screen reader support.
+
+= Does it support WooCommerce? =
+
+Yes. WooCommerce pages are styled to match the theme's design. The ListingCore plugin also supports paid listings via WooCommerce.
+
+== Screenshots ==
+
+1. Homepage with hero search, categories, and featured listings.
+2. Listings Archive page with filters and grid layout.
+3. Single Listing page with details and contact form.
+4. User Dashboard with sidebar navigation.
+5. Wishlist page.
+6. Blog archive.
+7. Submit Listing form.
+8. Customizer options.
+
+== Changelog ==
 
 = 1.0.0 =
-* Initial release
+* Initial release.
+* Companion templates for ListingCore plugin.
+* Modern marketplace design.
+* Full accessibility support.
+* Block editor integration.
+* Customizer options.
+* 8 widget areas.
+* 6 block patterns.
+
+== Upgrade Notice ==
+
+= 1.0.0 =
+Initial release.
+
+== Copyright ==
+
+ListingCore Theme, Copyright (C) 2026 virendrasingh06
+ListingCore Theme is distributed under the terms of the GNU GPL v2 or later.
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+
+= Bundled Resources =
+
+ListingCore Theme bundles the following third-party resources:
+
+**Plus Jakarta Sans font**
+* License: SIL Open Font License 1.1
+* Source: https://fonts.google.com/specimen/Plus+Jakarta+Sans
+
+**JetBrains Mono font**
+* License: SIL Open Font License 1.1
+* Source: https://fonts.google.com/specimen/JetBrains+Mono
+
+**SVG Icons**
+* License: MIT
+* Source: Custom SVG icons created for this theme.
