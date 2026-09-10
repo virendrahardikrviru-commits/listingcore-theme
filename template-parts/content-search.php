@@ -15,35 +15,35 @@ $listingcore_theme_type_name = $listingcore_theme_type_obj
 	: __( 'Result', 'listingcore-theme' );
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class( 'lct-search-result' ); ?>>
+<article id="post-<?php the_ID(); ?>" <?php post_class( 'listingcore-search-result' ); ?>>
 
 	<?php if ( has_post_thumbnail() ) : ?>
-		<a href="<?php the_permalink(); ?>" class="lct-search-result__thumbnail-link" aria-hidden="true" tabindex="-1">
-			<div class="lct-search-result__thumbnail">
-				<?php the_post_thumbnail( 'lct-listing-grid' ); ?>
+		<a href="<?php the_permalink(); ?>" class="listingcore-search-result__thumbnail-link" aria-hidden="true" tabindex="-1">
+			<div class="listingcore-search-result__thumbnail">
+				<?php the_post_thumbnail( 'listingcore-listing-grid' ); ?>
 			</div>
 		</a>
 	<?php endif; ?>
 
-	<div class="lct-search-result__body">
+	<div class="listingcore-search-result__body">
 
-		<header class="lct-search-result__header">
+		<header class="listingcore-search-result__header">
 
-			<span class="lct-search-result__type-badge">
+			<span class="listingcore-search-result__type-badge">
 				<?php echo esc_html( $listingcore_theme_type_name ); ?>
 			</span>
 
-			<h2 class="lct-search-result__title">
+			<h2 class="listingcore-search-result__title">
 				<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
 			</h2>
 
 			<?php if ( 'post' === $listingcore_theme_post_type ) : ?>
-				<div class="lct-search-result__meta">
+				<div class="listingcore-search-result__meta">
 					<time datetime="<?php echo esc_attr( get_the_date( DATE_W3C ) ); ?>">
 						<?php echo esc_html( get_the_date() ); ?>
 					</time>
-					<span class="lct-search-result__meta-sep">·</span>
-					<span class="lct-search-result__author">
+					<span class="listingcore-search-result__meta-sep">·</span>
+					<span class="listingcore-search-result__author">
 						<?php
 						printf(
 							/* translators: %s: author name */
@@ -57,12 +57,12 @@ $listingcore_theme_type_name = $listingcore_theme_type_obj
 
 		</header>
 
-		<div class="lct-search-result__excerpt">
+		<div class="listingcore-search-result__excerpt">
 			<?php the_excerpt(); ?>
 		</div>
 
-		<footer class="lct-search-result__footer">
-			<a href="<?php the_permalink(); ?>" class="lct-search-result__link">
+		<footer class="listingcore-search-result__footer">
+			<a href="<?php the_permalink(); ?>" class="listingcore-search-result__link">
 				<?php
 				printf(
 					/* translators: %s: post type name */
@@ -79,7 +79,7 @@ $listingcore_theme_type_name = $listingcore_theme_type_obj
 					);
 					?>
 				</span>
-				<span class="lct-search-result__arrow" aria-hidden="true">→</span>
+				<span class="listingcore-search-result__arrow" aria-hidden="true">→</span>
 			</a>
 		</footer>
 

@@ -36,7 +36,7 @@ class ListingCore_Theme_Recent_Listings_Widget extends WP_Widget {
 			__( 'ListingCore: Recent Listings', 'listingcore-theme' ),
 			[
 				'description' => __( 'Displays the most recent listings.', 'listingcore-theme' ),
-				'classname'   => 'lct-widget lct-widget--recent-listings',
+				'classname'   => 'listingcore-widget listingcore-widget--recent-listings',
 			]
 		);
 	}
@@ -73,11 +73,11 @@ class ListingCore_Theme_Recent_Listings_Widget extends WP_Widget {
 		] );
 
 		if ( $listings->have_posts() ) {
-			echo '<ul class="lct-widget__list">';
+			echo '<ul class="listingcore-widget__list">';
 			while ( $listings->have_posts() ) {
 				$listings->the_post();
 				printf(
-					'<li class="lct-widget__item"><a href="%1$s">%2$s</a></li>',
+					'<li class="listingcore-widget__item"><a href="%1$s">%2$s</a></li>',
 					esc_url( get_permalink() ),
 					esc_html( get_the_title() )
 				);
@@ -161,7 +161,7 @@ class ListingCore_Theme_CTA_Widget extends WP_Widget {
 			__( 'ListingCore: Call to Action', 'listingcore-theme' ),
 			[
 				'description' => __( 'Displays a call-to-action box with a button.', 'listingcore-theme' ),
-				'classname'   => 'lct-widget lct-widget--cta',
+				'classname'   => 'listingcore-widget listingcore-widget--cta',
 			]
 		);
 	}
@@ -180,18 +180,18 @@ class ListingCore_Theme_CTA_Widget extends WP_Widget {
 
 		echo $args['before_widget']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
-		echo '<div class="lct-cta">';
+		echo '<div class="listingcore-cta">';
 
 		if ( $title ) {
 			echo $args['before_title'] . esc_html( $title ) . $args['after_title']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		}
 
 		if ( $text ) {
-			echo '<p class="lct-cta__text">' . esc_html( $text ) . '</p>';
+			echo '<p class="listingcore-cta__text">' . esc_html( $text ) . '</p>';
 		}
 
 		printf(
-			'<a href="%1$s" class="lct-button lct-button--primary">%2$s</a>',
+			'<a href="%1$s" class="listingcore-button listingcore-button--primary">%2$s</a>',
 			esc_url( $url ),
 			esc_html( $label )
 		);
@@ -296,7 +296,7 @@ class ListingCore_Theme_Stats_Widget extends WP_Widget {
 			__( 'ListingCore: Stats', 'listingcore-theme' ),
 			[
 				'description' => __( 'Displays listing counts by status.', 'listingcore-theme' ),
-				'classname'   => 'lct-widget lct-widget--stats',
+				'classname'   => 'listingcore-widget listingcore-widget--stats',
 			]
 		);
 	}
@@ -326,7 +326,7 @@ class ListingCore_Theme_Stats_Widget extends WP_Widget {
 		$total  = isset( $counts->publish ) ? absint( $counts->publish ) : 0;
 
 		printf(
-			'<div class="lct-stats"><div class="lct-stat"><span class="lct-stat__number">%1$s</span><span class="lct-stat__label">%2$s</span></div></div>',
+			'<div class="listingcore-stats"><div class="listingcore-stat"><span class="listingcore-stat__number">%1$s</span><span class="listingcore-stat__label">%2$s</span></div></div>',
 			esc_html( number_format_i18n( $total ) ),
 			esc_html__( 'Active Listings', 'listingcore-theme' )
 		);

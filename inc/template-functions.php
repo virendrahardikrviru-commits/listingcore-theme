@@ -20,7 +20,7 @@ function listingcore_theme_site_logo() {
 	}
 
 	printf(
-		'<a href="%1$s" class="lct-site-title" rel="home">%2$s</a>',
+		'<a href="%1$s" class="listingcore-site-title" rel="home">%2$s</a>',
 		esc_url( home_url( '/' ) ),
 		esc_html( get_bloginfo( 'name' ) )
 	);
@@ -39,7 +39,7 @@ function listingcore_theme_site_tagline() {
 	}
 
 	return sprintf(
-		'<p class="lct-site-description">%s</p>',
+		'<p class="listingcore-site-description">%s</p>',
 		esc_html( $description )
 	);
 }
@@ -55,8 +55,8 @@ function listingcore_theme_primary_nav() {
 	wp_nav_menu( [
 		'theme_location'  => 'primary',
 		'container'       => 'nav',
-		'container_class' => 'lct-nav lct-nav--primary',
-		'menu_class'      => 'lct-menu',
+		'container_class' => 'listingcore-nav listingcore-nav--primary',
+		'menu_class'      => 'listingcore-menu',
 		'depth'           => 3,
 		'fallback_cb'     => false,
 	] );
@@ -73,8 +73,8 @@ function listingcore_theme_mobile_nav() {
 	wp_nav_menu( [
 		'theme_location'  => 'mobile',
 		'container'       => 'nav',
-		'container_class' => 'lct-nav lct-nav--mobile',
-		'menu_class'      => 'lct-menu lct-menu--mobile',
+		'container_class' => 'listingcore-nav listingcore-nav--mobile',
+		'menu_class'      => 'listingcore-menu listingcore-menu--mobile',
 		'depth'           => 2,
 		'fallback_cb'     => false,
 	] );
@@ -91,8 +91,8 @@ function listingcore_theme_footer_nav() {
 	wp_nav_menu( [
 		'theme_location'  => 'footer',
 		'container'       => 'nav',
-		'container_class' => 'lct-nav lct-nav--footer',
-		'menu_class'      => 'lct-menu lct-menu--footer',
+		'container_class' => 'listingcore-nav listingcore-nav--footer',
+		'menu_class'      => 'listingcore-menu listingcore-menu--footer',
 		'depth'           => 1,
 		'fallback_cb'     => false,
 	] );
@@ -105,7 +105,7 @@ function listingcore_theme_footer_nav() {
  * @param string $size    Image size.
  * @return string
  */
-function listingcore_theme_get_thumbnail_url( $post_id = 0, $size = 'lct-listing-grid' ) {
+function listingcore_theme_get_thumbnail_url( $post_id = 0, $size = 'listingcore-listing-grid' ) {
 	$post_id = $post_id ? $post_id : get_the_ID();
 
 	if ( has_post_thumbnail( $post_id ) ) {
@@ -126,7 +126,7 @@ function listingcore_theme_get_thumbnail_url( $post_id = 0, $size = 'lct-listing
  * @param string $size    Image size.
  * @param array  $attr    Extra attributes.
  */
-function listingcore_theme_post_thumbnail( $post_id = 0, $size = 'lct-listing-grid', $attr = [] ) {
+function listingcore_theme_post_thumbnail( $post_id = 0, $size = 'listingcore-listing-grid', $attr = [] ) {
 	$post_id = $post_id ? $post_id : get_the_ID();
 
 	if ( has_post_thumbnail( $post_id ) ) {
@@ -139,7 +139,7 @@ function listingcore_theme_post_thumbnail( $post_id = 0, $size = 'lct-listing-gr
 	}
 
 	printf(
-		'<img src="%1$s" alt="%2$s" loading="lazy" class="lct-placeholder" />',
+		'<img src="%1$s" alt="%2$s" loading="lazy" class="listingcore-placeholder" />',
 		esc_url( LISTINGCORE_THEME_URI . '/assets/images/placeholder.jpg' ),
 		esc_attr__( 'No image available', 'listingcore-theme' )
 	);
@@ -175,10 +175,10 @@ function listingcore_theme_breadcrumbs() {
 		);
 	}
 
-	echo '<nav class="lct-breadcrumbs" aria-label="' . esc_attr__( 'Breadcrumb', 'listingcore-theme' ) . '">';
-	echo '<ol class="lct-breadcrumbs__list">';
+	echo '<nav class="listingcore-breadcrumbs" aria-label="' . esc_attr__( 'Breadcrumb', 'listingcore-theme' ) . '">';
+	echo '<ol class="listingcore-breadcrumbs__list">';
 	foreach ( $items as $item ) {
-		echo '<li class="lct-breadcrumbs__item">' . wp_kses_post( $item ) . '</li>';
+		echo '<li class="listingcore-breadcrumbs__item">' . wp_kses_post( $item ) . '</li>';
 	}
 	echo '</ol>';
 	echo '</nav>';
@@ -193,7 +193,7 @@ function listingcore_theme_pagination() {
 		'prev_text'          => esc_html__( 'Previous', 'listingcore-theme' ),
 		'next_text'          => esc_html__( 'Next', 'listingcore-theme' ),
 		'screen_reader_text' => esc_html__( 'Posts navigation', 'listingcore-theme' ),
-		'class'              => 'lct-pagination',
+		'class'              => 'listingcore-pagination',
 	] );
 }
 
@@ -221,7 +221,7 @@ function listingcore_theme_plugin_missing_notice() {
 	}
 
 	printf(
-		'<div class="lct-plugin-notice">%s</div>',
+		'<div class="listingcore-plugin-notice">%s</div>',
 		esc_html__( 'This theme works best with the ListingCore plugin. Some features may not be available until the plugin is installed.', 'listingcore-theme' )
 	);
 }
@@ -243,14 +243,14 @@ function listingcore_theme_current_year() {
 function listingcore_theme_get_layout_class() {
 	$sidebar_position = get_theme_mod( 'listingcore_theme_sidebar_position', 'right' );
 
-	$classes = [ 'lct-layout--sidebar-' . $sidebar_position ];
+	$classes = [ 'listingcore-layout--sidebar-' . $sidebar_position ];
 
 	if ( 'none' === $sidebar_position ) {
-		$classes[] = 'lct-layout--no-sidebar';
+		$classes[] = 'listingcore-layout--no-sidebar';
 	}
 
 	if ( ! is_active_sidebar( 'sidebar-1' ) ) {
-		$classes[] = 'lct-layout--no-widgets';
+		$classes[] = 'listingcore-layout--no-widgets';
 	}
 
 	return implode( ' ', $classes );
@@ -267,22 +267,22 @@ function listingcore_theme_get_layout_class() {
  */
 function listingcore_theme_comment_callback( $comment, $args, $depth ) {
 	?>
-	<li id="comment-<?php comment_ID(); ?>" <?php comment_class( 'lct-comment' ); ?>>
+	<li id="comment-<?php comment_ID(); ?>" <?php comment_class( 'listingcore-comment' ); ?>>
 
-		<article class="lct-comment__body">
+		<article class="listingcore-comment__body">
 
-			<header class="lct-comment__header">
+			<header class="listingcore-comment__header">
 
-				<div class="lct-comment__avatar">
+				<div class="listingcore-comment__avatar">
 					<?php echo get_avatar( $comment, $args['avatar_size'] ); ?>
 				</div>
 
-				<div class="lct-comment__meta">
-					<span class="lct-comment__author">
+				<div class="listingcore-comment__meta">
+					<span class="listingcore-comment__author">
 						<?php echo wp_kses_post( get_comment_author_link( $comment ) ); ?>
 					</span>
 
-					<time class="lct-comment__date" datetime="<?php echo esc_attr( get_comment_date( DATE_W3C, $comment ) ); ?>">
+					<time class="listingcore-comment__date" datetime="<?php echo esc_attr( get_comment_date( DATE_W3C, $comment ) ); ?>">
 						<?php
 						printf(
 							/* translators: %s: comment date */
@@ -293,7 +293,7 @@ function listingcore_theme_comment_callback( $comment, $args, $depth ) {
 					</time>
 
 					<?php if ( '0' === $comment->comment_approved ) : ?>
-						<span class="lct-comment__awaiting">
+						<span class="listingcore-comment__awaiting">
 							<?php esc_html_e( 'Your comment is awaiting moderation.', 'listingcore-theme' ); ?>
 						</span>
 					<?php endif; ?>
@@ -301,16 +301,16 @@ function listingcore_theme_comment_callback( $comment, $args, $depth ) {
 
 			</header>
 
-			<div class="lct-comment__content">
+			<div class="listingcore-comment__content">
 				<?php comment_text( $comment ); ?>
 			</div>
 
-			<footer class="lct-comment__footer">
+			<footer class="listingcore-comment__footer">
 				<?php
 				comment_reply_link( array_merge( $args, [
 					'depth'     => $depth,
 					'max_depth' => $args['max_depth'],
-					'before'    => '<span class="lct-comment__reply">',
+					'before'    => '<span class="listingcore-comment__reply">',
 					'after'     => '</span>',
 				] ), $comment );
 				?>

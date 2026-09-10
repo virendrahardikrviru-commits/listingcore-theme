@@ -12,44 +12,44 @@
    ============================================ */
 :root {
 	/* Brand Colors */
-	--lct-primary:       #1a56db;
-	--lct-primary-dark:  #1340a8;
-	--lct-primary-light: #e8f0fe;
-	--lct-accent:        #f59e0b;
-	--lct-success:       #10b981;
-	--lct-danger:        #ef4444;
+	--listingcore-primary:       #1a56db;
+	--listingcore-primary-dark:  #1340a8;
+	--listingcore-primary-light: #e8f0fe;
+	--listingcore-accent:        #f59e0b;
+	--listingcore-success:       #10b981;
+	--listingcore-danger:        #ef4444;
 
 	/* Neutrals */
-	--lct-dark:          #111827;
-	--lct-gray-900:      #1f2937;
-	--lct-gray-700:      #374151;
-	--lct-gray-500:      #6b7280;
-	--lct-gray-300:      #d1d5db;
-	--lct-gray-100:      #f3f4f6;
-	--lct-gray-50:       #f9fafb;
-	--lct-white:         #ffffff;
+	--listingcore-dark:          #111827;
+	--listingcore-gray-900:      #1f2937;
+	--listingcore-gray-700:      #374151;
+	--listingcore-gray-500:      #6b7280;
+	--listingcore-gray-300:      #d1d5db;
+	--listingcore-gray-100:      #f3f4f6;
+	--listingcore-gray-50:       #f9fafb;
+	--listingcore-white:         #ffffff;
 
 	/* Typography */
-	--lct-font-primary:  'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-	--lct-font-mono:     'JetBrains Mono', ui-monospace, monospace;
+	--listingcore-font-primary:  'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+	--listingcore-font-mono:     'JetBrains Mono', ui-monospace, monospace;
 
 	/* Layout */
-	--lct-content-width: 720px;
-	--lct-wide-width:    1280px;
+	--listingcore-content-width: 720px;
+	--listingcore-wide-width:    1280px;
 
 	/* Radius */
-	--lct-border-radius:    0.5rem;
-	--lct-border-radius-lg: 1rem;
-	--lct-border-radius-xl: 1.5rem;
+	--listingcore-border-radius:    0.5rem;
+	--listingcore-border-radius-lg: 1rem;
+	--listingcore-border-radius-xl: 1.5rem;
 }
 
 /* ============================================
    EDITOR WRAPPER
    ============================================ */
 .editor-styles-wrapper {
-	background-color: var(--lct-white);
-	color: var(--lct-dark);
-	font-family: var(--lct-font-primary);
+	background-color: var(--listingcore-white);
+	color: var(--listingcore-dark);
+	font-family: var(--listingcore-font-primary);
 	font-size: 16px;
 	line-height: 1.6;
 	-webkit-font-smoothing: antialiased;
@@ -57,11 +57,11 @@
 }
 
 .editor-styles-wrapper .wp-block {
-	max-width: var(--lct-content-width);
+	max-width: var(--listingcore-content-width);
 }
 
 .editor-styles-wrapper .wp-block[data-align="wide"] {
-	max-width: var(--lct-wide-width);
+	max-width: var(--listingcore-wide-width);
 }
 
 .editor-styles-wrapper .wp-block[data-align="full"] {
@@ -77,10 +77,10 @@
 .editor-styles-wrapper h4,
 .editor-styles-wrapper h5,
 .editor-styles-wrapper h6 {
-	font-family: var(--lct-font-primary);
+	font-family: var(--listingcore-font-primary);
 	font-weight: 700;
 	line-height: 1.25;
-	color: var(--lct-dark);
+	color: var(--listingcore-dark);
 	margin-top: 1.5em;
 	margin-bottom: 0.5em;
 }
@@ -110,7 +110,7 @@
 	font-size: 1rem;
 	text-transform: uppercase;
 	letter-spacing: 0.05em;
-	color: var(--lct-gray-700);
+	color: var(--listingcore-gray-700);
 }
 
 .editor-styles-wrapper p {
@@ -118,7 +118,7 @@
 }
 
 .editor-styles-wrapper a {
-	color: var(--lct-primary);
+	color: var(--listingcore-primary);
 	text-decoration: none;
 }
 
@@ -160,11 +160,11 @@
    BLOCKQUOTE
    ============================================ */
 .editor-styles-wrapper .wp-block-quote {
-	border-left: 4px solid var(--lct-primary);
+	border-left: 4px solid var(--listingcore-primary);
 	padding-left: 1.5em;
 	margin: 1.5em 0;
 	font-style: italic;
-	color: var(--lct-gray-700);
+	color: var(--listingcore-gray-700);
 	background-color: transparent;
 }
 
@@ -173,7 +173,7 @@
 	margin-top: 0.5em;
 	font-size: 0.875rem;
 	font-style: normal;
-	color: var(--lct-gray-500);
+	color: var(--listingcore-gray-500);
 }
 
 .editor-styles-wrapper .wp-block-quote.is-style-large {
@@ -186,27 +186,27 @@
    CODE BLOCKS
    ============================================ */
 .editor-styles-wrapper .wp-block-code {
-	background-color: var(--lct-gray-100);
-	border: 1px solid var(--lct-gray-300);
-	border-radius: var(--lct-border-radius);
+	background-color: var(--listingcore-gray-100);
+	border: 1px solid var(--listingcore-gray-300);
+	border-radius: var(--listingcore-border-radius);
 	padding: 1rem;
-	font-family: var(--lct-font-mono);
+	font-family: var(--listingcore-font-mono);
 	font-size: 0.875rem;
 	line-height: 1.6;
 	overflow-x: auto;
 }
 
 .editor-styles-wrapper code {
-	font-family: var(--lct-font-mono);
+	font-family: var(--listingcore-font-mono);
 	font-size: 0.9em;
-	background-color: var(--lct-gray-100);
+	background-color: var(--listingcore-gray-100);
 	padding: 0.15em 0.4em;
 	border-radius: 0.25rem;
-	color: var(--lct-dark);
+	color: var(--listingcore-dark);
 }
 
 .editor-styles-wrapper pre {
-	font-family: var(--lct-font-mono);
+	font-family: var(--listingcore-font-mono);
 	overflow-x: auto;
 }
 
@@ -214,9 +214,9 @@
    BUTTONS
    ============================================ */
 .editor-styles-wrapper .wp-block-button__link {
-	background-color: var(--lct-primary);
-	color: var(--lct-white);
-	border-radius: var(--lct-border-radius);
+	background-color: var(--listingcore-primary);
+	color: var(--listingcore-white);
+	border-radius: var(--listingcore-border-radius);
 	padding: 0.75rem 1.5rem;
 	font-weight: 600;
 	font-size: 1rem;
@@ -227,28 +227,28 @@
 }
 
 .editor-styles-wrapper .wp-block-button__link:hover {
-	background-color: var(--lct-primary-dark);
-	color: var(--lct-white);
+	background-color: var(--listingcore-primary-dark);
+	color: var(--listingcore-white);
 	text-decoration: none;
 }
 
 .editor-styles-wrapper .wp-block-button.is-style-outline .wp-block-button__link {
 	background-color: transparent;
-	border: 2px solid var(--lct-primary);
-	color: var(--lct-primary);
+	border: 2px solid var(--listingcore-primary);
+	color: var(--listingcore-primary);
 	padding: calc(0.75rem - 2px) calc(1.5rem - 2px);
 }
 
 .editor-styles-wrapper .wp-block-button.is-style-outline .wp-block-button__link:hover {
-	background-color: var(--lct-primary);
-	color: var(--lct-white);
+	background-color: var(--listingcore-primary);
+	color: var(--listingcore-white);
 }
 
 /* ============================================
    IMAGES
    ============================================ */
 .editor-styles-wrapper .wp-block-image img {
-	border-radius: var(--lct-border-radius);
+	border-radius: var(--listingcore-border-radius);
 	max-width: 100%;
 	height: auto;
 }
@@ -256,7 +256,7 @@
 .editor-styles-wrapper .wp-block-image figcaption {
 	text-align: center;
 	font-size: 0.875rem;
-	color: var(--lct-gray-500);
+	color: var(--listingcore-gray-500);
 	margin-top: 0.5em;
 	font-style: italic;
 }
@@ -278,11 +278,11 @@
 .editor-styles-wrapper .wp-block-table td {
 	padding: 0.75rem 1rem;
 	text-align: left;
-	border: 1px solid var(--lct-gray-300);
+	border: 1px solid var(--listingcore-gray-300);
 }
 
 .editor-styles-wrapper .wp-block-table th {
-	background-color: var(--lct-gray-100);
+	background-color: var(--listingcore-gray-100);
 	font-weight: 600;
 }
 
@@ -291,7 +291,7 @@
    ============================================ */
 .editor-styles-wrapper .wp-block-separator {
 	border: none;
-	border-bottom: 2px solid var(--lct-gray-300);
+	border-bottom: 2px solid var(--listingcore-gray-300);
 	margin: 2em auto;
 	max-width: 100px;
 }
@@ -322,7 +322,7 @@
 }
 
 .editor-styles-wrapper .wp-block-gallery .wp-block-image img {
-	border-radius: var(--lct-border-radius);
+	border-radius: var(--listingcore-border-radius);
 }
 
 /* ============================================
@@ -333,7 +333,7 @@
 }
 
 .editor-styles-wrapper .wp-block-embed iframe {
-	border-radius: var(--lct-border-radius);
+	border-radius: var(--listingcore-border-radius);
 	max-width: 100%;
 }
 
@@ -341,8 +341,8 @@
    PULLQUOTE
    ============================================ */
 .editor-styles-wrapper .wp-block-pullquote {
-	border-top: 4px solid var(--lct-primary);
-	border-bottom: 4px solid var(--lct-primary);
+	border-top: 4px solid var(--listingcore-primary);
+	border-bottom: 4px solid var(--listingcore-primary);
 	padding: 2em 1.5em;
 	text-align: center;
 	margin: 2em 0;
@@ -355,12 +355,12 @@
 	font-size: 1.5rem;
 	font-weight: 600;
 	font-style: normal;
-	color: var(--lct-dark);
+	color: var(--listingcore-dark);
 }
 
 .editor-styles-wrapper .wp-block-pullquote cite {
 	font-size: 0.875rem;
-	color: var(--lct-gray-500);
+	color: var(--listingcore-gray-500);
 	font-style: normal;
 }
 
@@ -368,6 +368,6 @@
    EDITOR ACCESSIBILITY
    ============================================ */
 .editor-styles-wrapper :focus-visible {
-	outline: 2px solid var(--lct-primary);
+	outline: 2px solid var(--listingcore-primary);
 	outline-offset: 2px;
 }

@@ -21,31 +21,31 @@ defined( 'ABSPATH' ) || exit;
  */
 function listingcore_theme_body_classes( $classes ) {
 	if ( ! is_singular() ) {
-		$classes[] = 'lct-hfeed';
+		$classes[] = 'listingcore-hfeed';
 	}
 
 	if ( is_page_template( 'template-listings.php' ) ) {
-		$classes[] = 'lct-page-listings';
+		$classes[] = 'listingcore-page-listings';
 	}
 
 	if ( is_page_template( 'template-dashboard.php' ) ) {
-		$classes[] = 'lct-page-dashboard';
+		$classes[] = 'listingcore-page-dashboard';
 	}
 
 	if ( is_page_template( 'template-submit.php' ) ) {
-		$classes[] = 'lct-page-submit';
+		$classes[] = 'listingcore-page-submit';
 	}
 
 	if ( is_page_template( 'template-wishlist.php' ) ) {
-		$classes[] = 'lct-page-wishlist';
+		$classes[] = 'listingcore-page-wishlist';
 	}
 
 	if ( ! listingcore_theme_has_plugin() ) {
-		$classes[] = 'lct-plugin-missing';
+		$classes[] = 'listingcore-plugin-missing';
 	}
 
 	if ( is_active_sidebar( 'sidebar-1' ) ) {
-		$classes[] = 'lct-has-sidebar';
+		$classes[] = 'listingcore-has-sidebar';
 	}
 
 	return $classes;
@@ -60,7 +60,7 @@ add_filter( 'body_class', 'listingcore_theme_body_classes' );
  */
 function listingcore_theme_skip_link() {
 	printf(
-		'<a class="lct-skip-link screen-reader-text" href="#content">%s</a>',
+		'<a class="listingcore-skip-link screen-reader-text" href="#content">%s</a>',
 		esc_html__( 'Skip to content', 'listingcore-theme' )
 	);
 }
@@ -74,12 +74,12 @@ function listingcore_theme_header_top() {
 		return;
 	}
 
-	echo '<div class="lct-topbar"><div class="lct-container">';
+	echo '<div class="listingcore-topbar"><div class="listingcore-container">';
 	wp_nav_menu( [
 		'theme_location'  => 'secondary',
 		'container'       => 'nav',
-		'container_class' => 'lct-nav lct-nav--secondary',
-		'menu_class'      => 'lct-menu lct-menu--secondary',
+		'container_class' => 'listingcore-nav listingcore-nav--secondary',
+		'menu_class'      => 'listingcore-menu listingcore-menu--secondary',
 		'depth'           => 1,
 		'fallback_cb'     => false,
 	] );
@@ -114,15 +114,15 @@ function listingcore_theme_footer_widgets() {
 		return;
 	}
 
-	echo '<div class="lct-footer__widgets"><div class="lct-container">';
-	echo '<div class="lct-footer__grid">';
+	echo '<div class="listingcore-footer__widgets"><div class="listingcore-container">';
+	echo '<div class="listingcore-footer__grid">';
 
 	foreach ( $columns as $id => $name ) {
 		if ( ! is_active_sidebar( $id ) ) {
 			continue;
 		}
 
-		echo '<div class="lct-footer__column" data-widget-area="' . esc_attr( $id ) . '">';
+		echo '<div class="listingcore-footer__column" data-widget-area="' . esc_attr( $id ) . '">';
 		dynamic_sidebar( $id );
 		echo '</div>';
 	}
@@ -136,11 +136,11 @@ add_action( 'listingcore_theme_footer', 'listingcore_theme_footer_widgets', 10 )
  */
 function listingcore_theme_footer_bottom() {
 	?>
-	<div class="lct-footer__bottom">
-		<div class="lct-container">
-			<div class="lct-footer__bottom-inner">
+	<div class="listingcore-footer__bottom">
+		<div class="listingcore-container">
+			<div class="listingcore-footer__bottom-inner">
 
-				<p class="lct-footer__copyright">
+				<p class="listingcore-footer__copyright">
 					<?php
 					printf(
 						/* translators: 1: current year, 2: site name. */
@@ -172,7 +172,7 @@ function listingcore_theme_post_meta() {
 	}
 
 	printf(
-		'<div class="lct-post-meta"><time datetime="%1$s">%2$s</time> · <span class="lct-post-meta__author">%3$s</span></div>',
+		'<div class="listingcore-post-meta"><time datetime="%1$s">%2$s</time> · <span class="listingcore-post-meta__author">%3$s</span></div>',
 		esc_attr( get_the_date( DATE_W3C ) ),
 		esc_html( get_the_date() ),
 		esc_html( get_the_author() )
@@ -208,7 +208,7 @@ function listingcore_theme_plugin_notice() {
 	}
 
 	printf(
-		'<div class="lct-notice lct-notice--warning"><div class="lct-container">%s</div></div>',
+		'<div class="listingcore-notice listingcore-notice--warning"><div class="listingcore-container">%s</div></div>',
 		esc_html__( 'ListingCore Theme works best with the ListingCore plugin. Please install and activate it for full functionality.', 'listingcore-theme' )
 	);
 }

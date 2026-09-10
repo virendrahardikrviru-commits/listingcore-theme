@@ -14,13 +14,13 @@ defined( 'ABSPATH' ) || exit;
 get_header();
 ?>
 
-<main id="primary" class="lct-main lct-main--archive-listing" role="main">
-	<div class="lct-container">
+<main id="primary" class="listingcore-main listingcore-main--archive-listing" role="main">
+	<div class="listingcore-container">
 
 		<?php listingcore_theme_breadcrumbs(); ?>
 
-		<header class="lct-page-header">
-			<h1 class="lct-page-header__title">
+		<header class="listingcore-page-header">
+			<h1 class="listingcore-page-header__title">
 				<?php
 				if ( is_post_type_archive( 'listing' ) ) {
 					esc_html_e( 'All Listings', 'listingcore-theme' );
@@ -34,23 +34,23 @@ get_header();
 			$description = get_the_archive_description();
 			if ( $description ) :
 				?>
-				<div class="lct-page-header__description">
+				<div class="listingcore-page-header__description">
 					<?php echo wp_kses_post( $description ); ?>
 				</div>
 			<?php endif; ?>
 
 			<?php if ( listingcore_theme_has_plugin() ) : ?>
-				<div class="lct-page-header__actions">
-					<a href="<?php echo esc_url( home_url( '/submit-listing/' ) ); ?>" class="lct-button lct-button--primary">
+				<div class="listingcore-page-header__actions">
+					<a href="<?php echo esc_url( home_url( '/submit-listing/' ) ); ?>" class="listingcore-button listingcore-button--primary">
 						<?php esc_html_e( 'Post a Listing', 'listingcore-theme' ); ?>
 					</a>
 				</div>
 			<?php endif; ?>
 		</header>
 
-		<div class="lct-layout <?php echo esc_attr( listingcore_theme_get_layout_class() ); ?>">
+		<div class="listingcore-layout <?php echo esc_attr( listingcore_theme_get_layout_class() ); ?>">
 
-			<div class="lct-layout__main">
+			<div class="listingcore-layout__main">
 
 				<?php if ( listingcore_theme_has_plugin() ) : ?>
 
@@ -67,29 +67,29 @@ get_header();
 
 				<?php elseif ( have_posts() ) : ?>
 
-					<div class="lct-posts lct-posts--listing">
+					<div class="listingcore-posts listingcore-posts--listing">
 
 						<?php
 						while ( have_posts() ) :
 							the_post();
 							?>
 
-							<article id="post-<?php the_ID(); ?>" <?php post_class( 'lct-listing-card' ); ?>>
+							<article id="post-<?php the_ID(); ?>" <?php post_class( 'listingcore-listing-card' ); ?>>
 
-								<a href="<?php the_permalink(); ?>" class="lct-listing-card__thumbnail-link" aria-hidden="true" tabindex="-1">
-									<?php listingcore_theme_post_thumbnail( get_the_ID(), 'lct-listing-grid' ); ?>
+								<a href="<?php the_permalink(); ?>" class="listingcore-listing-card__thumbnail-link" aria-hidden="true" tabindex="-1">
+									<?php listingcore_theme_post_thumbnail( get_the_ID(), 'listingcore-listing-grid' ); ?>
 								</a>
 
-								<div class="lct-listing-card__body">
-									<h2 class="lct-listing-card__title">
+								<div class="listingcore-listing-card__body">
+									<h2 class="listingcore-listing-card__title">
 										<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
 									</h2>
 
-									<div class="lct-listing-card__excerpt">
+									<div class="listingcore-listing-card__excerpt">
 										<?php the_excerpt(); ?>
 									</div>
 
-									<a href="<?php the_permalink(); ?>" class="lct-listing-card__link">
+									<a href="<?php the_permalink(); ?>" class="listingcore-listing-card__link">
 										<?php esc_html_e( 'View Listing', 'listingcore-theme' ); ?>
 									</a>
 								</div>
@@ -104,11 +104,11 @@ get_header();
 
 				<?php else : ?>
 
-					<div class="lct-empty-state">
-						<h2 class="lct-empty-state__title">
+					<div class="listingcore-empty-state">
+						<h2 class="listingcore-empty-state__title">
 							<?php esc_html_e( 'No listings found', 'listingcore-theme' ); ?>
 						</h2>
-						<p class="lct-empty-state__text">
+						<p class="listingcore-empty-state__text">
 							<?php esc_html_e( 'There are no listings to display at this time.', 'listingcore-theme' ); ?>
 						</p>
 					</div>

@@ -239,10 +239,10 @@ function listingcore_theme_customizer_css() {
 
 	$css = ':root {';
 	if ( $primary ) {
-		$css .= '--lct-primary: ' . sanitize_hex_color( $primary ) . ';';
+		$css .= '--listingcore-primary: ' . sanitize_hex_color( $primary ) . ';';
 	}
 	if ( $accent ) {
-		$css .= '--lct-accent: ' . sanitize_hex_color( $accent ) . ';';
+		$css .= '--listingcore-accent: ' . sanitize_hex_color( $accent ) . ';';
 	}
 	$css .= '}';
 

@@ -15,13 +15,13 @@ defined( 'ABSPATH' ) || exit;
 get_header();
 ?>
 
-<main id="primary" class="lct-main lct-main--template-listings" role="main">
-	<div class="lct-container">
+<main id="primary" class="listingcore-main listingcore-main--template-listings" role="main">
+	<div class="listingcore-container">
 
 		<?php listingcore_theme_breadcrumbs(); ?>
 
-		<header class="lct-page-header">
-			<h1 class="lct-page-header__title">
+		<header class="listingcore-page-header">
+			<h1 class="listingcore-page-header__title">
 				<?php the_title(); ?>
 			</h1>
 
@@ -32,7 +32,7 @@ get_header();
 
 				if ( get_the_content() ) :
 					?>
-					<div class="lct-page-header__description">
+					<div class="listingcore-page-header__description">
 						<?php the_content(); ?>
 					</div>
 					<?php
@@ -41,17 +41,17 @@ get_header();
 			?>
 
 			<?php if ( listingcore_theme_has_plugin() ) : ?>
-				<div class="lct-page-header__actions">
-					<a href="<?php echo esc_url( home_url( '/submit-listing/' ) ); ?>" class="lct-button lct-button--primary">
+				<div class="listingcore-page-header__actions">
+					<a href="<?php echo esc_url( home_url( '/submit-listing/' ) ); ?>" class="listingcore-button listingcore-button--primary">
 						<?php esc_html_e( 'Post a Listing', 'listingcore-theme' ); ?>
 					</a>
 				</div>
 			<?php endif; ?>
 		</header>
 
-		<div class="lct-layout <?php echo esc_attr( listingcore_theme_get_layout_class() ); ?>">
+		<div class="listingcore-layout <?php echo esc_attr( listingcore_theme_get_layout_class() ); ?>">
 
-			<div class="lct-layout__main">
+			<div class="listingcore-layout__main">
 
 				<?php if ( listingcore_theme_has_plugin() ) : ?>
 
@@ -68,8 +68,8 @@ get_header();
 
 				<?php else : ?>
 
-					<div class="lct-notice lct-notice--info">
-						<h2 class="lct-notice__title">
+					<div class="listingcore-notice listingcore-notice--info">
+						<h2 class="listingcore-notice__title">
 							<?php esc_html_e( 'ListingCore Plugin Required', 'listingcore-theme' ); ?>
 						</h2>
 						<p>
@@ -78,7 +78,7 @@ get_header();
 
 						<?php if ( current_user_can( 'install_plugins' ) ) : ?>
 							<p>
-								<a href="<?php echo esc_url( admin_url( 'plugin-install.php?s=listingcore&tab=search&type=term' ) ); ?>" class="lct-button lct-button--primary">
+								<a href="<?php echo esc_url( admin_url( 'plugin-install.php?s=listingcore&tab=search&type=term' ) ); ?>" class="listingcore-button listingcore-button--primary">
 									<?php esc_html_e( 'Install ListingCore', 'listingcore-theme' ); ?>
 								</a>
 							</p>

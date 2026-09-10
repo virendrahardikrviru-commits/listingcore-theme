@@ -15,27 +15,27 @@ defined( 'ABSPATH' ) || exit;
 get_header();
 ?>
 
-<main id="primary" class="lct-main lct-main--template-submit" role="main">
-	<div class="lct-container">
+<main id="primary" class="listingcore-main listingcore-main--template-submit" role="main">
+	<div class="listingcore-container">
 
 		<?php listingcore_theme_breadcrumbs(); ?>
 
-		<div class="lct-layout <?php echo esc_attr( listingcore_theme_get_layout_class() ); ?>">
+		<div class="listingcore-layout <?php echo esc_attr( listingcore_theme_get_layout_class() ); ?>">
 
-			<div class="lct-layout__main">
+			<div class="listingcore-layout__main">
 
 				<?php
 				while ( have_posts() ) :
 					the_post();
 					?>
 
-					<article id="post-<?php the_ID(); ?>" <?php post_class( 'lct-submit-page' ); ?>>
+					<article id="post-<?php the_ID(); ?>" <?php post_class( 'listingcore-submit-page' ); ?>>
 
-						<header class="lct-submit-page__header">
-							<h1 class="lct-submit-page__title"><?php the_title(); ?></h1>
+						<header class="listingcore-submit-page__header">
+							<h1 class="listingcore-submit-page__title"><?php the_title(); ?></h1>
 
 							<?php if ( get_the_content() ) : ?>
-								<div class="lct-submit-page__description">
+								<div class="listingcore-submit-page__description">
 									<?php the_content(); ?>
 								</div>
 							<?php endif; ?>
@@ -45,19 +45,19 @@ get_header();
 
 							<?php if ( ! is_user_logged_in() ) : ?>
 
-								<div class="lct-notice lct-notice--info">
-									<h2 class="lct-notice__title">
+								<div class="listingcore-notice listingcore-notice--info">
+									<h2 class="listingcore-notice__title">
 										<?php esc_html_e( 'Log in to Post a Listing', 'listingcore-theme' ); ?>
 									</h2>
 									<p>
 										<?php esc_html_e( 'You need to be logged in to post a listing. Log in or create a free account to get started.', 'listingcore-theme' ); ?>
 									</p>
 									<p>
-										<a href="<?php echo esc_url( wp_login_url( get_permalink() ) ); ?>" class="lct-button lct-button--primary">
+										<a href="<?php echo esc_url( wp_login_url( get_permalink() ) ); ?>" class="listingcore-button listingcore-button--primary">
 											<?php esc_html_e( 'Log in', 'listingcore-theme' ); ?>
 										</a>
 										<?php if ( get_option( 'users_can_register' ) ) : ?>
-											<a href="<?php echo esc_url( wp_registration_url() ); ?>" class="lct-button lct-button--outline">
+											<a href="<?php echo esc_url( wp_registration_url() ); ?>" class="listingcore-button listingcore-button--outline">
 												<?php esc_html_e( 'Register', 'listingcore-theme' ); ?>
 											</a>
 										<?php endif; ?>
@@ -66,7 +66,7 @@ get_header();
 
 							<?php else : ?>
 
-								<div class="lct-submit-page__form">
+								<div class="listingcore-submit-page__form">
 									<?php
 									/**
 									 * The ListingCore plugin handles the actual submission form:
@@ -80,8 +80,8 @@ get_header();
 
 						<?php else : ?>
 
-							<div class="lct-notice lct-notice--warning">
-								<h2 class="lct-notice__title">
+							<div class="listingcore-notice listingcore-notice--warning">
+								<h2 class="listingcore-notice__title">
 									<?php esc_html_e( 'ListingCore Plugin Required', 'listingcore-theme' ); ?>
 								</h2>
 								<p>
@@ -90,7 +90,7 @@ get_header();
 
 								<?php if ( current_user_can( 'install_plugins' ) ) : ?>
 									<p>
-										<a href="<?php echo esc_url( admin_url( 'plugin-install.php?s=listingcore&tab=search&type=term' ) ); ?>" class="lct-button lct-button--primary">
+										<a href="<?php echo esc_url( admin_url( 'plugin-install.php?s=listingcore&tab=search&type=term' ) ); ?>" class="listingcore-button listingcore-button--primary">
 											<?php esc_html_e( 'Install ListingCore', 'listingcore-theme' ); ?>
 										</a>
 									</p>

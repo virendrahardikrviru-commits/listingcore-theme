@@ -155,13 +155,13 @@ if ( ! function_exists( 'listingcore_theme_setup' ) ) :
 		// ---------------------------------------------------------------------
 		// Image sizes
 		// ---------------------------------------------------------------------
-		add_image_size( 'lct-listing-thumb',  600, 450, true );
-		add_image_size( 'lct-listing-grid',   400, 300, true );
-		add_image_size( 'lct-listing-single', 1200, 800, true );
-		add_image_size( 'lct-listing-hero',   1600, 600, true );
-		add_image_size( 'lct-category-icon',  120, 120, true );
-		add_image_size( 'lct-avatar',          96,  96, true );
-		add_image_size( 'lct-blog-thumb',      800, 500, true );
+		add_image_size( 'listingcore-listing-thumb',  600, 450, true );
+		add_image_size( 'listingcore-listing-grid',   400, 300, true );
+		add_image_size( 'listingcore-listing-single', 1200, 800, true );
+		add_image_size( 'listingcore-listing-hero',   1600, 600, true );
+		add_image_size( 'listingcore-category-icon',  120, 120, true );
+		add_image_size( 'listingcore-avatar',          96,  96, true );
+		add_image_size( 'listingcore-blog-thumb',      800, 500, true );
 	}
 endif;
 add_action( 'after_setup_theme', 'listingcore_theme_setup' );

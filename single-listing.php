@@ -14,32 +14,32 @@ defined( 'ABSPATH' ) || exit;
 get_header();
 ?>
 
-<main id="primary" class="lct-main lct-main--single-listing" role="main">
+<main id="primary" class="listingcore-main listingcore-main--single-listing" role="main">
 
 	<?php
 	while ( have_posts() ) :
 		the_post();
 		?>
 
-		<article id="post-<?php the_ID(); ?>" <?php post_class( 'lct-listing' ); ?>>
+		<article id="post-<?php the_ID(); ?>" <?php post_class( 'listingcore-listing' ); ?>>
 
-			<div class="lct-container">
+			<div class="listingcore-container">
 
 				<?php listingcore_theme_breadcrumbs(); ?>
 
-				<div class="lct-layout <?php echo esc_attr( listingcore_theme_get_layout_class() ); ?>">
+				<div class="listingcore-layout <?php echo esc_attr( listingcore_theme_get_layout_class() ); ?>">
 
-					<div class="lct-layout__main">
+					<div class="listingcore-layout__main">
 
-						<header class="lct-listing__header">
+						<header class="listingcore-listing__header">
 
-							<div class="lct-listing__categories">
+							<div class="listingcore-listing__categories">
 								<?php
 								$terms = get_the_terms( get_the_ID(), 'listing_category' );
 								if ( $terms && ! is_wp_error( $terms ) ) {
 									foreach ( $terms as $term ) {
 										printf(
-											'<a href="%1$s" class="lct-listing__category">%2$s</a>',
+											'<a href="%1$s" class="listingcore-listing__category">%2$s</a>',
 											esc_url( get_term_link( $term ) ),
 											esc_html( $term->name )
 										);
@@ -48,9 +48,9 @@ get_header();
 								?>
 							</div>
 
-							<h1 class="lct-listing__title"><?php the_title(); ?></h1>
+							<h1 class="listingcore-listing__title"><?php the_title(); ?></h1>
 
-							<div class="lct-listing__meta">
+							<div class="listingcore-listing__meta">
 								<time datetime="<?php echo esc_attr( get_the_date( DATE_W3C ) ); ?>">
 									<?php echo esc_html( get_the_date() ); ?>
 								</time>
@@ -60,8 +60,8 @@ get_header();
 									$views = (int) get_post_meta( get_the_ID(), '_listingcore_views', true );
 									if ( $views > 0 ) :
 										?>
-										<span class="lct-listing__meta-sep">·</span>
-										<span class="lct-listing__views">
+										<span class="listingcore-listing__meta-sep">·</span>
+										<span class="listingcore-listing__views">
 											<?php
 											printf(
 												/* translators: %s: view count */
@@ -77,24 +77,24 @@ get_header();
 						</header>
 
 						<?php if ( has_post_thumbnail() ) : ?>
-							<div class="lct-listing__gallery">
-								<?php the_post_thumbnail( 'lct-listing-single' ); ?>
+							<div class="listingcore-listing__gallery">
+								<?php the_post_thumbnail( 'listingcore-listing-single' ); ?>
 
 								<?php
 								// Additional gallery images (if using native WP gallery).
 								$gallery_images = get_post_meta( get_the_ID(), '_listingcore_gallery', true );
 								if ( ! empty( $gallery_images ) && is_array( $gallery_images ) ) :
 									?>
-									<div class="lct-listing__gallery-thumbs">
+									<div class="listingcore-listing__gallery-thumbs">
 										<?php foreach ( $gallery_images as $image_id ) : ?>
-											<?php echo wp_get_attachment_image( $image_id, 'lct-listing-thumb', false, [ 'loading' => 'lazy' ] ); ?>
+											<?php echo wp_get_attachment_image( $image_id, 'listingcore-listing-thumb', false, [ 'loading' => 'lazy' ] ); ?>
 										<?php endforeach; ?>
 									</div>
 								<?php endif; ?>
 							</div>
 						<?php endif; ?>
 
-						<div class="lct-listing__content">
+						<div class="listingcore-listing__content">
 							<?php the_content(); ?>
 						</div>
 
@@ -107,9 +107,9 @@ get_header();
 							$fields = \ListingCore\Listings\FieldRegistry::get_fields();
 
 							if ( ! empty( $fields ) ) {
-								echo '<div class="lct-listing__details">';
-								echo '<h2 class="lct-listing__details-title">' . esc_html__( 'Listing Details', 'listingcore-theme' ) . '</h2>';
-								echo '<dl class="lct-listing__details-list">';
+								echo '<div class="listingcore-listing__details">';
+								echo '<h2 class="listingcore-listing__details-title">' . esc_html__( 'Listing Details', 'listingcore-theme' ) . '</h2>';
+								echo '<dl class="listingcore-listing__details-list">';
 
 								foreach ( $fields as $key => $field ) {
 									$value = get_post_meta( get_the_ID(), $key, true );
@@ -121,7 +121,7 @@ get_header();
 									$label = isset( $field['label'] ) ? $field['label'] : $key;
 
 									printf(
-										'<dt class="lct-listing__detail-label">%1$s</dt><dd class="lct-listing__detail-value">%2$s</dd>',
+										'<dt class="listingcore-listing__detail-label">%1$s</dt><dd class="listingcore-listing__detail-value">%2$s</dd>',
 										esc_html( $label ),
 										esc_html( is_array( $value ) ? implode( ', ', $value ) : (string) $value )
 									);
@@ -138,7 +138,7 @@ get_header();
 						$tags = get_the_term_list( get_the_ID(), 'listing_tag', '', ', ' );
 						if ( $tags && ! is_wp_error( $tags ) ) :
 							?>
-							<div class="lct-listing__tags">
+							<div class="listingcore-listing__tags">
 								<?php echo wp_kses_post( $tags ); ?>
 							</div>
 						<?php endif; ?>
@@ -146,7 +146,7 @@ get_header();
 						<?php
 						// Contact form (from plugin if available).
 						if ( listingcore_theme_has_plugin() ) {
-							echo '<div class="lct-listing__contact">';
+							echo '<div class="listingcore-listing__contact">';
 							echo do_shortcode( '[listingcore_contact_form]' );
 							echo '</div>';
 						}
@@ -155,14 +155,14 @@ get_header();
 						<?php
 						// Post navigation between listings.
 						the_post_navigation( [
-							'prev_text' => '<span class="lct-post-nav__label">' . esc_html__( 'Previous listing', 'listingcore-theme' ) . '</span><span class="lct-post-nav__title">%title</span>',
-							'next_text' => '<span class="lct-post-nav__label">' . esc_html__( 'Next listing', 'listingcore-theme' ) . '</span><span class="lct-post-nav__title">%title</span>',
-							'class'     => 'lct-post-nav lct-post-nav--listing',
+							'prev_text' => '<span class="listingcore-post-nav__label">' . esc_html__( 'Previous listing', 'listingcore-theme' ) . '</span><span class="listingcore-post-nav__title">%title</span>',
+							'next_text' => '<span class="listingcore-post-nav__label">' . esc_html__( 'Next listing', 'listingcore-theme' ) . '</span><span class="listingcore-post-nav__title">%title</span>',
+							'class'     => 'listingcore-post-nav listingcore-post-nav--listing',
 						] );
 						?>
 
 						<?php if ( get_edit_post_link() ) : ?>
-							<footer class="lct-listing__footer">
+							<footer class="listingcore-listing__footer">
 								<?php
 								edit_post_link(
 									sprintf(
@@ -170,7 +170,7 @@ get_header();
 										esc_html__( 'Edit %s', 'listingcore-theme' ),
 										'<span class="screen-reader-text">' . get_the_title() . '</span>'
 									),
-									'<span class="lct-listing__edit-link">',
+									'<span class="listingcore-listing__edit-link">',
 									'</span>'
 								);
 								?>
@@ -190,7 +190,7 @@ get_header();
 		<?php
 		// Comments for listings (if enabled).
 		if ( comments_open() || get_comments_number() ) {
-			echo '<div class="lct-container">';
+			echo '<div class="listingcore-container">';
 			comments_template();
 			echo '</div>';
 		}

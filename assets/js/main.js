@@ -26,7 +26,7 @@
 	 * Mobile menu toggle.
 	 */
 	function initMobileMenu() {
-		var toggle = document.querySelector( '.lct-header__menu-toggle' );
+		var toggle = document.querySelector( '.listingcore-header__menu-toggle' );
 		var nav = document.getElementById( 'site-navigation' );
 
 		if ( ! toggle || ! nav ) {
@@ -38,7 +38,7 @@
 
 			toggle.setAttribute( 'aria-expanded', String( ! expanded ) );
 			nav.classList.toggle( 'is-open' );
-			document.body.classList.toggle( 'lct-menu-open' );
+			document.body.classList.toggle( 'listingcore-menu-open' );
 		} );
 
 		// Close menu on Escape key.
@@ -46,7 +46,7 @@
 			if ( event.key === 'Escape' && nav.classList.contains( 'is-open' ) ) {
 				toggle.setAttribute( 'aria-expanded', 'false' );
 				nav.classList.remove( 'is-open' );
-				document.body.classList.remove( 'lct-menu-open' );
+				document.body.classList.remove( 'listingcore-menu-open' );
 				toggle.focus();
 			}
 		} );
@@ -60,7 +60,7 @@
 			) {
 				toggle.setAttribute( 'aria-expanded', 'false' );
 				nav.classList.remove( 'is-open' );
-				document.body.classList.remove( 'lct-menu-open' );
+				document.body.classList.remove( 'listingcore-menu-open' );
 			}
 		} );
 	}
@@ -69,8 +69,8 @@
 	 * Header search toggle.
 	 */
 	function initSearchToggle() {
-		var toggle = document.querySelector( '.lct-header__search-toggle' );
-		var search = document.getElementById( 'lct-header-search' );
+		var toggle = document.querySelector( '.listingcore-header__search-toggle' );
+		var search = document.getElementById( 'listingcore-header-search' );
 
 		if ( ! toggle || ! search ) {
 			return;
@@ -104,7 +104,7 @@
 	 * Back-to-top button.
 	 */
 	function initBackToTop() {
-		var button = document.querySelector( '.lct-back-to-top' );
+		var button = document.querySelector( '.listingcore-back-to-top' );
 
 		if ( ! button ) {
 			return;
@@ -142,7 +142,7 @@
 	 * Accessible submenu toggles.
 	 */
 	function initSubmenuToggles() {
-		var toggles = document.querySelectorAll( '.lct-menu__toggle' );
+		var toggles = document.querySelectorAll( '.listingcore-menu__toggle' );
 
 		if ( ! toggles.length ) {
 			return;
@@ -153,7 +153,7 @@
 				event.preventDefault();
 
 				var expanded = toggle.getAttribute( 'aria-expanded' ) === 'true';
-				var parentItem = toggle.closest( '.lct-menu__item--has-children' );
+				var parentItem = toggle.closest( '.listingcore-menu__item--has-children' );
 
 				toggle.setAttribute( 'aria-expanded', String( ! expanded ) );
 

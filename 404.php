@@ -13,19 +13,19 @@ defined( 'ABSPATH' ) || exit;
 get_header();
 ?>
 
-<main id="primary" class="lct-main lct-main--404" role="main">
-	<div class="lct-container">
+<main id="primary" class="listingcore-main listingcore-main--404" role="main">
+	<div class="listingcore-container">
 
-		<div class="lct-error-page">
+		<div class="listingcore-error-page">
 
-			<header class="lct-error-page__header">
-				<p class="lct-error-page__code" aria-hidden="true">404</p>
-				<h1 class="lct-error-page__title">
+			<header class="listingcore-error-page__header">
+				<p class="listingcore-error-page__code" aria-hidden="true">404</p>
+				<h1 class="listingcore-error-page__title">
 					<?php esc_html_e( 'Page Not Found', 'listingcore-theme' ); ?>
 				</h1>
 			</header>
 
-			<div class="lct-error-page__content">
+			<div class="listingcore-error-page__content">
 				<p>
 					<?php esc_html_e( 'Sorry, the page you were looking for could not be found. It may have been removed, renamed, or is temporarily unavailable.', 'listingcore-theme' ); ?>
 				</p>
@@ -37,13 +37,13 @@ get_header();
 				] );
 				?>
 
-				<div class="lct-error-page__actions">
-					<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="lct-button lct-button--primary">
+				<div class="listingcore-error-page__actions">
+					<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="listingcore-button listingcore-button--primary">
 						<?php esc_html_e( 'Back to Homepage', 'listingcore-theme' ); ?>
 					</a>
 
 					<?php if ( listingcore_theme_has_plugin() ) : ?>
-						<a href="<?php echo esc_url( home_url( '/listings/' ) ); ?>" class="lct-button lct-button--outline">
+						<a href="<?php echo esc_url( home_url( '/listings/' ) ); ?>" class="listingcore-button listingcore-button--outline">
 							<?php esc_html_e( 'Browse Listings', 'listingcore-theme' ); ?>
 						</a>
 					<?php endif; ?>
@@ -53,8 +53,8 @@ get_header();
 			<?php if ( listingcore_theme_has_plugin() ) : ?>
 
 				<!-- Show recent listings as a helpful suggestion -->
-				<section class="lct-error-page__suggestions" aria-labelledby="lct-404-suggestions-title">
-					<h2 id="lct-404-suggestions-title" class="lct-error-page__suggestions-title">
+				<section class="listingcore-error-page__suggestions" aria-labelledby="listingcore-404-suggestions-title">
+					<h2 id="listingcore-404-suggestions-title" class="listingcore-error-page__suggestions-title">
 						<?php esc_html_e( 'You might be interested in', 'listingcore-theme' ); ?>
 					</h2>
 
@@ -72,12 +72,12 @@ get_header();
 
 				if ( ! empty( $recent_posts ) ) :
 					?>
-					<section class="lct-error-page__suggestions" aria-labelledby="lct-404-posts-title">
-						<h2 id="lct-404-posts-title" class="lct-error-page__suggestions-title">
+					<section class="listingcore-error-page__suggestions" aria-labelledby="listingcore-404-posts-title">
+						<h2 id="listingcore-404-posts-title" class="listingcore-error-page__suggestions-title">
 							<?php esc_html_e( 'Recent Posts', 'listingcore-theme' ); ?>
 						</h2>
 
-						<ul class="lct-error-page__post-list">
+						<ul class="listingcore-error-page__post-list">
 							<?php foreach ( $recent_posts as $post ) : ?>
 								<li>
 									<a href="<?php echo esc_url( get_permalink( $post->ID ) ); ?>">

@@ -15,15 +15,15 @@ defined( 'ABSPATH' ) || exit;
 get_header();
 ?>
 
-<main id="primary" class="lct-main lct-main--template-dashboard" role="main">
-	<div class="lct-container">
+<main id="primary" class="listingcore-main listingcore-main--template-dashboard" role="main">
+	<div class="listingcore-container">
 
 		<?php listingcore_theme_breadcrumbs(); ?>
 
 		<?php if ( ! listingcore_theme_has_plugin() ) : ?>
 
-			<div class="lct-notice lct-notice--warning">
-				<h2 class="lct-notice__title">
+			<div class="listingcore-notice listingcore-notice--warning">
+				<h2 class="listingcore-notice__title">
 					<?php esc_html_e( 'ListingCore Plugin Required', 'listingcore-theme' ); ?>
 				</h2>
 				<p>
@@ -32,7 +32,7 @@ get_header();
 
 				<?php if ( current_user_can( 'install_plugins' ) ) : ?>
 					<p>
-						<a href="<?php echo esc_url( admin_url( 'plugin-install.php?s=listingcore&tab=search&type=term' ) ); ?>" class="lct-button lct-button--primary">
+						<a href="<?php echo esc_url( admin_url( 'plugin-install.php?s=listingcore&tab=search&type=term' ) ); ?>" class="listingcore-button listingcore-button--primary">
 							<?php esc_html_e( 'Install ListingCore', 'listingcore-theme' ); ?>
 						</a>
 					</p>
@@ -41,19 +41,19 @@ get_header();
 
 		<?php elseif ( ! is_user_logged_in() ) : ?>
 
-			<div class="lct-notice lct-notice--info">
-				<h2 class="lct-notice__title">
+			<div class="listingcore-notice listingcore-notice--info">
+				<h2 class="listingcore-notice__title">
 					<?php esc_html_e( 'Log in to Access Your Dashboard', 'listingcore-theme' ); ?>
 				</h2>
 				<p>
 					<?php esc_html_e( 'Log in to manage your listings, view your wishlist, and update your profile.', 'listingcore-theme' ); ?>
 				</p>
 				<p>
-					<a href="<?php echo esc_url( wp_login_url( get_permalink() ) ); ?>" class="lct-button lct-button--primary">
+					<a href="<?php echo esc_url( wp_login_url( get_permalink() ) ); ?>" class="listingcore-button listingcore-button--primary">
 						<?php esc_html_e( 'Log in', 'listingcore-theme' ); ?>
 					</a>
 					<?php if ( get_option( 'users_can_register' ) ) : ?>
-						<a href="<?php echo esc_url( wp_registration_url() ); ?>" class="lct-button lct-button--outline">
+						<a href="<?php echo esc_url( wp_registration_url() ); ?>" class="listingcore-button listingcore-button--outline">
 							<?php esc_html_e( 'Register', 'listingcore-theme' ); ?>
 						</a>
 					<?php endif; ?>
@@ -66,27 +66,27 @@ get_header();
 			$current_user = wp_get_current_user();
 			?>
 
-			<header class="lct-page-header lct-page-header--dashboard">
-				<h1 class="lct-page-header__title">
+			<header class="listingcore-page-header listingcore-page-header--dashboard">
+				<h1 class="listingcore-page-header__title">
 					<?php
 					printf(
 						/* translators: %s: user display name */
 						esc_html__( 'Welcome back, %s', 'listingcore-theme' ),
-						'<span class="lct-page-header__user">' . esc_html( $current_user->display_name ) . '</span>'
+						'<span class="listingcore-page-header__user">' . esc_html( $current_user->display_name ) . '</span>'
 					);
 					?>
 				</h1>
 
-				<div class="lct-page-header__actions">
-					<a href="<?php echo esc_url( home_url( '/submit-listing/' ) ); ?>" class="lct-button lct-button--primary">
+				<div class="listingcore-page-header__actions">
+					<a href="<?php echo esc_url( home_url( '/submit-listing/' ) ); ?>" class="listingcore-button listingcore-button--primary">
 						<?php esc_html_e( 'Post a New Listing', 'listingcore-theme' ); ?>
 					</a>
 				</div>
 			</header>
 
-			<div class="lct-layout <?php echo esc_attr( listingcore_theme_get_layout_class() ); ?>">
+			<div class="listingcore-layout <?php echo esc_attr( listingcore_theme_get_layout_class() ); ?>">
 
-				<div class="lct-layout__main">
+				<div class="listingcore-layout__main">
 
 					<?php
 					// If the page has its own content, show it above the dashboard.
@@ -95,7 +95,7 @@ get_header();
 
 						if ( get_the_content() ) :
 							?>
-							<div class="lct-page-content">
+							<div class="listingcore-page-content">
 								<?php the_content(); ?>
 							</div>
 							<?php

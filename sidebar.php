@@ -27,7 +27,7 @@ if ( ! is_active_sidebar( $listingcore_theme_sidebar_id ) ) {
 
 <aside
 	id="secondary"
-	class="lct-sidebar lct-sidebar--<?php echo esc_attr( $listingcore_theme_sidebar_id ); ?>"
+	class="listingcore-sidebar listingcore-sidebar--<?php echo esc_attr( $listingcore_theme_sidebar_id ); ?>"
 	role="complementary"
 	aria-label="<?php esc_attr_e( 'Sidebar', 'listingcore-theme' ); ?>"
 >

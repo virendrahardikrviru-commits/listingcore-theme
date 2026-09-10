@@ -13,7 +13,7 @@ defined( 'ABSPATH' ) || exit;
 
 	<?php do_action( 'listingcore_theme_before_footer' ); ?>
 
-	<footer id="colophon" class="lct-footer" role="contentinfo">
+	<footer id="colophon" class="listingcore-footer" role="contentinfo">
 
 		<?php do_action( 'listingcore_theme_footer' ); ?>
 
@@ -29,7 +29,7 @@ if ( ! is_admin() ) :
 	?>
 	<button
 		type="button"
-		class="lct-back-to-top"
+		class="listingcore-back-to-top"
 		aria-label="<?php esc_attr_e( 'Back to top', 'listingcore-theme' ); ?>"
 		hidden
 	>

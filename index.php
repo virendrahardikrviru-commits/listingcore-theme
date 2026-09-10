@@ -14,8 +14,8 @@ defined( 'ABSPATH' ) || exit;
 get_header();
 ?>
 
-<main id="primary" class="lct-main" role="main">
-	<div class="lct-container">
+<main id="primary" class="listingcore-main" role="main">
+	<div class="listingcore-container">
 
 		<?php
 		// Breadcrumbs (only on non-front pages).
@@ -24,19 +24,19 @@ get_header();
 		}
 		?>
 
-		<div class="lct-layout <?php echo esc_attr( listingcore_theme_get_layout_class() ); ?>">
+		<div class="listingcore-layout <?php echo esc_attr( listingcore_theme_get_layout_class() ); ?>">
 
-			<div class="lct-layout__main">
+			<div class="listingcore-layout__main">
 
 				<?php if ( have_posts() ) : ?>
 
 					<?php if ( is_home() && ! is_front_page() ) : ?>
-						<header class="lct-page-header">
-							<h1 class="lct-page-title"><?php single_post_title(); ?></h1>
+						<header class="listingcore-page-header">
+							<h1 class="listingcore-page-title"><?php single_post_title(); ?></h1>
 						</header>
 					<?php endif; ?>
 
-					<div class="lct-posts">
+					<div class="listingcore-posts">
 
 						<?php
 						while ( have_posts() ) :

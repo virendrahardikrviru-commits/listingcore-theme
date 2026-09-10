@@ -18,7 +18,7 @@ $listingcore_theme_aria_label = ! empty( $args['aria_label'] )
 <form
 	role="search"
 	method="get"
-	class="lct-searchform"
+	class="listingcore-searchform"
 	action="<?php echo esc_url( home_url( '/' ) ); ?>"
 	aria-label="<?php echo esc_attr( $listingcore_theme_aria_label ); ?>"
 >
@@ -26,11 +26,11 @@ $listingcore_theme_aria_label = ! empty( $args['aria_label'] )
 		<?php esc_html_e( 'Search for:', 'listingcore-theme' ); ?>
 	</label>
 
-	<div class="lct-searchform__field">
+	<div class="listingcore-searchform__field">
 		<input
 			type="search"
 			id="<?php echo esc_attr( $listingcore_theme_search_id ); ?>"
-			class="lct-searchform__input"
+			class="listingcore-searchform__input"
 			name="s"
 			value="<?php echo esc_attr( get_search_query() ); ?>"
 			placeholder="<?php esc_attr_e( 'Search…', 'listingcore-theme' ); ?>"
@@ -39,7 +39,7 @@ $listingcore_theme_aria_label = ! empty( $args['aria_label'] )
 
 		<button
 			type="submit"
-			class="lct-searchform__submit"
+			class="listingcore-searchform__submit"
 			aria-label="<?php esc_attr_e( 'Submit search', 'listingcore-theme' ); ?>"
 		>
 			<svg

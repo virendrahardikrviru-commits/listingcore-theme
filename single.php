@@ -13,41 +13,41 @@ defined( 'ABSPATH' ) || exit;
 get_header();
 ?>
 
-<main id="primary" class="lct-main" role="main">
-	<div class="lct-container">
+<main id="primary" class="listingcore-main" role="main">
+	<div class="listingcore-container">
 
 		<?php listingcore_theme_breadcrumbs(); ?>
 
-		<div class="lct-layout <?php echo esc_attr( listingcore_theme_get_layout_class() ); ?>">
+		<div class="listingcore-layout <?php echo esc_attr( listingcore_theme_get_layout_class() ); ?>">
 
-			<div class="lct-layout__main">
+			<div class="listingcore-layout__main">
 
 				<?php
 				while ( have_posts() ) :
 					the_post();
 					?>
 
-					<article id="post-<?php the_ID(); ?>" <?php post_class( 'lct-single' ); ?>>
+					<article id="post-<?php the_ID(); ?>" <?php post_class( 'listingcore-single' ); ?>>
 
-						<header class="lct-single__header">
+						<header class="listingcore-single__header">
 
 							<?php
 							$categories = get_the_category_list( ', ' );
 							if ( $categories ) :
 								?>
-								<div class="lct-single__categories">
+								<div class="listingcore-single__categories">
 									<?php echo wp_kses_post( $categories ); ?>
 								</div>
 							<?php endif; ?>
 
-							<h1 class="lct-single__title"><?php the_title(); ?></h1>
+							<h1 class="listingcore-single__title"><?php the_title(); ?></h1>
 
-							<div class="lct-single__meta">
+							<div class="listingcore-single__meta">
 								<time datetime="<?php echo esc_attr( get_the_date( DATE_W3C ) ); ?>">
 									<?php echo esc_html( get_the_date() ); ?>
 								</time>
-								<span class="lct-single__meta-sep">·</span>
-								<span class="lct-single__author">
+								<span class="listingcore-single__meta-sep">·</span>
+								<span class="listingcore-single__author">
 									<?php
 									printf(
 										/* translators: %s: author name */
@@ -57,8 +57,8 @@ get_header();
 									?>
 								</span>
 								<?php if ( has_tag() ) : ?>
-									<span class="lct-single__meta-sep">·</span>
-									<span class="lct-single__tags">
+									<span class="listingcore-single__meta-sep">·</span>
+									<span class="listingcore-single__tags">
 										<?php the_tags( '', ', ' ); ?>
 									</span>
 								<?php endif; ?>
@@ -67,35 +67,35 @@ get_header();
 						</header>
 
 						<?php if ( has_post_thumbnail() ) : ?>
-							<div class="lct-single__thumbnail">
-								<?php the_post_thumbnail( 'lct-blog-thumb' ); ?>
+							<div class="listingcore-single__thumbnail">
+								<?php the_post_thumbnail( 'listingcore-blog-thumb' ); ?>
 							</div>
 						<?php endif; ?>
 
-						<div class="lct-single__content">
+						<div class="listingcore-single__content">
 							<?php
 							the_content();
 
 							wp_link_pages( [
-								'before' => '<nav class="lct-page-links"><span class="lct-page-links__label">' . esc_html__( 'Pages:', 'listingcore-theme' ) . '</span>',
+								'before' => '<nav class="listingcore-page-links"><span class="listingcore-page-links__label">' . esc_html__( 'Pages:', 'listingcore-theme' ) . '</span>',
 								'after'  => '</nav>',
 							] );
 							?>
 						</div>
 
-						<footer class="lct-single__footer">
+						<footer class="listingcore-single__footer">
 
 							<?php
 							// Post navigation (previous/next post).
 							the_post_navigation( [
-								'prev_text' => '<span class="lct-post-nav__label">' . esc_html__( 'Previous', 'listingcore-theme' ) . '</span><span class="lct-post-nav__title">%title</span>',
-								'next_text' => '<span class="lct-post-nav__label">' . esc_html__( 'Next', 'listingcore-theme' ) . '</span><span class="lct-post-nav__title">%title</span>',
-								'class'     => 'lct-post-nav',
+								'prev_text' => '<span class="listingcore-post-nav__label">' . esc_html__( 'Previous', 'listingcore-theme' ) . '</span><span class="listingcore-post-nav__title">%title</span>',
+								'next_text' => '<span class="listingcore-post-nav__label">' . esc_html__( 'Next', 'listingcore-theme' ) . '</span><span class="listingcore-post-nav__title">%title</span>',
+								'class'     => 'listingcore-post-nav',
 							] );
 							?>
 
 							<?php if ( get_edit_post_link() ) : ?>
-								<div class="lct-single__edit">
+								<div class="listingcore-single__edit">
 									<?php
 									edit_post_link(
 										sprintf(
@@ -103,7 +103,7 @@ get_header();
 											esc_html__( 'Edit %s', 'listingcore-theme' ),
 											'<span class="screen-reader-text">' . get_the_title() . '</span>'
 										),
-										'<span class="lct-single__edit-link">',
+										'<span class="listingcore-single__edit-link">',
 										'</span>'
 									);
 									?>

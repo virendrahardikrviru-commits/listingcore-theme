@@ -9,39 +9,39 @@
 defined( 'ABSPATH' ) || exit;
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class( 'lct-post' ); ?>>
+<article id="post-<?php the_ID(); ?>" <?php post_class( 'listingcore-post' ); ?>>
 
 	<?php if ( has_post_thumbnail() ) : ?>
-		<a href="<?php the_permalink(); ?>" class="lct-post__thumbnail-link" aria-hidden="true" tabindex="-1">
-			<div class="lct-post__thumbnail">
-				<?php the_post_thumbnail( 'lct-blog-thumb' ); ?>
+		<a href="<?php the_permalink(); ?>" class="listingcore-post__thumbnail-link" aria-hidden="true" tabindex="-1">
+			<div class="listingcore-post__thumbnail">
+				<?php the_post_thumbnail( 'listingcore-blog-thumb' ); ?>
 			</div>
 		</a>
 	<?php endif; ?>
 
-	<div class="lct-post__body">
+	<div class="listingcore-post__body">
 
-		<header class="lct-post__header">
+		<header class="listingcore-post__header">
 
 			<?php
 			$categories = get_the_category_list( ', ' );
 			if ( $categories ) :
 				?>
-				<div class="lct-post__categories">
+				<div class="listingcore-post__categories">
 					<?php echo wp_kses_post( $categories ); ?>
 				</div>
 			<?php endif; ?>
 
-			<h2 class="lct-post__title">
+			<h2 class="listingcore-post__title">
 				<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
 			</h2>
 
-			<div class="lct-post__meta">
+			<div class="listingcore-post__meta">
 				<time datetime="<?php echo esc_attr( get_the_date( DATE_W3C ) ); ?>">
 					<?php echo esc_html( get_the_date() ); ?>
 				</time>
-				<span class="lct-post__meta-sep">·</span>
-				<span class="lct-post__author">
+				<span class="listingcore-post__meta-sep">·</span>
+				<span class="listingcore-post__author">
 					<?php
 					printf(
 						/* translators: %s: author name */
@@ -54,12 +54,12 @@ defined( 'ABSPATH' ) || exit;
 
 		</header>
 
-		<div class="lct-post__excerpt">
+		<div class="listingcore-post__excerpt">
 			<?php the_excerpt(); ?>
 		</div>
 
-		<footer class="lct-post__footer">
-			<a href="<?php the_permalink(); ?>" class="lct-button lct-button--outline">
+		<footer class="listingcore-post__footer">
+			<a href="<?php the_permalink(); ?>" class="listingcore-button listingcore-button--outline">
 				<?php esc_html_e( 'Read More', 'listingcore-theme' ); ?>
 				<span class="screen-reader-text">
 					<?php

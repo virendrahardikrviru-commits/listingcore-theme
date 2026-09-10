@@ -24,10 +24,10 @@ class ListingCore_Theme_Walker_Nav_Menu extends Walker_Nav_Menu {
 	 */
 	public function start_lvl( &$output, $depth = 0, $args = null ) {
 		$indent  = str_repeat( "\t", $depth );
-		$classes = [ 'lct-submenu', 'lct-submenu--depth-' . absint( $depth + 1 ) ];
+		$classes = [ 'listingcore-submenu', 'listingcore-submenu--depth-' . absint( $depth + 1 ) ];
 
 		if ( 0 === $depth ) {
-			$classes[] = 'lct-submenu--top';
+			$classes[] = 'listingcore-submenu--top';
 		}
 
 		$class_names = implode( ' ', $classes );
@@ -60,15 +60,15 @@ class ListingCore_Theme_Walker_Nav_Menu extends Walker_Nav_Menu {
 		$indent = $depth ? str_repeat( "\t", $depth ) : '';
 
 		$classes   = empty( $item->classes ) ? [] : (array) $item->classes;
-		$classes[] = 'lct-menu__item';
-		$classes[] = 'lct-menu__item--depth-' . absint( $depth );
+		$classes[] = 'listingcore-menu__item';
+		$classes[] = 'listingcore-menu__item--depth-' . absint( $depth );
 
 		if ( in_array( 'menu-item-has-children', $classes, true ) ) {
-			$classes[] = 'lct-menu__item--has-children';
+			$classes[] = 'listingcore-menu__item--has-children';
 		}
 
 		if ( in_array( 'current-menu-item', $classes, true ) || in_array( 'current-menu-parent', $classes, true ) ) {
-			$classes[] = 'lct-menu__item--current';
+			$classes[] = 'listingcore-menu__item--current';
 		}
 
 		$class_names = implode( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args, $depth ) );
@@ -96,13 +96,13 @@ class ListingCore_Theme_Walker_Nav_Menu extends Walker_Nav_Menu {
 		$title = apply_filters( 'nav_menu_item_title', $title, $item, $args, $depth );
 
 		$item_output  = $args->before ?? '';
-		$item_output .= '<a class="lct-menu__link"' . $attributes . '>';
+		$item_output .= '<a class="listingcore-menu__link"' . $attributes . '>';
 		$item_output .= ( $args->link_before ?? '' ) . $title . ( $args->link_after ?? '' );
 		$item_output .= '</a>';
 
 		if ( in_array( 'menu-item-has-children', $classes, true ) ) {
-			$item_output .= '<button class="lct-menu__toggle" aria-expanded="false" aria-label="' . esc_attr__( 'Toggle submenu', 'listingcore-theme' ) . '">';
-			$item_output .= '<span class="lct-menu__toggle-icon" aria-hidden="true"></span>';
+			$item_output .= '<button class="listingcore-menu__toggle" aria-expanded="false" aria-label="' . esc_attr__( 'Toggle submenu', 'listingcore-theme' ) . '">';
+			$item_output .= '<span class="listingcore-menu__toggle-icon" aria-hidden="true"></span>';
 			$item_output .= '</button>';
 		}
 

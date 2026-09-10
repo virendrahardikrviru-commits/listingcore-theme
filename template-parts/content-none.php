@@ -9,11 +9,11 @@
 defined( 'ABSPATH' ) || exit;
 ?>
 
-<section class="lct-no-results">
+<section class="listingcore-no-results">
 
-	<header class="lct-no-results__header">
+	<header class="listingcore-no-results__header">
 
-		<h2 class="lct-no-results__title">
+		<h2 class="listingcore-no-results__title">
 			<?php
 			if ( is_search() ) {
 				esc_html_e( 'Nothing Found', 'listingcore-theme' );
@@ -27,7 +27,7 @@ defined( 'ABSPATH' ) || exit;
 
 	</header>
 
-	<div class="lct-no-results__content">
+	<div class="listingcore-no-results__content">
 
 		<?php if ( is_search() ) : ?>
 
@@ -35,16 +35,16 @@ defined( 'ABSPATH' ) || exit;
 				<?php esc_html_e( 'Sorry, no results matched your search. Please try again with different keywords.', 'listingcore-theme' ); ?>
 			</p>
 
-			<div class="lct-no-results__search">
+			<div class="listingcore-no-results__search">
 				<?php get_search_form(); ?>
 			</div>
 
 			<?php if ( listingcore_theme_has_plugin() ) : ?>
-				<p class="lct-no-results__hint">
+				<p class="listingcore-no-results__hint">
 					<?php esc_html_e( 'Looking for listings? Try browsing all listings instead.', 'listingcore-theme' ); ?>
 				</p>
 				<p>
-					<a href="<?php echo esc_url( home_url( '/listings/' ) ); ?>" class="lct-button lct-button--primary">
+					<a href="<?php echo esc_url( home_url( '/listings/' ) ); ?>" class="listingcore-button listingcore-button--primary">
 						<?php esc_html_e( 'Browse Listings', 'listingcore-theme' ); ?>
 					</a>
 				</p>
@@ -77,7 +77,7 @@ defined( 'ABSPATH' ) || exit;
 				<?php esc_html_e( 'It looks like nothing was found at this location. Maybe try a search?', 'listingcore-theme' ); ?>
 			</p>
 
-			<div class="lct-no-results__search">
+			<div class="listingcore-no-results__search">
 				<?php get_search_form(); ?>
 			</div>
 

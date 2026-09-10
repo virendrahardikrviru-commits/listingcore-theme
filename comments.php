@@ -19,11 +19,11 @@ if ( post_password_required() ) {
 }
 ?>
 
-<div id="comments" class="lct-comments">
+<div id="comments" class="listingcore-comments">
 
 	<?php if ( have_comments() ) : ?>
 
-		<h2 class="lct-comments__title">
+		<h2 class="listingcore-comments__title">
 			<?php
 			$comment_count = get_comments_number();
 
@@ -44,7 +44,7 @@ if ( post_password_required() ) {
 			?>
 		</h2>
 
-		<ol class="lct-comments__list">
+		<ol class="listingcore-comments__list">
 			<?php
 			wp_list_comments( [
 				'style'       => 'ol',
@@ -66,7 +66,7 @@ if ( post_password_required() ) {
 
 	<?php if ( ! comments_open() && get_comments_number() && post_type_supports( get_post_type(), 'comments' ) ) : ?>
 
-		<p class="lct-comments__closed">
+		<p class="listingcore-comments__closed">
 			<?php esc_html_e( 'Comments are closed.', 'listingcore-theme' ); ?>
 		</p>
 
@@ -74,19 +74,19 @@ if ( post_password_required() ) {
 
 	<?php
 	comment_form( [
-		'class_container'    => 'lct-comment-form',
-		'class_form'         => 'lct-comment-form__form',
+		'class_container'    => 'listingcore-comment-form',
+		'class_form'         => 'listingcore-comment-form__form',
 		'title_reply'        => esc_html__( 'Leave a Comment', 'listingcore-theme' ),
-		'title_reply_before' => '<h2 id="reply-title" class="lct-comment-form__title">',
+		'title_reply_before' => '<h2 id="reply-title" class="listingcore-comment-form__title">',
 		'title_reply_after'  => '</h2>',
-		'comment_notes_before' => '<p class="lct-comment-form__notes">' . esc_html__( 'Your email address will not be published. Required fields are marked *', 'listingcore-theme' ) . '</p>',
+		'comment_notes_before' => '<p class="listingcore-comment-form__notes">' . esc_html__( 'Your email address will not be published. Required fields are marked *', 'listingcore-theme' ) . '</p>',
 		'comment_field'      => sprintf(
-			'<p class="lct-comment-form__field"><label for="comment">%1$s</label><textarea id="comment" name="comment" cols="45" rows="6" required aria-required="true"></textarea></p>',
+			'<p class="listingcore-comment-form__field"><label for="comment">%1$s</label><textarea id="comment" name="comment" cols="45" rows="6" required aria-required="true"></textarea></p>',
 			esc_html__( 'Comment *', 'listingcore-theme' )
 		),
 		'label_submit'       => esc_html__( 'Post Comment', 'listingcore-theme' ),
-		'submit_button'      => '<input name="%1$s" type="submit" id="%2$s" class="%3$s lct-button lct-button--primary" value="%4$s" />',
-		'submit_field'       => '<p class="lct-comment-form__submit">%1$s %2$s</p>',
+		'submit_button'      => '<input name="%1$s" type="submit" id="%2$s" class="%3$s listingcore-button listingcore-button--primary" value="%4$s" />',
+		'submit_field'       => '<p class="listingcore-comment-form__submit">%1$s %2$s</p>',
 	] );
 	?>
 

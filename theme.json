@@ -232,24 +232,24 @@
 			]
 		},
 		"custom": {
-			"lct-transition": "all 0.2s cubic-bezier(0.4, 0, 0.2, 1)",
-			"lct-transition-slow": "all 0.35s cubic-bezier(0.4, 0, 0.2, 1)",
-			"lct-container-width": "1280px",
-			"lct-border-radius": "0.5rem",
-			"lct-border-radius-lg": "1rem",
-			"lct-border-radius-xl": "1.5rem"
+			"listingcore-transition": "all 0.2s cubic-bezier(0.4, 0, 0.2, 1)",
+			"listingcore-transition-slow": "all 0.35s cubic-bezier(0.4, 0, 0.2, 1)",
+			"listingcore-container-width": "1280px",
+			"listingcore-border-radius": "0.5rem",
+			"listingcore-border-radius-lg": "1rem",
+			"listingcore-border-radius-xl": "1.5rem"
 		},
 		"useRootPaddingAwareAlignments": true
 	},
 	"styles": {
 		"color": {
-			"background": "var(--lct-white, #ffffff)",
-			"text": "var(--lct-dark, #111827)"
+			"background": "var(--listingcore-white, #ffffff)",
+			"text": "var(--listingcore-dark, #111827)"
 		},
 		"typography": {
-			"fontFamily": "var(--lct-font-primary, 'Plus Jakarta Sans', system-ui, sans-serif)",
-			"fontSize": "var(--lct-text-base, 1rem)",
-			"lineHeight": "var(--lct-line-height, 1.6)"
+			"fontFamily": "var(--listingcore-font-primary, 'Plus Jakarta Sans', system-ui, sans-serif)",
+			"fontSize": "var(--listingcore-text-base, 1rem)",
+			"lineHeight": "var(--listingcore-line-height, 1.6)"
 		},
 		"spacing": {
 			"blockGap": "1.5rem",
@@ -263,7 +263,7 @@
 		"elements": {
 			"link": {
 				"color": {
-					"text": "var(--lct-primary, #1a56db)"
+					"text": "var(--listingcore-primary, #1a56db)"
 				},
 				"typography": {
 					"textDecoration": "none"
@@ -317,8 +317,8 @@
 					"radius": "0.5rem"
 				},
 				"color": {
-					"background": "var(--lct-primary, #1a56db)",
-					"text": "var(--lct-white, #ffffff)"
+					"background": "var(--listingcore-primary, #1a56db)",
+					"text": "var(--listingcore-white, #ffffff)"
 				},
 				"typography": {
 					"fontWeight": "600",
@@ -334,7 +334,7 @@
 				},
 				":hover": {
 					"color": {
-						"background": "var(--lct-primary-dark, #1340a8)"
+						"background": "var(--listingcore-primary-dark, #1340a8)"
 					}
 				}
 			}
@@ -348,7 +348,7 @@
 			"core/quote": {
 				"border": {
 					"left": {
-						"color": "var(--lct-primary, #1a56db)",
+						"color": "var(--listingcore-primary, #1a56db)",
 						"style": "solid",
 						"width": "4px"
 					}
@@ -361,7 +361,7 @@
 			},
 			"core/code": {
 				"typography": {
-					"fontFamily": "var(--lct-font-mono, 'JetBrains Mono', monospace)",
+					"fontFamily": "var(--listingcore-font-mono, 'JetBrains Mono', monospace)",
 					"fontSize": "0.875rem"
 				},
 				"color": {
