@@ -1,109 +1,204 @@
 <?php
 /**
- * The template for displaying all single listings
+ * Single listing template.
+ *
+ * Displays a single listing. Uses the ListingCore plugin's shortcode
+ * and template system where available.
  *
  * @package ListingCoreTheme
+ * @since   1.0.0
  */
 
-get_header(); ?>
+defined( 'ABSPATH' ) || exit;
 
-<div class="listingcore-breadcrumbs-wrapper">
-    <?php if ( function_exists( 'listingcore_theme_breadcrumbs' ) ) {
-        listingcore_theme_breadcrumbs();
-    } ?>
-</div>
+get_header();
+?>
 
-<main id="primary" class="site-main listingcore-container" style="max-width: 1200px; margin: 40px auto; padding: 0 20px; display: grid; grid-template-columns: 2fr 1fr; gap: 30px;">
-    
-    <!-- ── MAIN CONTENT AREA ──────────────────────────────── -->
-    <section class="listing-main-content">
-        <?php while ( have_posts() ) : the_post(); ?>
-            
-            <article id="post-<?php the_ID(); ?>" <?php post_class('listingcore-single-view'); ?> style="background: #ffffff; padding: 30px; border-radius: 12px; border: 1px solid #e2e8f0;">
-                
-                <header class="listing-header" style="margin-bottom: 24px;">
-                    <div class="listing-categories" style="margin-bottom: 10px;">
-                        <?php
-                        $terms = get_the_terms( get_the_ID(), 'listing_category' );
-                        if ( $terms && ! is_wp_error( $terms ) ) :
-                            foreach ( $terms as $term ) : ?>
-                                <span class="badge-category" style="background: #eff6ff; color: #2563eb; padding: 4px 10px; border-radius: 6px; font-size: 12px; font-weight: 600; text-transform: uppercase; margin-right: 8px;">
-                                    <?php echo esc_html( $term->name ); ?>
-                                </span>
-                            <?php endforeach;
-                        endif;
-                        ?>
-                    </div>
+<main id="primary" class="lct-main lct-main--single-listing" role="main">
 
-                    <h1 class="entry-title" style="font-size: 32px; font-weight: 700; color: #0f172a; margin: 0 0 15px 0;">
-                        <?php the_title(); ?>
-                    </h1>
+	<?php
+	while ( have_posts() ) :
+		the_post();
+		?>
 
-                    <?php 
-                    // Fetch dynamic metadata matching your approved plugin engine keys
-                    $price      = get_post_meta( get_the_ID(), '_listing_price', true );
-                    $price_type = get_post_meta( get_the_ID(), '_listing_price_type', true ) ?: 'fixed';
-                    $currency   = get_post_meta( get_the_ID(), '_listing_currency', true ) ?: 'INR';
-                    
-                    if ( $price && function_exists( 'listingcore_theme_format_price' ) ) : ?>
-                        <div class="listing-detail-price" style="font-size: 28px; font-weight: 800; color: #10b981; margin-bottom: 15px;">
-                            <?php echo listingcore_theme_format_price( $price, $currency, $price_type ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
-                        </div>
-                    <?php endif; ?>
-                </header>
+		<article id="post-<?php the_ID(); ?>" <?php post_class( 'lct-listing' ); ?>>
 
-                <!-- Featured Image Showcase -->
-                <?php if ( has_post_thumbnail() ) : ?>
-                    <div class="listing-featured-image" style="margin-bottom: 30px; border-radius: 8px; overflow: hidden; border: 1px solid #e2e8f0;">
-                        <?php the_post_thumbnail( 'large', array( 'style' => 'width: 100%; height: auto; display: block;' ) ); ?>
-                    </div>
-                <?php endif; ?>
+			<div class="lct-container">
 
-                <!-- Core Description Text -->
-                <div class="listing-entry-content" style="line-height: 1.8; color: #334155; font-size: 16px;">
-                    <h3 style="font-size: 20px; font-weight: 600; color: #0f172a; border-bottom: 1px solid #e2e8f0; padding-bottom: 10px; margin-bottom: 15px;">
-                        <?php esc_html_e( 'Description', 'listingcore-theme' ); ?>
-                    </h3>
-                    <?php the_content(); ?>
-                </div>
+				<?php listingcore_theme_breadcrumbs(); ?>
 
-            </article>
+				<div class="lct-layout <?php echo esc_attr( listingcore_theme_get_layout_class() ); ?>">
 
-        <?php endwhile; ?>
-    </section>
+					<div class="lct-layout__main">
 
-    <!-- ── SIDEBAR CONTEXT AREA ───────────────────────────── -->
-    <aside class="listing-sidebar-area">
-        <?php 
-        $city    = get_post_meta( get_the_ID(), '_listing_city', true );
-        $country = get_post_meta( get_the_ID(), '_listing_country', true );
-        $location = implode( ', ', array_filter( [ $city, $country ] ) );
-        
-        if ( $location ) : ?>
-            <div class="sidebar-location-block" style="background: #ffffff; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0; margin-bottom: 24px;">
-                <h4 style="margin-top: 0; font-size: 16px; color: #0f172a;">📍 <?php esc_html_e( 'Location Details', 'listingcore-theme' ); ?></h4>
-                <p style="margin: 5px 0 0 0; color: #475569; font-weight: 500;"><?php echo esc_html( $location ); ?></p>
-            </div>
-        <?php endif; ?>
+						<header class="lct-listing__header">
 
-        <!-- Contact/Lead Form Integration Section -->
-        <div class="sidebar-contact-block" style="background: #ffffff; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0; margin-bottom: 24px;">
-            <h4 style="margin-top: 0; font-size: 16px; color: #0f172a; margin-bottom: 15px;">✉️ <?php esc_html_e( 'Contact Owner', 'listingcore-theme' ); ?></h4>
-            
-            <?php 
-            // Natively executes your custom plugin contact form shortcode safely
-            echo do_shortcode( '[listingcore_contact_form]' ); 
-            ?>
-        </div>
+							<div class="lct-listing__categories">
+								<?php
+								$terms = get_the_terms( get_the_ID(), 'listing_category' );
+								if ( $terms && ! is_wp_error( $terms ) ) {
+									foreach ( $terms as $term ) {
+										printf(
+											'<a href="%1$s" class="lct-listing__category">%2$s</a>',
+											esc_url( get_term_link( $term ) ),
+											esc_html( $term->name )
+										);
+									}
+								}
+								?>
+							</div>
 
-        <?php 
-        // Falls back onto your multi-segment listing filter sidebar configurations
-        if ( is_active_sidebar( 'sidebar-listings' ) ) {
-            dynamic_sidebar( 'sidebar-listings' );
-        } 
-        ?>
-    </aside>
+							<h1 class="lct-listing__title"><?php the_title(); ?></h1>
+
+							<div class="lct-listing__meta">
+								<time datetime="<?php echo esc_attr( get_the_date( DATE_W3C ) ); ?>">
+									<?php echo esc_html( get_the_date() ); ?>
+								</time>
+
+								<?php if ( listingcore_theme_has_plugin() ) : ?>
+									<?php
+									$views = (int) get_post_meta( get_the_ID(), '_listingcore_views', true );
+									if ( $views > 0 ) :
+										?>
+										<span class="lct-listing__meta-sep">·</span>
+										<span class="lct-listing__views">
+											<?php
+											printf(
+												/* translators: %s: view count */
+												esc_html( _n( '%s view', '%s views', $views, 'listingcore-theme' ) ),
+												number_format_i18n( $views )
+											);
+											?>
+										</span>
+									<?php endif; ?>
+								<?php endif; ?>
+							</div>
+
+						</header>
+
+						<?php if ( has_post_thumbnail() ) : ?>
+							<div class="lct-listing__gallery">
+								<?php the_post_thumbnail( 'lct-listing-single' ); ?>
+
+								<?php
+								// Additional gallery images (if using native WP gallery).
+								$gallery_images = get_post_meta( get_the_ID(), '_listingcore_gallery', true );
+								if ( ! empty( $gallery_images ) && is_array( $gallery_images ) ) :
+									?>
+									<div class="lct-listing__gallery-thumbs">
+										<?php foreach ( $gallery_images as $image_id ) : ?>
+											<?php echo wp_get_attachment_image( $image_id, 'lct-listing-thumb', false, [ 'loading' => 'lazy' ] ); ?>
+										<?php endforeach; ?>
+									</div>
+								<?php endif; ?>
+							</div>
+						<?php endif; ?>
+
+						<div class="lct-listing__content">
+							<?php the_content(); ?>
+						</div>
+
+						<?php
+						/**
+						 * Listing details (custom fields from ListingCore plugin).
+						 * Rendered by the plugin's FieldRegistry if available.
+						 */
+						if ( listingcore_theme_has_plugin() && class_exists( 'ListingCore\\Listings\\FieldRegistry' ) ) {
+							$fields = \ListingCore\Listings\FieldRegistry::get_fields();
+
+							if ( ! empty( $fields ) ) {
+								echo '<div class="lct-listing__details">';
+								echo '<h2 class="lct-listing__details-title">' . esc_html__( 'Listing Details', 'listingcore-theme' ) . '</h2>';
+								echo '<dl class="lct-listing__details-list">';
+
+								foreach ( $fields as $key => $field ) {
+									$value = get_post_meta( get_the_ID(), $key, true );
+
+									if ( '' === $value || null === $value ) {
+										continue;
+									}
+
+									$label = isset( $field['label'] ) ? $field['label'] : $key;
+
+									printf(
+										'<dt class="lct-listing__detail-label">%1$s</dt><dd class="lct-listing__detail-value">%2$s</dd>',
+										esc_html( $label ),
+										esc_html( is_array( $value ) ? implode( ', ', $value ) : (string) $value )
+									);
+								}
+
+								echo '</dl>';
+								echo '</div>';
+							}
+						}
+						?>
+
+						<?php
+						// Tags.
+						$tags = get_the_term_list( get_the_ID(), 'listing_tag', '', ', ' );
+						if ( $tags && ! is_wp_error( $tags ) ) :
+							?>
+							<div class="lct-listing__tags">
+								<?php echo wp_kses_post( $tags ); ?>
+							</div>
+						<?php endif; ?>
+
+						<?php
+						// Contact form (from plugin if available).
+						if ( listingcore_theme_has_plugin() ) {
+							echo '<div class="lct-listing__contact">';
+							echo do_shortcode( '[listingcore_contact_form]' );
+							echo '</div>';
+						}
+						?>
+
+						<?php
+						// Post navigation between listings.
+						the_post_navigation( [
+							'prev_text' => '<span class="lct-post-nav__label">' . esc_html__( 'Previous listing', 'listingcore-theme' ) . '</span><span class="lct-post-nav__title">%title</span>',
+							'next_text' => '<span class="lct-post-nav__label">' . esc_html__( 'Next listing', 'listingcore-theme' ) . '</span><span class="lct-post-nav__title">%title</span>',
+							'class'     => 'lct-post-nav lct-post-nav--listing',
+						] );
+						?>
+
+						<?php if ( get_edit_post_link() ) : ?>
+							<footer class="lct-listing__footer">
+								<?php
+								edit_post_link(
+									sprintf(
+										/* translators: %s: listing title */
+										esc_html__( 'Edit %s', 'listingcore-theme' ),
+										'<span class="screen-reader-text">' . get_the_title() . '</span>'
+									),
+									'<span class="lct-listing__edit-link">',
+									'</span>'
+								);
+								?>
+							</footer>
+						<?php endif; ?>
+
+					</div>
+
+					<?php get_sidebar(); ?>
+
+				</div>
+
+			</div>
+
+		</article>
+
+		<?php
+		// Comments for listings (if enabled).
+		if ( comments_open() || get_comments_number() ) {
+			echo '<div class="lct-container">';
+			comments_template();
+			echo '</div>';
+		}
+
+	endwhile;
+	?>
 
 </main>
 
-<?php get_footer(); ?>
+<?php
+get_footer();
