@@ -1,191 +1,238 @@
 <?php
 /**
- * Template Functions
+ * Template functions and helpers.
+ *
+ * Reusable presentation helpers used across the theme templates.
  *
  * @package ListingCoreTheme
+ * @since   1.0.0
  */
 
 defined( 'ABSPATH' ) || exit;
 
-// ── PRICE FORMATTING ─────────────────────────────────────
+/**
+ * Get the site logo or fallback text.
+ *
+ * @return string
+ */
+function listingcore_theme_site_logo() {
+	if ( has_custom_logo() ) {
+		the_custom_logo();
+		return;
+	}
 
-function listingcore_theme_format_price( $price, $currency = 'USD', $price_type = 'fixed' ) {
-    if ( $price_type === 'free' ) {
-        return '<span class="listingcore-price-free">' . __( 'Free', 'listingcore-theme' ) . '</span>';
-    }
-    if ( $price_type === 'negotiable' ) {
-        return '<span class="listingcore-price-negotiable">' . __( 'Negotiable', 'listingcore-theme' ) . '</span>';
-    }
-    if ( $price_type === 'on_call' ) {
-        return '<span class="listingcore-price-oncall">' . __( 'Contact for Price', 'listingcore-theme' ) . '</span>';
-    }
-
-    $symbols = [ 'USD' => '$', 'EUR' => '€', 'GBP' => '£', 'INR' => '₹', 'JPY' => '¥', 'AUD' => 'A$', 'CAD' => 'C$' ];
-    $symbol  = $symbols[ $currency ] ?? $currency . ' ';
-
-    return '<span class="listingcore-price-amount">' . $symbol . number_format_i18n( (float) $price, ( $currency === 'JPY' ) ? 0 : 2 ) . '</span>';
+	printf(
+		'<a href="%1$s" class="lct-site-title" rel="home">%2$s</a>',
+		esc_url( home_url( '/' ) ),
+		esc_html( get_bloginfo( 'name' ) )
+	);
 }
 
-// ── LISTING CARD ─────────────────────────────────────────
+/**
+ * Get the site tagline.
+ *
+ * @return string
+ */
+function listingcore_theme_site_tagline() {
+	$description = get_bloginfo( 'description', 'display' );
 
-function listingcore_theme_listing_card( $post_id, $args = [] ) {
-    $defaults = [
-        'show_category' => true,
-        'show_location' => true,
-        'show_date'     => true,
-    ];
-    $args = wp_parse_args( $args, $defaults );
+	if ( empty( $description ) ) {
+		return '';
+	}
 
-    // Maps directly to the ListingCore backend database keys
-    $price      = get_post_meta( $post_id, '_listing_price',      true );
-    $price_type = get_post_meta( $post_id, '_listing_price_type', true ) ?: 'fixed';
-    $currency   = get_post_meta( $post_id, '_listing_currency',   true ) ?: 'INR';
-    $city       = get_post_meta( $post_id, '_listing_city',       true );
-    $country    = get_post_meta( $post_id, '_listing_country',    true );
-    $featured   = get_post_meta( $post_id, '_listing_featured',   true );
-    $urgent     = get_post_meta( $post_id, '_listing_urgent',     true );
-    $verified   = get_post_meta( $post_id, '_listing_verified',   true );
-
-    $categories = get_the_terms( $post_id, 'listing_category' );
-    $cat_name   = ( $categories && ! is_wp_error( $categories ) ) ? $categories[0]->name : '';
-    $cat_link   = ( $categories && ! is_wp_error( $categories ) ) ? get_term_link( $categories[0] ) : '';
-
-    $location   = implode( ', ', array_filter( [ $city, $country ] ) );
-    ?>
-    <article class="listingcore-listing-card" id="listing-<?php echo esc_attr( $post_id ); ?>">
-
-        <div class="listingcore-listing-badge">
-            <?php if ( $featured ) : ?>
-                <span class="listingcore-badge listingcore-badge-featured"><?php esc_html_e( 'Featured', 'listingcore-theme' ); ?></span>
-            <?php endif; ?>
-            <?php if ( $urgent ) : ?>
-                <span class="listingcore-badge listingcore-badge-urgent"><?php esc_html_e( 'Urgent', 'listingcore-theme' ); ?></span>
-            <?php endif; ?>
-        </div>
-
-        <button class="listingcore-listing-wishlist" data-id="<?php echo esc_attr( $post_id ); ?>" aria-label="<?php esc_attr_e( 'Save to wishlist', 'listingcore-theme' ); ?>">
-            ♡
-        </button>
-
-        <div class="listingcore-listing-thumb">
-            <?php if ( has_post_thumbnail( $post_id ) ) : ?>
-                <a href="<?php echo esc_url( get_permalink( $post_id ) ); ?>">
-                    <?php echo get_the_post_thumbnail( $post_id, 'listingcore-listing-grid', [ 'loading' => 'lazy' ] ); ?>
-                </a>
-            <?php else : ?>
-                <a href="<?php echo esc_url( get_permalink( $post_id ) ); ?>">
-                    <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/images/placeholder.jpg' ); ?>" alt="" loading="lazy" />
-                </a>
-            <?php endif; ?>
-        </div>
-
-        <div class="listingcore-listing-body">
-            <?php if ( $args['show_category'] && $cat_name ) : ?>
-                <div class="listingcore-listing-category">
-                    <a href="<?php echo esc_url( $cat_link ); ?>"><?php echo esc_html( $cat_name ); ?></a>
-                    <?php if ( $verified ) : ?>
-                        <span title="<?php esc_attr_e( 'Verified', 'listingcore-theme' ); ?>"> ✅</span>
-                    <?php endif; ?>
-                </div>
-            <?php endif; ?>
-
-            <h3 class="listingcore-listing-title">
-                <a href="<?php echo esc_url( get_permalink( $post_id ) ); ?>"><?php echo esc_html( get_the_title( $post_id ) ); ?></a>
-            </h3>
-
-            <div class="listingcore-listing-price">
-                <?php echo listingcore_theme_format_price( $price, $currency, $price_type ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
-            </div>
-
-            <div class="listingcore-listing-meta">
-                <?php if ( $args['show_location'] && $location ) : ?>
-                    <span>📍 <?php echo esc_html( $location ); ?></span>
-                <?php endif; ?>
-                <?php if ( $args['show_date'] ) : ?>
-                    <span>🕐 <?php echo esc_html( human_time_diff( get_the_date( 'U', $post_id ), current_time( 'timestamp' ) ) . ' ' . __( 'ago', 'listingcore-theme' ) ); ?></span>
-                <?php endif; ?>
-            </div>
-        </div>
-
-    </article>
-    <?php
+	return sprintf(
+		'<p class="lct-site-description">%s</p>',
+		esc_html( $description )
+	);
 }
 
-// ── BREADCRUMBS ───────────────────────────────────────────
+/**
+ * Display the primary navigation menu.
+ */
+function listingcore_theme_primary_nav() {
+	if ( ! has_nav_menu( 'primary' ) ) {
+		return;
+	}
 
+	wp_nav_menu( [
+		'theme_location' => 'primary',
+		'container'      => 'nav',
+		'container_class' => 'lct-nav lct-nav--primary',
+		'menu_class'     => 'lct-menu',
+		'depth'          => 3,
+		'fallback_cb'    => false,
+	] );
+}
+
+/**
+ * Display the mobile navigation menu.
+ */
+function listingcore_theme_mobile_nav() {
+	if ( ! has_nav_menu( 'mobile' ) ) {
+		return;
+	}
+
+	wp_nav_menu( [
+		'theme_location' => 'mobile',
+		'container'      => 'nav',
+		'container_class' => 'lct-nav lct-nav--mobile',
+		'menu_class'     => 'lct-menu lct-menu--mobile',
+		'depth'          => 2,
+		'fallback_cb'    => false,
+	] );
+}
+
+/**
+ * Display the footer navigation menu.
+ */
+function listingcore_theme_footer_nav() {
+	if ( ! has_nav_menu( 'footer' ) ) {
+		return;
+	}
+
+	wp_nav_menu( [
+		'theme_location' => 'footer',
+		'container'      => 'nav',
+		'container_class' => 'lct-nav lct-nav--footer',
+		'menu_class'     => 'lct-menu lct-menu--footer',
+		'depth'          => 1,
+		'fallback_cb'    => false,
+	] );
+}
+
+/**
+ * Get the post thumbnail URL with fallback.
+ *
+ * @param int    $post_id  Post ID.
+ * @param string $size     Image size.
+ * @return string
+ */
+function listingcore_theme_get_thumbnail_url( $post_id = 0, $size = 'lct-listing-grid' ) {
+	$post_id = $post_id ?: get_the_ID();
+
+	if ( has_post_thumbnail( $post_id ) ) {
+		$url = get_the_post_thumbnail_url( $post_id, $size );
+
+		if ( $url ) {
+			return $url;
+		}
+	}
+
+	return LISTINGCORE_THEME_URI . '/assets/images/placeholder.jpg';
+}
+
+/**
+ * Render the post thumbnail or a fallback placeholder.
+ *
+ * @param int    $post_id Post ID.
+ * @param string $size    Image size.
+ * @param array  $attr    Extra attributes.
+ */
+function listingcore_theme_post_thumbnail( $post_id = 0, $size = 'lct-listing-grid', $attr = [] ) {
+	$post_id = $post_id ?: get_the_ID();
+
+	if ( has_post_thumbnail( $post_id ) ) {
+		echo get_the_post_thumbnail(
+			$post_id,
+			$size,
+			wp_parse_args( $attr, [ 'loading' => 'lazy' ] )
+		);
+		return;
+	}
+
+	printf(
+		'<img src="%1$s" alt="%2$s" loading="lazy" class="lct-placeholder" />',
+		esc_url( LISTINGCORE_THEME_URI . '/assets/images/placeholder.jpg' ),
+		esc_attr__( 'No image available', 'listingcore-theme' )
+	);
+}
+
+/**
+ * Get breadcrumb trail.
+ */
 function listingcore_theme_breadcrumbs() {
-    if ( is_front_page() ) return;
-    ?>
-    <nav class="listingcore-breadcrumbs" aria-label="<?php esc_attr_e( 'Breadcrumb', 'listingcore-theme' ); ?>">
-        <div class="listingcore-container">
-            <ol class="listingcore-breadcrumb-list">
-                <li><a href="<?php echo esc_url( home_url() ); ?>"><?php esc_html_e( 'Home', 'listingcore-theme' ); ?></a></li>
-                <?php
-                if ( is_single() ) {
-                    if ( get_post_type() === 'listingcore' ) {
-                        echo '<li><a href="' . esc_url( get_post_type_archive_link( 'listingcore' ) ) . '">' . esc_html__( 'Listings', 'listingcore-theme' ) . '</a></li>';
-                        $terms = get_the_terms( get_the_ID(), 'listing_category' );
-                        if ( $terms && ! is_wp_error( $terms ) ) {
-                            echo '<li><a href="' . esc_url( get_term_link( $terms[0] ) ) . '">' . esc_html( $terms[0]->name ) . '</a></li>';
-                        }
-                    } else {
-                        echo '<li><a href="' . esc_url( get_permalink( get_option( 'page_for_posts' ) ) ) . '">' . esc_html__( 'Blog', 'listingcore-theme' ) . '</a></li>';
-                    }
-                    echo '<li aria-current="page">' . esc_html( get_the_title() ) . '</li>';
-                } elseif ( is_archive() ) {
-                    echo '<li aria-current="page">' . esc_html( get_the_archive_title() ) . '</li>';
-                } elseif ( is_page() ) {
-                    echo '<li aria-current="page">' . esc_html( get_the_title() ) . '</li>';
-                } elseif ( is_search() ) {
-                    echo '<li aria-current="page">' . esc_html__( 'Search Results', 'listingcore-theme' ) . '</li>';
-                }
-                ?>
-            </ol>
-        </div>
-    </nav>
-    <?php
+	if ( is_front_page() ) {
+		return;
+	}
+
+	$items   = [];
+	$items[] = sprintf(
+		'<a href="%s">%s</a>',
+		esc_url( home_url( '/' ) ),
+		esc_html__( 'Home', 'listingcore-theme' )
+	);
+
+	if ( is_singular() ) {
+		$items[] = sprintf( '<span>%s</span>', esc_html( get_the_title() ) );
+	} elseif ( is_archive() ) {
+		$items[] = sprintf( '<span>%s</span>', esc_html( get_the_archive_title() ) );
+	} elseif ( is_search() ) {
+		$items[] = sprintf(
+			'<span>%s</span>',
+			sprintf(
+				/* translators: %s: search query */
+				esc_html__( 'Search: %s', 'listingcore-theme' ),
+				esc_html( get_search_query() )
+			)
+		);
+	}
+
+	echo '<nav class="lct-breadcrumbs" aria-label="' . esc_attr__( 'Breadcrumb', 'listingcore-theme' ) . '">';
+	echo '<ol class="lct-breadcrumbs__list">';
+	foreach ( $items as $item ) {
+		echo '<li class="lct-breadcrumbs__item">' . wp_kses_post( $item ) . '</li>';
+	}
+	echo '</ol>';
+	echo '</nav>';
 }
 
-// ── PAGINATION ────────────────────────────────────────────
-
-function listingcore_theme_pagination( $query = null ) {
-    global $wp_query;
-    $q = $query ?: $wp_query;
-
-    echo '<nav class="listingcore-pagination" aria-label="' . esc_attr__( 'Page navigation', 'listingcore-theme' ) . '">';
-    echo paginate_links( [
-        'base'      => str_replace( PHP_INT_MAX, '%#%', esc_url( get_pagenum_link( PHP_INT_MAX ) ) ),
-        'format'    => '?paged=%#%',
-        'current'   => max( 1, get_query_var( 'paged' ) ),
-        'total'     => $q->max_num_pages,
-        'prev_text' => '&larr;',
-        'next_text' => '&rarr;',
-    ] );
-    echo '</nav>';
+/**
+ * Pagination wrapper.
+ */
+function listingcore_theme_pagination() {
+	the_posts_pagination( [
+		'mid_size'           => 2,
+		'prev_text'          => esc_html__( 'Previous', 'listingcore-theme' ),
+		'next_text'          => esc_html__( 'Next', 'listingcore-theme' ),
+		'screen_reader_text' => esc_html__( 'Posts navigation', 'listingcore-theme' ),
+		'class'              => 'lct-pagination',
+	] );
 }
 
-// ── VIEW COUNTER ──────────────────────────────────────────
-
-function listingcore_theme_increment_view_count( $post_id ) {
-    if ( is_singular( 'listingcore' ) ) {
-        $key    = 'listingcore_viewed_' . $post_id;
-        $period = 3600; // 1 hour
-
-        if ( ! isset( $_COOKIE[ $key ] ) ) {
-            $views = (int) get_post_meta( $post_id, '_listing_views', true );
-            update_post_meta( $post_id, '_listing_views', $views + 1 );
-            setcookie( $key, '1', time() + $period, COOKIEPATH, COOKIE_DOMAIN, is_ssl(), true );
-        }
-    }
+/**
+ * Check if the ListingCore plugin is active.
+ *
+ * @return bool
+ */
+function listingcore_theme_has_plugin() {
+	return class_exists( 'ListingCore\\Core\\Plugin' );
 }
-add_action( 'wp', function() { listingcore_theme_increment_view_count( get_the_ID() ); } );
 
-// ── LISTING EXPIRY CHECK ──────────────────────────────────
+/**
+ * Display a notice when the ListingCore plugin is not active.
+ *
+ * Only shown to logged-in administrators.
+ */
+function listingcore_theme_plugin_missing_notice() {
+	if ( listingcore_theme_has_plugin() ) {
+		return;
+	}
 
-function listingcore_theme_is_listing_expired( $post_id ) {
-    $expires = get_post_meta( $post_id, '_listing_expires', true );
-    if ( ! $expires ) {
-        return false;
-    }
-    return ( current_time( 'timestamp' ) > strtotime( $expires ) );
+	if ( ! current_user_can( 'install_plugins' ) ) {
+		return;
+	}
+
+	printf(
+		'<div class="lct-plugin-notice">%s</div>',
+		esc_html__( 'This theme works best with the ListingCore plugin. Some features may not be available until the plugin is installed.', 'listingcore-theme' )
+	);
+}
+
+/**
+ * Get the current year for copyright.
+ *
+ * @return string
+ */
+function listingcore_theme_current_year() {
+	return esc_html( gmdate( 'Y' ) );
 }
