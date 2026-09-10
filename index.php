@@ -1,44 +1,72 @@
 <?php
-// Copyright (C) 2024 Your Name - ClassiPress Pro. Licensed under GPLv2 or later.
 /**
- * The main template file.
- * Fallback for all templates not matched by the template hierarchy.
+ * Main template file.
  *
- * @package ClassiPressPro
+ * The fallback template used by WordPress when no more specific
+ * template file matches the current query.
+ *
+ * @package ListingCoreTheme
+ * @since   1.0.0
  */
+
+defined( 'ABSPATH' ) || exit;
 
 get_header();
 ?>
 
-<main id="main" class="site-main" role="main">
-    <div class="cp-container cp-section">
+<main id="primary" class="lct-main" role="main">
+	<div class="lct-container">
 
-        <?php if ( have_posts() ) : ?>
+		<?php
+		// Breadcrumbs (only on non-front pages).
+		if ( ! is_front_page() ) {
+			listingcore_theme_breadcrumbs();
+		}
+		?>
 
-            <?php if ( is_home() && ! is_front_page() ) : ?>
-                <header class="page-header">
-                    <h1 class="page-title"><?php single_post_title(); ?></h1>
-                </header>
-            <?php endif; ?>
+		<div class="lct-layout <?php echo esc_attr( listingcore_theme_get_layout_class() ); ?>">
 
-            <div class="cp-blog-grid">
-                <?php while ( have_posts() ) : the_post(); ?>
-                    <?php get_template_part( 'template-parts/content', get_post_type() ); ?>
-                <?php endwhile; ?>
-            </div>
+			<div class="lct-layout__main">
 
-            <?php cp_pagination(); ?>
+				<?php if ( have_posts() ) : ?>
 
-        <?php else : ?>
+					<?php if ( is_home() && ! is_front_page() ) : ?>
+						<header class="lct-page-header">
+							<h1 class="lct-page-title"><?php single_post_title(); ?></h1>
+						</header>
+					<?php endif; ?>
 
-            <?php get_template_part( 'template-parts/content', 'none' ); ?>
+					<div class="lct-posts">
 
-        <?php endif; ?>
+						<?php
+						while ( have_posts() ) :
+							the_post();
 
-    </div>
+							get_template_part( 'template-parts/content', get_post_type() );
+						endwhile;
+						?>
+
+					</div>
+
+					<?php
+					// Pagination.
+					listingcore_theme_pagination();
+					?>
+
+				<?php else : ?>
+
+					<?php get_template_part( 'template-parts/content', 'none' ); ?>
+
+				<?php endif; ?>
+
+			</div>
+
+			<?php get_sidebar(); ?>
+
+		</div>
+
+	</div>
 </main>
 
 <?php
-// Copyright (C) 2024 Your Name - ClassiPress Pro. Licensed under GPLv2 or later.
-get_sidebar();
 get_footer();

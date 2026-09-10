@@ -12,8 +12,6 @@ defined( 'ABSPATH' ) || exit;
 
 /**
  * Get the site logo or fallback text.
- *
- * @return string
  */
 function listingcore_theme_site_logo() {
 	if ( has_custom_logo() ) {
@@ -55,12 +53,12 @@ function listingcore_theme_primary_nav() {
 	}
 
 	wp_nav_menu( [
-		'theme_location' => 'primary',
-		'container'      => 'nav',
+		'theme_location'  => 'primary',
+		'container'       => 'nav',
 		'container_class' => 'lct-nav lct-nav--primary',
-		'menu_class'     => 'lct-menu',
-		'depth'          => 3,
-		'fallback_cb'    => false,
+		'menu_class'      => 'lct-menu',
+		'depth'           => 3,
+		'fallback_cb'     => false,
 	] );
 }
 
@@ -73,12 +71,12 @@ function listingcore_theme_mobile_nav() {
 	}
 
 	wp_nav_menu( [
-		'theme_location' => 'mobile',
-		'container'      => 'nav',
+		'theme_location'  => 'mobile',
+		'container'       => 'nav',
 		'container_class' => 'lct-nav lct-nav--mobile',
-		'menu_class'     => 'lct-menu lct-menu--mobile',
-		'depth'          => 2,
-		'fallback_cb'    => false,
+		'menu_class'      => 'lct-menu lct-menu--mobile',
+		'depth'           => 2,
+		'fallback_cb'     => false,
 	] );
 }
 
@@ -91,24 +89,24 @@ function listingcore_theme_footer_nav() {
 	}
 
 	wp_nav_menu( [
-		'theme_location' => 'footer',
-		'container'      => 'nav',
+		'theme_location'  => 'footer',
+		'container'       => 'nav',
 		'container_class' => 'lct-nav lct-nav--footer',
-		'menu_class'     => 'lct-menu lct-menu--footer',
-		'depth'          => 1,
-		'fallback_cb'    => false,
+		'menu_class'      => 'lct-menu lct-menu--footer',
+		'depth'           => 1,
+		'fallback_cb'     => false,
 	] );
 }
 
 /**
  * Get the post thumbnail URL with fallback.
  *
- * @param int    $post_id  Post ID.
- * @param string $size     Image size.
+ * @param int    $post_id Post ID.
+ * @param string $size    Image size.
  * @return string
  */
 function listingcore_theme_get_thumbnail_url( $post_id = 0, $size = 'lct-listing-grid' ) {
-	$post_id = $post_id ?: get_the_ID();
+	$post_id = $post_id ? $post_id : get_the_ID();
 
 	if ( has_post_thumbnail( $post_id ) ) {
 		$url = get_the_post_thumbnail_url( $post_id, $size );
@@ -129,7 +127,7 @@ function listingcore_theme_get_thumbnail_url( $post_id = 0, $size = 'lct-listing
  * @param array  $attr    Extra attributes.
  */
 function listingcore_theme_post_thumbnail( $post_id = 0, $size = 'lct-listing-grid', $attr = [] ) {
-	$post_id = $post_id ?: get_the_ID();
+	$post_id = $post_id ? $post_id : get_the_ID();
 
 	if ( has_post_thumbnail( $post_id ) ) {
 		echo get_the_post_thumbnail(
@@ -235,4 +233,25 @@ function listingcore_theme_plugin_missing_notice() {
  */
 function listingcore_theme_current_year() {
 	return esc_html( gmdate( 'Y' ) );
+}
+
+/**
+ * Get the layout class based on customizer settings.
+ *
+ * @return string
+ */
+function listingcore_theme_get_layout_class() {
+	$sidebar_position = get_theme_mod( 'listingcore_theme_sidebar_position', 'right' );
+
+	$classes = [ 'lct-layout--sidebar-' . $sidebar_position ];
+
+	if ( 'none' === $sidebar_position ) {
+		$classes[] = 'lct-layout--no-sidebar';
+	}
+
+	if ( ! is_active_sidebar( 'sidebar-1' ) ) {
+		$classes[] = 'lct-layout--no-widgets';
+	}
+
+	return implode( ' ', $classes );
 }
