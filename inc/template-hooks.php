@@ -1,120 +1,215 @@
 <?php
 /**
- * Template Hooks — connects actions to template-part functions
+ * Template hooks.
  *
- * @package ClassiPressPro
+ * Centralized hooks for injecting markup into templates.
+ *
+ * @package ListingCoreTheme
+ * @since   1.0.0
  */
 
 defined( 'ABSPATH' ) || exit;
 
-// ── HEADER ────────────────────────────────────────────────
-add_action( 'classipress_header',       'classipress_template_header_inner', 10 );
+// -----------------------------------------------------------------------------
+// Body classes
+// -----------------------------------------------------------------------------
+/**
+ * Add custom body classes.
+ *
+ * @param array $classes Existing body classes.
+ * @return array
+ */
+function listingcore_theme_body_classes( $classes ) {
+	if ( ! is_singular() ) {
+		$classes[] = 'lct-hfeed';
+	}
 
-function classipress_template_header_inner() {
-    get_template_part( 'template-parts/header/header', 'inner' );
+	if ( is_page_template( 'template-listings.php' ) ) {
+		$classes[] = 'lct-page-listings';
+	}
+
+	if ( is_page_template( 'template-dashboard.php' ) ) {
+		$classes[] = 'lct-page-dashboard';
+	}
+
+	if ( is_page_template( 'template-submit.php' ) ) {
+		$classes[] = 'lct-page-submit';
+	}
+
+	if ( is_page_template( 'template-wishlist.php' ) ) {
+		$classes[] = 'lct-page-wishlist';
+	}
+
+	if ( ! listingcore_theme_has_plugin() ) {
+		$classes[] = 'lct-plugin-missing';
+	}
+
+	if ( is_active_sidebar( 'sidebar-1' ) ) {
+		$classes[] = 'lct-has-sidebar';
+	}
+
+	return $classes;
 }
+add_filter( 'body_class', 'listingcore_theme_body_classes' );
 
-// ── FOOTER ────────────────────────────────────────────────
-add_action( 'classipress_footer',       'classipress_template_footer_inner', 10 );
-
-function classipress_template_footer_inner() {
-    get_template_part( 'template-parts/footer/footer', 'inner' );
+// -----------------------------------------------------------------------------
+// Header hooks
+// -----------------------------------------------------------------------------
+/**
+ * Output the skip link before the header.
+ */
+function listingcore_theme_skip_link() {
+	printf(
+		'<a class="lct-skip-link screen-reader-text" href="#content">%s</a>',
+		esc_html__( 'Skip to content', 'listingcore-theme' )
+	);
 }
+add_action( 'wp_body_open', 'listingcore_theme_skip_link', 5 );
 
-// ── LISTING ARCHIVE ───────────────────────────────────────
-add_action( 'classipress_before_listings_loop', 'classipress_listing_archive_header', 10 );
+/**
+ * Output the header top bar.
+ */
+function listingcore_theme_header_top() {
+	if ( ! has_nav_menu( 'secondary' ) ) {
+		return;
+	}
 
-function classipress_listing_archive_header() {
-    get_template_part( 'template-parts/listing/archive', 'header' );
+	echo '<div class="lct-topbar"><div class="lct-container">';
+	wp_nav_menu( [
+		'theme_location'  => 'secondary',
+		'container'       => 'nav',
+		'container_class' => 'lct-nav lct-nav--secondary',
+		'menu_class'      => 'lct-menu lct-menu--secondary',
+		'depth'           => 1,
+		'fallback_cb'     => false,
+	] );
+	echo '</div></div>';
 }
+add_action( 'listingcore_theme_before_header', 'listingcore_theme_header_top' );
 
-// ── SCHEMA MARKUP ─────────────────────────────────────────
-add_action( 'wp_head', 'classipress_schema_markup' );
+// -----------------------------------------------------------------------------
+// Footer hooks
+// -----------------------------------------------------------------------------
+/**
+ * Output the footer widgets area.
+ */
+function listingcore_theme_footer_widgets() {
+	$columns = [
+		'footer-1' => __( 'Footer Column 1', 'listingcore-theme' ),
+		'footer-2' => __( 'Footer Column 2', 'listingcore-theme' ),
+		'footer-3' => __( 'Footer Column 3', 'listingcore-theme' ),
+		'footer-4' => __( 'Footer Column 4', 'listingcore-theme' ),
+	];
 
-function classipress_schema_markup() {
-    if ( is_singular( 'listing' ) ) {
-        $post_id  = get_the_ID();
-        $price    = get_post_meta( $post_id, '_cp_price',    true );
-        $currency = get_post_meta( $post_id, '_cp_currency', true ) ?: 'USD';
-        $city     = get_post_meta( $post_id, '_cp_city',     true );
-        $country  = get_post_meta( $post_id, '_cp_country',  true );
+	$has_widgets = false;
 
-        $schema = [
-            '@context'    => 'https://schema.org',
-            '@type'       => 'Product',
-            'name'        => get_the_title(),
-            'description' => wp_strip_all_tags( get_the_excerpt() ),
-            'url'         => get_permalink(),
-        ];
+	foreach ( $columns as $id => $name ) {
+		if ( is_active_sidebar( $id ) ) {
+			$has_widgets = true;
+			break;
+		}
+	}
 
-        if ( has_post_thumbnail() ) {
-            $schema['image'] = get_the_post_thumbnail_url( null, 'full' );
-        }
+	if ( ! $has_widgets ) {
+		return;
+	}
 
-        if ( $price ) {
-            $schema['offers'] = [
-                '@type'         => 'Offer',
-                'price'         => $price,
-                'priceCurrency' => $currency,
-                'availability'  => 'https://schema.org/InStock',
-                'url'           => get_permalink(),
-            ];
-        }
+	echo '<div class="lct-footer__widgets"><div class="lct-container">';
+	echo '<div class="lct-footer__grid">';
 
-        if ( $city || $country ) {
-            $schema['locationCreated'] = [
-                '@type'          => 'Place',
-                'addressLocality'=> $city,
-                'addressCountry' => $country,
-            ];
-        }
+	foreach ( $columns as $id => $name ) {
+		if ( ! is_active_sidebar( $id ) ) {
+			continue;
+		}
 
-        echo '<script type="application/ld+json">' . wp_json_encode( $schema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE ) . '</script>';
-    }
+		echo '<div class="lct-footer__column" data-widget-area="' . esc_attr( $id ) . '">';
+		dynamic_sidebar( $id );
+		echo '</div>';
+	}
+
+	echo '</div></div></div>';
 }
+add_action( 'listingcore_theme_footer', 'listingcore_theme_footer_widgets', 10 );
 
-// ── BODY CLASSES ─────────────────────────────────────────
-add_filter( 'body_class', 'classipress_body_classes' );
+/**
+ * Output the footer bottom bar (copyright + footer menu).
+ */
+function listingcore_theme_footer_bottom() {
+	?>
+	<div class="lct-footer__bottom">
+		<div class="lct-container">
+			<div class="lct-footer__bottom-inner">
 
-function classipress_body_classes( $classes ) {
-    if ( is_singular( 'listing' ) ) $classes[] = 'cp-single-listing';
-    if ( is_post_type_archive( 'listing' ) ) $classes[] = 'cp-archive-listing';
-    if ( is_tax( [ 'listing_category', 'listing_location' ] ) ) $classes[] = 'cp-tax-listing';
-    if ( get_theme_mod( 'cp_sticky_header', true ) ) $classes[] = 'cp-sticky-header';
-    return $classes;
+				<p class="lct-footer__copyright">
+					<?php
+					printf(
+						/* translators: 1: current year, 2: site name. */
+						esc_html__( '© %1$s %2$s. All rights reserved.', 'listingcore-theme' ),
+						listingcore_theme_current_year(),
+						esc_html( get_bloginfo( 'name' ) )
+					);
+					?>
+				</p>
+
+				<?php listingcore_theme_footer_nav(); ?>
+
+			</div>
+		</div>
+	</div>
+	<?php
 }
+add_action( 'listingcore_theme_footer', 'listingcore_theme_footer_bottom', 20 );
 
-// ── TITLE ─────────────────────────────────────────────────
-add_filter( 'the_title', 'classipress_listing_title_expired', 10, 2 );
+// -----------------------------------------------------------------------------
+// Content hooks
+// -----------------------------------------------------------------------------
+/**
+ * Output post meta (date, author, comments).
+ */
+function listingcore_theme_post_meta() {
+	if ( 'post' !== get_post_type() ) {
+		return;
+	}
 
-function classipress_listing_title_expired( $title, $post_id ) {
-    if ( get_post_type( $post_id ) === 'listing' && cp_is_listing_expired( $post_id ) ) {
-        $title .= ' <span class="cp-badge cp-badge-expired">' . esc_html__( 'Expired', 'classipress-pro' ) . '</span>';
-    }
-    return $title;
+	printf(
+		'<div class="lct-post-meta"><time datetime="%1$s">%2$s</time> · <span class="lct-post-meta__author">%3$s</span></div>',
+		esc_attr( get_the_date( DATE_W3C ) ),
+		esc_html( get_the_date() ),
+		esc_html( get_the_author() )
+	);
 }
+add_action( 'listingcore_theme_after_entry_title', 'listingcore_theme_post_meta' );
 
-// ── SEARCH QUERY FIX ─────────────────────────────────────
-add_action( 'pre_get_posts', 'classipress_modify_search_query' );
+/**
+ * Output pagination after archive/loop.
+ */
+function listingcore_theme_after_loop() {
+	if ( is_singular() ) {
+		return;
+	}
 
-function classipress_modify_search_query( $query ) {
-    if ( ! is_admin() && $query->is_main_query() ) {
-
-        // Include listings in search
-        if ( $query->is_search() ) {
-            $query->set( 'post_type', [ 'post', 'page', 'listing' ] );
-        }
-
-        // Listings per page from customizer
-        if ( $query->is_post_type_archive( 'listing' ) || $query->is_tax( 'listing_category' ) ) {
-            $per_page = get_theme_mod( 'cp_listings_per_page', 12 );
-            $query->set( 'posts_per_page', $per_page );
-
-            // Default sort: featured first, then date
-            if ( ! isset( $_GET['orderby'] ) ) {
-                $query->set( 'meta_key', '_cp_featured' );
-                $query->set( 'orderby', [ 'meta_value' => 'DESC', 'date' => 'DESC' ] );
-            }
-        }
-    }
+	listingcore_theme_pagination();
 }
+add_action( 'listingcore_theme_after_loop', 'listingcore_theme_after_loop' );
+
+// -----------------------------------------------------------------------------
+// Plugin missing notice (front-end, admins only)
+// -----------------------------------------------------------------------------
+/**
+ * Output a front-end notice when ListingCore plugin is missing.
+ */
+function listingcore_theme_plugin_notice() {
+	if ( listingcore_theme_has_plugin() ) {
+		return;
+	}
+
+	if ( ! is_user_logged_in() || ! current_user_can( 'install_plugins' ) ) {
+		return;
+	}
+
+	printf(
+		'<div class="lct-notice lct-notice--warning"><div class="lct-container">%s</div></div>',
+		esc_html__( 'ListingCore Theme works best with the ListingCore plugin. Please install and activate it for full functionality.', 'listingcore-theme' )
+	);
+}
+add_action( 'listingcore_theme_before_header', 'listingcore_theme_plugin_notice', 1 );
