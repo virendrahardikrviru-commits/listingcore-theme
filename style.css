@@ -3458,3 +3458,173 @@ body.listingcore-plugin-missing .site-content {
 .listingcore-header + .listingcore-notice {
   margin-top: var(--listingcore-space-4);
 }
+
+/* ==========================================================================
+   PLUGIN INTEGRATION: ListingCore plugin class names
+   ========================================================================== */
+
+/* Plugin card grid */
+.listingcore-listings-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  gap: var(--listingcore-space-6);
+}
+
+/* Plugin listing card */
+.listingcore-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  background-color: var(--listingcore-white);
+  border: 1px solid var(--listingcore-gray-100);
+  border-radius: var(--listingcore-border-radius-lg);
+  box-shadow: var(--listingcore-shadow);
+  transition: var(--listingcore-transition-slow);
+}
+
+.listingcore-card:hover {
+  box-shadow: var(--listingcore-shadow-lg);
+  transform: translateY(-0.25rem);
+}
+
+.listingcore-card__image {
+  display: block;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background-color: var(--listingcore-gray-100);
+  line-height: 0;
+}
+
+.listingcore-card__thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.listingcore-card__placeholder {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: var(--listingcore-gray-100);
+}
+
+.listingcore-card__content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--listingcore-space-2);
+  padding: var(--listingcore-space-5);
+}
+
+.listingcore-card__title {
+  margin: 0;
+  font-size: var(--listingcore-text-lg);
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.listingcore-card__title a {
+  color: var(--listingcore-gray-900);
+  text-decoration: none;
+}
+
+.listingcore-card__title a:hover {
+  color: var(--listingcore-primary);
+}
+
+.listingcore-card__wishlist {
+  align-self: flex-start;
+  padding: 0;
+  background: none;
+  border: 0;
+  font-size: 1.25rem;
+  color: var(--listingcore-gray-300);
+  cursor: pointer;
+  transition: var(--listingcore-transition);
+}
+
+.listingcore-card__wishlist:hover {
+  color: var(--listingcore-accent);
+}
+
+.listingcore-card__price {
+  font-size: var(--listingcore-text-base);
+  font-weight: 700;
+  color: var(--listingcore-primary);
+}
+
+.listingcore-card__location {
+  font-size: var(--listingcore-text-sm);
+  color: var(--listingcore-gray-500);
+}
+
+/* Plugin search form */
+.listingcore-search-form-wrap {
+  width: 100%;
+}
+
+.listingcore-inline-search-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--listingcore-space-2);
+  padding: var(--listingcore-space-2);
+  background-color: var(--listingcore-white);
+  border-radius: var(--listingcore-border-radius-lg);
+  box-shadow: var(--listingcore-shadow-lg);
+}
+
+.listingcore-search-field {
+  flex: 1;
+  min-width: 0;
+}
+
+.listingcore-search-field input,
+.listingcore-search-field select {
+  width: 100%;
+  padding: var(--listingcore-space-3) var(--listingcore-space-4);
+  font-size: var(--listingcore-text-base);
+  border: 1px solid var(--listingcore-gray-100);
+  border-radius: var(--listingcore-border-radius);
+}
+
+/* Plugin button — cp-btn = ClassiPress prefix, still used by plugin */
+.cp-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--listingcore-space-2);
+  padding: var(--listingcore-space-3) var(--listingcore-space-6);
+  font-size: var(--listingcore-text-base);
+  font-weight: 600;
+  color: var(--listingcore-white);
+  background-color: var(--listingcore-primary);
+  border: 1px solid var(--listingcore-primary);
+  border-radius: var(--listingcore-border-radius);
+  cursor: pointer;
+  text-decoration: none;
+  transition: var(--listingcore-transition);
+}
+
+.cp-btn:hover {
+  background-color: var(--listingcore-primary-dark);
+  transform: translateY(-1px);
+  box-shadow: var(--listingcore-shadow-md);
+  text-decoration: none;
+  color: var(--listingcore-white);
+}
+
+.cp-btn-primary {
+  background-color: var(--listingcore-primary);
+  border-color: var(--listingcore-primary);
+  color: var(--listingcore-white);
+}
+
+/* Plugin empty states */
+.listingcore-no-categories {
+  padding: var(--listingcore-space-6);
+  text-align: center;
+  color: var(--listingcore-gray-500);
+  background-color: var(--listingcore-gray-50);
+  border-radius: var(--listingcore-border-radius);
+}
