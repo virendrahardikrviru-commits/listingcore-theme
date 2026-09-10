@@ -1,112 +1,113 @@
 <?php
 /**
- * Enqueue Scripts & Styles
+ * Enqueue scripts and styles.
  *
- * @package ClassiPressPro
+ * Loads front-end and editor assets for the ListingCore Theme.
+ *
+ * @package ListingCoreTheme
+ * @since   1.0.0
  */
 
 defined( 'ABSPATH' ) || exit;
 
-function classipress_enqueue_assets() {
-    $v = CP_VERSION;
+/**
+ * Enqueue front-end styles and scripts.
+ */
+function listingcore_theme_enqueue_assets() {
 
-    // Google Fonts
-    wp_enqueue_style(
-        'classipress-fonts',
-        'https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap',
-        [],
-        null
-    );
+	$theme_version = LISTINGCORE_THEME_VERSION;
+	$theme_uri     = LISTINGCORE_THEME_URI;
 
-    // Main theme stylesheet
-    wp_enqueue_style(
-        'classipress-style',
-        get_stylesheet_uri(),
-        [ 'classipress-fonts' ],
-        $v
-    );
+	// -------------------------------------------------------------------------
+	// Styles
+	// -------------------------------------------------------------------------
 
-    // Comment reply script
-    if ( is_singular() && comments_open() ) {
-        wp_enqueue_script( 'comment-reply' );
-    }
+	// Main stylesheet.
+	wp_enqueue_style(
+		'listingcore-theme-style',
+		get_stylesheet_uri(),
+		[],
+		$theme_version
+	);
 
-    // Main theme JS
-    wp_enqueue_script(
-        'classipress-main',
-        CP_URI . '/assets/js/main.js',
-        [ 'jquery' ],
-        $v,
-        true
-    );
+	// Optional: Google Fonts (preconnect handles performance).
+	wp_enqueue_style(
+		'listingcore-theme-fonts',
+		'https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap',
+		[],
+		null
+	);
 
-    // Theme-side JS data (non-sensitive, no nonce — AJAX nonce provided by plugin)
-    wp_localize_script( 'classipress-main', 'ClassiPressTheme', [
-        'home_url' => esc_url( home_url() ),
-        'i18n'     => [
-            'loading' => esc_html__( 'Loading...', 'classipress-pro' ),
-            'error'   => esc_html__( 'Something went wrong.', 'classipress-pro' ),
-        ],
-    ] );
+	// -------------------------------------------------------------------------
+	// Scripts
+	// -------------------------------------------------------------------------
 
-    // Select2 for enhanced dropdowns
-    wp_enqueue_style(
-        'select2',
-        'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css',
-        [],
-        '4.1.0'
-    );
-    wp_enqueue_script(
-        'select2',
-        'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js',
-        [ 'jquery' ],
-        '4.1.0',
-        true
-    );
+	// Main theme JS.
+	wp_enqueue_script(
+		'listingcore-theme-main',
+		$theme_uri . '/assets/js/main.js',
+		[],
+		$theme_version,
+		true
+	);
 
-    // Lightbox for gallery — only on single listing or singular post
-    if ( is_singular( 'listing' ) || is_singular( 'post' ) ) {
-        wp_enqueue_style(
-            'glightbox',
-            'https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css',
-            [],
-            '3.2.0'
-        );
-        wp_enqueue_script(
-            'glightbox',
-            'https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js',
-            [],
-            '3.2.0',
-            true
-        );
-    }
+	// Comment reply (only when needed).
+	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
+		wp_enqueue_script( 'comment-reply' );
+	}
 
-    // Google Maps — only when key is set and maps are enabled
-    if ( get_theme_mod( 'cp_enable_maps', true ) ) {
-        $maps_key = get_theme_mod( 'cp_google_maps_key', '' );
-        if ( $maps_key && is_singular( 'listing' ) ) {
-            wp_enqueue_script(
-                'google-maps-api',
-                add_query_arg(
-                    [ 'key' => sanitize_text_field( $maps_key ), 'libraries' => 'places', 'callback' => 'initListingMap' ],
-                    'https://maps.googleapis.com/maps/api/js'
-                ),
-                [ 'classipress-main' ],
-                null,
-                true
-            );
-        }
-    }
+	// -------------------------------------------------------------------------
+	// Localize script for AJAX and translatable strings
+	// -------------------------------------------------------------------------
+		wp_localize_script(
+		'listingcore-theme-main',
+		'listingcoreThemeData',
+		[
+			'ajaxUrl' => admin_url( 'admin-ajax.php' ),
+			'nonce'   => wp_create_nonce( 'listingcore_theme_nonce' ),
+			'strings' => [
+				'loading'   => __( 'Loading…', 'listingcore-theme' ),
+				'error'     => __( 'Something went wrong. Please try again.', 'listingcore-theme' ),
+				'confirm'   => __( 'Are you sure?', 'listingcore-theme' ),
+				'searching' => __( 'Searching…', 'listingcore-theme' ),
+				'noResults' => __( 'No results found.', 'listingcore-theme' ),
+			],
+		]
+	);
 }
-add_action( 'wp_enqueue_scripts', 'classipress_enqueue_assets' );
+add_action( 'wp_enqueue_scripts', 'listingcore_theme_enqueue_assets' );
 
-// Block editor stylesheet
-function classipress_block_editor_assets() {
-    wp_enqueue_style(
-        'classipress-editor',
-        CP_URI . '/assets/css/editor-style.css',
-        [],
-        CP_VERSION
-    );
+/**
+ * Add preconnect for Google Fonts.
+ *
+ * @param array  $urls           URLs to print for resource hints.
+ * @param string $relation_type  The relation type the URLs are printed for.
+ * @return array Modified URLs.
+ */
+function listingcore_theme_resource_hints( $urls, $relation_type ) {
+	if ( 'preconnect' === $relation_type ) {
+		$urls[] = [
+			'href' => 'https://fonts.googleapis.com',
+		];
+		$urls[] = [
+			'href'        => 'https://fonts.gstatic.com',
+			'crossorigin' => 'anonymous',
+		];
+	}
+
+	return $urls;
 }
-add_action( 'enqueue_block_editor_assets', 'classipress_block_editor_assets' );
+add_filter( 'wp_resource_hints', 'listingcore_theme_resource_hints', 10, 2 );
+
+/**
+ * Enqueue block editor styles.
+ */
+function listingcore_theme_editor_assets() {
+	wp_enqueue_style(
+		'listingcore-theme-editor-style',
+		LISTINGCORE_THEME_URI . '/assets/css/editor-style.css',
+		[],
+		LISTINGCORE_THEME_VERSION
+	);
+}
+add_action( 'enqueue_block_editor_assets', 'listingcore_theme_editor_assets' );
