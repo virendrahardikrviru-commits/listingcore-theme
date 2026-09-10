@@ -1,42 +1,90 @@
 <?php
 /**
- * Page Template
+ * Page template.
  *
- * @package ClassiPressPro
+ * Displays standard WordPress pages.
+ *
+ * @package ListingCoreTheme
+ * @since   1.0.0
  */
 
+defined( 'ABSPATH' ) || exit;
+
 get_header();
-cp_breadcrumbs();
 ?>
 
-<main id="main" class="site-main" role="main">
-    <div class="cp-container cp-section-sm">
+<main id="primary" class="lct-main" role="main">
+	<div class="lct-container">
 
-        <?php while ( have_posts() ) : the_post(); ?>
+		<?php listingcore_theme_breadcrumbs(); ?>
 
-        <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-            <header class="entry-header" style="margin-bottom:2rem;">
-                <?php the_title( '<h1 class="entry-title" style="font-size:2.25rem;font-weight:800;">', '</h1>' ); ?>
-            </header>
-            <div class="entry-content" style="font-size:1.0625rem;line-height:1.8;">
-                <?php
-                the_content();
-                wp_link_pages( [
-                    'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'classipress-pro' ),
-                    'after'  => '</div>',
-                ] );
-                ?>
-            </div>
-        </article>
+		<div class="lct-layout <?php echo esc_attr( listingcore_theme_get_layout_class() ); ?>">
 
-        <?php
-        if ( comments_open() || get_comments_number() ) {
-            comments_template();
-        }
-        endwhile;
-        ?>
+			<div class="lct-layout__main">
 
-    </div>
+				<?php
+				while ( have_posts() ) :
+					the_post();
+					?>
+
+					<article id="post-<?php the_ID(); ?>" <?php post_class( 'lct-page' ); ?>>
+
+						<header class="lct-page__header">
+							<h1 class="lct-page__title"><?php the_title(); ?></h1>
+						</header>
+
+						<?php if ( has_post_thumbnail() ) : ?>
+							<div class="lct-page__thumbnail">
+								<?php the_post_thumbnail( 'lct-listing-single' ); ?>
+							</div>
+						<?php endif; ?>
+
+						<div class="lct-page__content">
+							<?php
+							the_content();
+
+							wp_link_pages( [
+								'before' => '<nav class="lct-page-links"><span class="lct-page-links__label">' . esc_html__( 'Pages:', 'listingcore-theme' ) . '</span>',
+								'after'  => '</nav>',
+							] );
+							?>
+						</div>
+
+						<?php if ( get_edit_post_link() ) : ?>
+							<footer class="lct-page__footer">
+								<?php
+								edit_post_link(
+									sprintf(
+										/* translators: %s: page title */
+										esc_html__( 'Edit %s', 'listingcore-theme' ),
+										'<span class="screen-reader-text">' . get_the_title() . '</span>'
+									),
+									'<span class="lct-page__edit-link">',
+									'</span>'
+								);
+								?>
+							</footer>
+						<?php endif; ?>
+
+					</article>
+
+					<?php
+					// Comments (if enabled and open).
+					if ( comments_open() || get_comments_number() ) {
+						comments_template();
+					}
+
+				endwhile;
+				?>
+
+			</div>
+
+			<?php get_sidebar(); ?>
+
+		</div>
+
+	</div>
 </main>
 
-<?php get_footer(); ?>
+<?php
+get_footer();
