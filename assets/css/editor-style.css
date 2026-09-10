@@ -1,80 +1,373 @@
-/* ClassiPress Pro – Block Editor Styles */
+/**
+ * Editor styles for ListingCore Theme.
+ *
+ * Applied inside the block editor to match front-end appearance.
+ *
+ * @package ListingCoreTheme
+ * @since   1.0.0
+ */
 
-.editor-styles-wrapper {
-    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
-    font-size: 1rem;
-    line-height: 1.7;
-    color: #374151;
-    max-width: 760px;
-    margin: 0 auto;
+/* ============================================
+   CSS CUSTOM PROPERTIES
+   ============================================ */
+:root {
+	/* Brand Colors */
+	--lct-primary:       #1a56db;
+	--lct-primary-dark:  #1340a8;
+	--lct-primary-light: #e8f0fe;
+	--lct-accent:        #f59e0b;
+	--lct-success:       #10b981;
+	--lct-danger:        #ef4444;
+
+	/* Neutrals */
+	--lct-dark:          #111827;
+	--lct-gray-900:      #1f2937;
+	--lct-gray-700:      #374151;
+	--lct-gray-500:      #6b7280;
+	--lct-gray-300:      #d1d5db;
+	--lct-gray-100:      #f3f4f6;
+	--lct-gray-50:       #f9fafb;
+	--lct-white:         #ffffff;
+
+	/* Typography */
+	--lct-font-primary:  'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+	--lct-font-mono:     'JetBrains Mono', ui-monospace, monospace;
+
+	/* Layout */
+	--lct-content-width: 720px;
+	--lct-wide-width:    1280px;
+
+	/* Radius */
+	--lct-border-radius:    0.5rem;
+	--lct-border-radius-lg: 1rem;
+	--lct-border-radius-xl: 1.5rem;
 }
 
+/* ============================================
+   EDITOR WRAPPER
+   ============================================ */
+.editor-styles-wrapper {
+	background-color: var(--lct-white);
+	color: var(--lct-dark);
+	font-family: var(--lct-font-primary);
+	font-size: 16px;
+	line-height: 1.6;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.editor-styles-wrapper .wp-block {
+	max-width: var(--lct-content-width);
+}
+
+.editor-styles-wrapper .wp-block[data-align="wide"] {
+	max-width: var(--lct-wide-width);
+}
+
+.editor-styles-wrapper .wp-block[data-align="full"] {
+	max-width: none;
+}
+
+/* ============================================
+   TYPOGRAPHY
+   ============================================ */
 .editor-styles-wrapper h1,
 .editor-styles-wrapper h2,
 .editor-styles-wrapper h3,
 .editor-styles-wrapper h4,
 .editor-styles-wrapper h5,
 .editor-styles-wrapper h6 {
-    font-weight: 700;
-    color: #111827;
-    line-height: 1.3;
-    margin-bottom: 0.75em;
+	font-family: var(--lct-font-primary);
+	font-weight: 700;
+	line-height: 1.25;
+	color: var(--lct-dark);
+	margin-top: 1.5em;
+	margin-bottom: 0.5em;
 }
 
-.editor-styles-wrapper p { margin-bottom: 1rem; }
-
-.editor-styles-wrapper a { color: #1a56db; }
-
-.editor-styles-wrapper blockquote {
-    border-left: 4px solid #1a56db;
-    margin-left: 0;
-    padding-left: 1.5rem;
-    font-style: italic;
-    color: #6b7280;
+.editor-styles-wrapper h1 {
+	font-size: 2.25rem;
+	font-weight: 800;
 }
 
-.editor-styles-wrapper pre,
+.editor-styles-wrapper h2 {
+	font-size: 1.875rem;
+}
+
+.editor-styles-wrapper h3 {
+	font-size: 1.5rem;
+}
+
+.editor-styles-wrapper h4 {
+	font-size: 1.25rem;
+}
+
+.editor-styles-wrapper h5 {
+	font-size: 1.125rem;
+}
+
+.editor-styles-wrapper h6 {
+	font-size: 1rem;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	color: var(--lct-gray-700);
+}
+
+.editor-styles-wrapper p {
+	margin-bottom: 1.25em;
+}
+
+.editor-styles-wrapper a {
+	color: var(--lct-primary);
+	text-decoration: none;
+}
+
+.editor-styles-wrapper a:hover {
+	text-decoration: underline;
+}
+
+.editor-styles-wrapper strong {
+	font-weight: 700;
+}
+
+.editor-styles-wrapper em {
+	font-style: italic;
+}
+
+/* ============================================
+   LISTS
+   ============================================ */
+.editor-styles-wrapper ul,
+.editor-styles-wrapper ol {
+	padding-left: 1.5em;
+	margin-bottom: 1.25em;
+}
+
+.editor-styles-wrapper ul li,
+.editor-styles-wrapper ol li {
+	margin-bottom: 0.5em;
+}
+
+.editor-styles-wrapper ul {
+	list-style-type: disc;
+}
+
+.editor-styles-wrapper ol {
+	list-style-type: decimal;
+}
+
+/* ============================================
+   BLOCKQUOTE
+   ============================================ */
+.editor-styles-wrapper .wp-block-quote {
+	border-left: 4px solid var(--lct-primary);
+	padding-left: 1.5em;
+	margin: 1.5em 0;
+	font-style: italic;
+	color: var(--lct-gray-700);
+	background-color: transparent;
+}
+
+.editor-styles-wrapper .wp-block-quote cite {
+	display: block;
+	margin-top: 0.5em;
+	font-size: 0.875rem;
+	font-style: normal;
+	color: var(--lct-gray-500);
+}
+
+.editor-styles-wrapper .wp-block-quote.is-style-large {
+	font-size: 1.25rem;
+	padding: 1.5em 2em;
+	border-left-width: 6px;
+}
+
+/* ============================================
+   CODE BLOCKS
+   ============================================ */
+.editor-styles-wrapper .wp-block-code {
+	background-color: var(--lct-gray-100);
+	border: 1px solid var(--lct-gray-300);
+	border-radius: var(--lct-border-radius);
+	padding: 1rem;
+	font-family: var(--lct-font-mono);
+	font-size: 0.875rem;
+	line-height: 1.6;
+	overflow-x: auto;
+}
+
 .editor-styles-wrapper code {
-    font-family: 'JetBrains Mono', 'Courier New', monospace;
-    background: #1f2937;
-    color: #f9fafb;
-    border-radius: 0.375rem;
-    padding: 0.125rem 0.375rem;
-    font-size: 0.875em;
+	font-family: var(--lct-font-mono);
+	font-size: 0.9em;
+	background-color: var(--lct-gray-100);
+	padding: 0.15em 0.4em;
+	border-radius: 0.25rem;
+	color: var(--lct-dark);
 }
 
-.editor-styles-wrapper pre code {
-    display: block;
-    padding: 1rem;
+.editor-styles-wrapper pre {
+	font-family: var(--lct-font-mono);
+	overflow-x: auto;
 }
 
-.editor-styles-wrapper table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.9375rem;
-}
-
-.editor-styles-wrapper table th,
-.editor-styles-wrapper table td {
-    border: 1px solid #d1d5db;
-    padding: 0.625rem 0.875rem;
-    text-align: left;
-}
-
-.editor-styles-wrapper table th {
-    background: #f3f4f6;
-    font-weight: 600;
-    color: #111827;
-}
-
+/* ============================================
+   BUTTONS
+   ============================================ */
 .editor-styles-wrapper .wp-block-button__link {
-    background: #1a56db;
-    color: #fff;
-    border-radius: 0.5rem;
-    font-weight: 600;
-    padding: 0.75rem 1.5rem;
+	background-color: var(--lct-primary);
+	color: var(--lct-white);
+	border-radius: var(--lct-border-radius);
+	padding: 0.75rem 1.5rem;
+	font-weight: 600;
+	font-size: 1rem;
+	text-decoration: none;
+	transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+	display: inline-block;
+	line-height: 1.2;
 }
 
+.editor-styles-wrapper .wp-block-button__link:hover {
+	background-color: var(--lct-primary-dark);
+	color: var(--lct-white);
+	text-decoration: none;
+}
+
+.editor-styles-wrapper .wp-block-button.is-style-outline .wp-block-button__link {
+	background-color: transparent;
+	border: 2px solid var(--lct-primary);
+	color: var(--lct-primary);
+	padding: calc(0.75rem - 2px) calc(1.5rem - 2px);
+}
+
+.editor-styles-wrapper .wp-block-button.is-style-outline .wp-block-button__link:hover {
+	background-color: var(--lct-primary);
+	color: var(--lct-white);
+}
+
+/* ============================================
+   IMAGES
+   ============================================ */
+.editor-styles-wrapper .wp-block-image img {
+	border-radius: var(--lct-border-radius);
+	max-width: 100%;
+	height: auto;
+}
+
+.editor-styles-wrapper .wp-block-image figcaption {
+	text-align: center;
+	font-size: 0.875rem;
+	color: var(--lct-gray-500);
+	margin-top: 0.5em;
+	font-style: italic;
+}
+
+/* ============================================
+   TABLES
+   ============================================ */
+.editor-styles-wrapper .wp-block-table {
+	overflow-x: auto;
+}
+
+.editor-styles-wrapper .wp-block-table table {
+	width: 100%;
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+.editor-styles-wrapper .wp-block-table th,
+.editor-styles-wrapper .wp-block-table td {
+	padding: 0.75rem 1rem;
+	text-align: left;
+	border: 1px solid var(--lct-gray-300);
+}
+
+.editor-styles-wrapper .wp-block-table th {
+	background-color: var(--lct-gray-100);
+	font-weight: 600;
+}
+
+/* ============================================
+   SEPARATOR
+   ============================================ */
 .editor-styles-wrapper .wp-block-separator {
-    border-color: #e5e7eb;
+	border: none;
+	border-bottom: 2px solid var(--lct-gray-300);
+	margin: 2em auto;
+	max-width: 100px;
+}
+
+.editor-styles-wrapper .wp-block-separator.is-style-wide {
+	max-width: 100%;
+}
+
+/* ============================================
+   COLUMNS
+   ============================================ */
+.editor-styles-wrapper .wp-block-columns {
+	gap: 1.5rem;
+}
+
+/* ============================================
+   LISTS (blocks)
+   ============================================ */
+.editor-styles-wrapper .wp-block-list {
+	padding-left: 1.5em;
+}
+
+/* ============================================
+   GALLERY
+   ============================================ */
+.editor-styles-wrapper .wp-block-gallery {
+	gap: 1rem;
+}
+
+.editor-styles-wrapper .wp-block-gallery .wp-block-image img {
+	border-radius: var(--lct-border-radius);
+}
+
+/* ============================================
+   EMBEDS
+   ============================================ */
+.editor-styles-wrapper .wp-block-embed {
+	margin-bottom: 1.5em;
+}
+
+.editor-styles-wrapper .wp-block-embed iframe {
+	border-radius: var(--lct-border-radius);
+	max-width: 100%;
+}
+
+/* ============================================
+   PULLQUOTE
+   ============================================ */
+.editor-styles-wrapper .wp-block-pullquote {
+	border-top: 4px solid var(--lct-primary);
+	border-bottom: 4px solid var(--lct-primary);
+	padding: 2em 1.5em;
+	text-align: center;
+	margin: 2em 0;
+}
+
+.editor-styles-wrapper .wp-block-pullquote blockquote {
+	border: none;
+	padding: 0;
+	margin: 0;
+	font-size: 1.5rem;
+	font-weight: 600;
+	font-style: normal;
+	color: var(--lct-dark);
+}
+
+.editor-styles-wrapper .wp-block-pullquote cite {
+	font-size: 0.875rem;
+	color: var(--lct-gray-500);
+	font-style: normal;
+}
+
+/* ============================================
+   EDITOR ACCESSIBILITY
+   ============================================ */
+.editor-styles-wrapper :focus-visible {
+	outline: 2px solid var(--lct-primary);
+	outline-offset: 2px;
 }
