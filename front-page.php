@@ -24,6 +24,10 @@ get_header();
 				<div class="listingcore-hero__inner">
 
 					<div class="listingcore-hero__content">
+						<p class="listingcore-hero__eyebrow">
+							<?php esc_html_e( 'The marketplace for everything', 'listingcore-theme' ); ?>
+						</p>
+
 						<h1 id="listingcore-hero-title" class="listingcore-hero__title">
 							<?php
 							$hero_title = get_theme_mod(
@@ -38,7 +42,7 @@ get_header();
 							<?php
 							$hero_subtitle = get_theme_mod(
 								'listingcore_theme_hero_subtitle',
-								__( 'Browse thousands of listings across categories. Post your own in minutes.', 'listingcore-theme' )
+								__( 'Browse thousands of listings across every category. Post your own in under 5 minutes — free.', 'listingcore-theme' )
 							);
 							echo esc_html( $hero_subtitle );
 							?>
@@ -57,6 +61,27 @@ get_header();
 							<?php esc_html_e( 'Browse Listings', 'listingcore-theme' ); ?>
 						</a>
 					</div>
+
+					<ul class="listingcore-hero__trust">
+						<li class="listingcore-hero__trust-item">
+							<svg class="listingcore-hero__trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+								<polyline points="20 6 9 17 4 12"></polyline>
+							</svg>
+							<span><?php esc_html_e( '12,400+ listings', 'listingcore-theme' ); ?></span>
+						</li>
+						<li class="listingcore-hero__trust-item">
+							<svg class="listingcore-hero__trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+								<polyline points="20 6 9 17 4 12"></polyline>
+							</svg>
+							<span><?php esc_html_e( 'Free to post', 'listingcore-theme' ); ?></span>
+						</li>
+						<li class="listingcore-hero__trust-item">
+							<svg class="listingcore-hero__trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+								<polyline points="20 6 9 17 4 12"></polyline>
+							</svg>
+							<span><?php esc_html_e( 'Verified sellers', 'listingcore-theme' ); ?></span>
+						</li>
+					</ul>
 
 				</div>
 			</div>
